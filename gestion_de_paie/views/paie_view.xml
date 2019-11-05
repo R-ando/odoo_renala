@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- vue formulaire contrat -->
+        <record id="hr_contract_view_form_l10n_mg_paye" model="ir.ui.view">
+            <field name="name">hr.contract.view.form.l10n.mg.paye</field>
+            <field name="model">hr.contract</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <field name="wage" position="after">
+                    <field name="categorie"/>
+                    <field name="echellon"/>
+                    <field name="indice"/>
+                </field>
+                <field name="working_hours" position="after">
+                    <field name="horaire_hebdo" string="Horaire hebdomadaire"/>
+                    <field name="payment_mode_id"/>
+                </field>
+                <field name="working_hours" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- vue formulaire company -->
+        <record id="res_company_form_l10n_mg_paye" model="ir.ui.view">
+            <field name="name">res.company.form.l10n.mg.paye</field>
+            <field name="model">res.company</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//page" position="after">
+                        <page string="Configuration">
+                            <group string="Paie">
+                                <group>
+                                    <field name="siret"/>
+                                    <field name="ape"/>
+                                    <field name="seuil_irsa"/>
+                                    <field name="taux_irsa"/>
+                                    <field name="abat_irsa"/>
+                                </group>
+                                <group>
+                                    <field name="num_cnaps_patr"/>
+                                    <field name="plafond_cnaps"/>
+                                    <field name="cotisation_cnaps_patr"/>
+                                    <field name="cotisation_cnaps_emp"/>
+                                </group>
+                                <group>
+                                    <field name="org_sante"/>
+                                    <field name="cotisation_sante_patr"/>
+                                    <field name="cotisation_sante_emp"/>
+                                    <field name="conge_mens"/>
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        <record id="print_btn" model="ir.ui.view">
+            <field name="type">form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                     <button name="print_payroll" type="object" string="Imprimer" class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paiememt" model="ir.ui.view">
+            <field name="name">Mode de paiement</field>
+            <field name="model">hr.payment.mode</field>
+            <field name="arch" type="xml">
+                <tree string="mode Lines" edit="true" create="true">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="mode_paiement_action" model="ir.actions.act_window">
+            <field name="name">Mode de paiement</field>
+            <field name="res_model">hr.payment.mode</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="configuration_menu" parent="hr_payroll.menu_hr_payroll_configuration" name="Mode de paiement"
+                  sequence="110" action="mode_paiement_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="hr_payroll_ostie_form" model="ir.ui.view">
+            <field name="name">reportexcel_ostie</field>
+            <field name="model">ostie.reportexcel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="quarter"/>
+                        <field name="annees"/>
+                    </group>
+                     <footer>
+                       <button name="generateOstie_excel" type="object" string="Exporter" class="btn-primary"/>
+                        <button string="Annuler" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_menuwizard_ostie" name="etat ostie" res_model="ostie.reportexcel" view_mode="form"
+                    target="new"/>
+
+        <menuitem id="menu_etat_ostie"
+                  action="action_menuwizard_ostie"
+                  name="OSTIE"
+                  parent="menu_payroll_etat_globale"
+                  sequence="23"/>
+    </data>
+</odoo>

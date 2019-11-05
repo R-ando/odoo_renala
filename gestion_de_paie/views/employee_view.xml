@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record id="lastname_employee" model="ir.ui.view">
+            <field name="name">hr.employee.from</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_ids']" position="after">
+                    <div class="oe_title">
+                        <label for="first_name" class="oe_edit_only"/>
+                        <h3>
+                            <field name="first_name" placeholder="Prenom de l' employé"/>
+                        </h3>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@widget='many2many_tags']" position="replace">
+                    <field name="category_ids" widget="many2many_tags" placeholder="e.g. Part Time"
+                           options="{'no_create_edit': True}" groups="hr.group_hr_user" attrs="{'invisible':True}"/>
+                </xpath>
+                <xpath expr="//div[@class='oe_title']" position="replace">
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h3>
+                            <field name="name" placeholder="Nom de l'employer"/>
+                        </h3>
+                    </div>
+                </xpath>
+
+                <xpath expr="//div[@class='oe_title']" position="replace">
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h3>
+                            <field name="name" placeholder="Nom de l'employer"/>
+                        </h3>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+        <!-- vue formulaire employé -->
+        <record id="hr_employee_form_l10n_mg_paye" model="ir.ui.view">
+            <field name="name">hr.employee.form.l10n.mg.paye</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">30</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="identification_id" position="after">
+                    <field name="num_cnaps_emp" string="N° CNAPS"/>
+                    <field name="num_cin" string="N° CIN"/>
+                    <field name="num_emp" string="N° Matricule"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

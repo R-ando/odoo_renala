@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_paie_document">
+        <t t-call="report.external_layout">
+            <!-- Debut du rapport -->
+            <div class="page">
+                <style>
+                    .titre {
+                    text-align:center;
+                    width: 400px;
+                    font-family:Calibri;
+                    }
+                    .cadre1 {
+
+                    font-size: x-large;
+                    border:2px solid #E2E2E0;
+                    padding: 1%;
+                    width: 420px;
+                    height: 46px;
+                    background-color : #E2E2E0;
+                    vertical-align: baseline;
+                    font-family:Calibri;
+                    }
+                    .cadre2 {
+                    font-size: small;
+                    border:1px solid #E2E2E0;
+                    padding: 1%;
+                    width: 100%;
+                    text-align:left;
+                    background-color : #E2E2E0;
+                    font-family:Calibri;
+                    }
+                    .periode {
+                    font-size:small;
+                    font-family:Calibri;
+                    }
+                    .font{
+
+                    font: 80% sans-serif;
+                    }
+
+                    td {padding:1%;border:1px solid #E2E2E0;text-align:right;font: 90% sans-serif; font-family:Calibri;
+                    }
+                    th {text-align:center;font-weight:bold;border:1px solid #E2E2E0; font-family: Calibri, Helvetica,
+                    sans-serif;}
+                    .centrer_th {padding:0.5%; background-color: #E5E5E5;font-weight: normal;}
+
+                    .tableau3 {
+                    border-radius: 10px;
+                    width: 420px;
+                    border:1px solid #E2E2E0;
+                    font-family:Calibri, Arial, "Arial Black",Arial, Verdana, sans-serif;
+                    }
+                    .no_border_top {border-top:0px;}
+                    .no_border_bottom {border-bottom:0px;}
+                    .no_border {border:0;}
+                    .tableau2{
+                    font-family:Calibri;
+                    border:1px solid #6D6D6D;
+                    width: 332px;
+                    background-color: #EBEBEB;
+                    }
+                    .tableau6{
+                    width:100%
+                    border:solid white 1px;
+                    font-family:Calibri;
+                    width: 332px;
+                    }
+                    .t2, .t2_center {
+                    border : white;
+                    }
+                    .t2_center{
+                    text-align: center;
+                    }
+                    .top_20px{
+                    margin-top:20px;
+                    }
+                    .top_150px{
+                    margin-top:150px;
+                    }
+                    .top_20px{
+                    margin-top:20px;
+                    }
+                    .centrer{
+                    text-align:center;
+                    }
+                    .droite{
+                    text-align:right;
+                    }
+                    .gauche{
+                    text-align:left;
+                    }
+
+
+                    .tableau1 {
+                    width: 100%;
+                    margin-top:20px;
+                    border:0.5px solid #E2E2E0;
+                    font-family:Calibri, Arial, "Arial Black",Arial, Verdana, sans-serif;
+                    }
+
+
+                    table {
+                    border-collapse:separate;
+                    border:solid #E2E2E0 1px;
+                    border-radius:6px;
+                    -moz-border-radius:6px;
+                    }
+
+
+                </style>
+
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="titre">
+                            <h2 class="cadre1">BULLETIN DE PAIE</h2>
+                        </div>
+                        <p style="font-family:Calibri">
+                            <span>
+                                Paie du
+                            </span>
+                            <span class="periode">
+                                <strong>
+                                    <span t-field="o.date_from"/>
+                                </strong>
+                                <span>au</span>
+                                <strong>
+                                    <span t-field="o.date_to"/>
+                                </strong>
+                            </span>
+
+                        </p>
+                        <table class="tableau3">
+                            <tr>
+                                <td class="no_border gauche" style="width:40%">
+                                    Matricule :
+                                    <br/>
+                                    Num CNAPS :
+                                    <br/>
+                                    Emploi :
+                                    <br/>
+                                    Catégorie :
+                                    <br/>
+                                    Echellon :
+                                    <br/>
+                                    Indice :
+                                    <br/>
+                                    Entrée :  <span t-field="o.contract_id.date_start"/>
+                                    <br/>
+                                    Sortie :  <span t-field="o.contract_id.date_end"/>
+
+                                    <br/>
+                                    ORG Médicale : <span t-field="o.employee_id.company_id.org_sante"/>
+                                </td>
+                                <td class="no_border gauche">
+                                    <span t-field="o.employee_id.num_emp"/>
+                                    <br/>
+                                    <span t-field="o.employee_id.num_cnaps_emp"/>
+                                    <br/>
+                                    <span t-field="o.contract_id.job_id.name"/>
+                                    <br/>
+                                    <span t-field="o.contract_id.categorie"/>
+                                    <br/>
+                                    <span t-field="o.contract_id.echellon"/>
+                                    <br/>
+                                    <span t-field="o.contract_id.indice"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="cadre2">
+                            <span t-field="o.employee_id.company_id.name"/>
+                            <br/>
+                            SIRET :
+                            <span t-field="o.employee_id.company_id.siret"/>
+                            APE :
+                            <span t-field="o.employee_id.company_id.ape"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <table style="border:none" class="tableau6">
+                            <tr>
+                                <td style="text-align: left;border: white; width:15%" class="no_border_bottom">
+                                    <strong style="font-family:Calibri; font-weight: bold; ">
+                                        Nom:
+                                    </strong>
+                                </td>
+                                <td style="text-align: left;border: white;" class="no_border_top">
+                                    <span style="font-family:Calibri, Arial, sans-serif" t-field="o.employee_id.name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <table class="tableau1">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="centrer_th"><br/>Designation
+                            </th>
+                            <th rowspan="2" class="centrer_th"><br/>Base
+                            </th>
+                            <th rowspan="2" class="centrer_th"><br/>Taux
+                            </th>
+                            <th rowspan="2" class="centrer_th"><br/>Quantité
+                            </th>
+                            <th rowspan="2" class="centrer_th"><br/>A payer
+                            </th>
+                            <th rowspan="2" class="centrer_th"><br/>A déduire
+                            </th>
+                            <th colspan="2" class="centrer_th">Charges patronales
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="background-color:#EBEBEB !important" class="centrer_th">Taux</th>
+                            <th style="background-color:#EBEBEB !important" class="centrer_th">Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                            <td class="gauche">
+                                <span t-field="line.name"/>
+                            </td>
+                            <td>
+                                <t t-if="line.amount_select == 'percentage'">
+                                    <span t-field="line.amount"/>
+                                </t>
+                                <t t-if="line.amount_select == 'fix'">
+                                    <span t-field="line.quantity"/>
+                                </t>
+                                <t t-if="line.amount_select not in ['fix','percentage']">
+                                    <span></span>
+                                </t>
+                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP']">
+                                    <span t-esc="get_format(get_total_by_rule_category(o,'GROSS'))"/>
+                                </t>
+                                <t t-if="line.code == 'IRSA'">
+                                    <span t-esc="get_format(get_total_by_rule_category(o, 'GROSS')
+                            	        -get_total_by_rule_category(o,'CNAPS')
+                            	        -get_total_by_rule_category(o,'OMSI')
+                            	        -o.employee_id.company_id.abat_irsa*o.employee_id.children)"/>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line.amount_select == 'percentage'">
+                                    <span t-esc="get_format(line.rate)"/>
+                                </t>
+                                <t t-if="line.amount_select &lt;&gt; 'percentage'">
+                                </t>
+                                <t t-if="line.code == 'CNAPS_EMP'">
+                                    <span t-esc="get_format(o.employee_id.company_id.cotisation_cnaps_emp)"/>
+                                </t>
+                                <t t-if="line.code == 'OMSI_EMP'">
+                                    <span t-esc="get_format(o.employee_id.company_id.cotisation_sante_emp)"/>
+                                </t>
+                                <t t-if="line.code == 'IRSA'">
+                                    <span t-esc="get_format(o.employee_id.company_id.taux_irsa)"/>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line.code not in ['CNAPS_EMP','OMSI_EMP','IRSA','AVANCE15','AVANCESP','PRM'] and get_employe_line(o,line)">
+                                    <span t-esc="get_format(get_employe_line(o,line).total)"/>
+
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM']">
+                                    <span t-field="line.total"/>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA','AVANCE15','AVANCESP','AUTRES']">
+                                    <span t-field="line.total"/>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line.code == 'CNAPS_EMP'">
+                                    <span t-esc="get_format(o.employee_id.company_id.cotisation_cnaps_patr)"/>
+                                </t>
+                                <t t-if="line.code == 'OMSI_EMP'">
+                                    <span t-esc="get_format(o.employee_id.company_id.cotisation_sante_patr)"/>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-if="line.code == 'CNAPS_EMP'">
+                                    <span t-esc="get_format(get_total_by_rule_category(o,'CNAPS_PAT'))"/>
+                                </t>
+                                <t t-if="line.code == 'OMSI_EMP'">
+                                    <span t-esc="get_format(get_total_by_rule_category(o,'OMSI_PAT'))"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #E5E5E5">
+                                <strong>TOTAL</strong>
+                            </td>
+                            <td style="background-color: #E5E5E5"></td>
+                            <td style="background-color: #E5E5E5"></td>
+                            <td style="background-color: #E5E5E5"></td>
+                            <td style="background-color: #E5E5E5">
+                                <strong>
+                                    <span t-esc="get_format(get_total_by_rule_category(o,'GROSS'))"/>
+                                </strong>
+                            </td>
+                            <td style="background-color: #E5E5E5">
+                                <strong>
+                                    <span t-esc="get_format(get_total_by_rule_category(o,'TOTAL_DED'))"/>
+                                </strong>
+                            </td>
+                            <td style="background-color: #E5E5E5"></td>
+                            <td style="background-color: #E5E5E5">
+                                <strong>
+                                    <span t-esc="get_format(get_total_by_rule_category(o,'CHARGE_PAT'))"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row top_20px">
+                    <div class="col-xs-7">
+                        <span>
+                            <strong style="font-weight: normal; font-family:Calibri;">Mode de règlement:</strong>
+                            <span t-field="o.contract_id.payment_mode_id"/>
+                        </span>
+                        <br/>
+                        <span>
+                            <strong style="font-weight: normal; font-family:Calibri;">Payé le</strong>
+                        </span>
+                        <br/>
+                        <br/>
+                        <span>
+                            <strong style="font-weight: normal; font-family:Calibri;">Conv. Coll.:</strong>
+                        </span>
+                    </div>
+                    <div class="col-xs-5">
+                        <table class="tableau2">
+                            <tr>
+                                <td class="centrer no_border_bottom t2">
+                                    <strong>
+                                        <span style="font-weight: normal;">Net à payer</span>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td class="centrer no_border_bottom t2">
+                                    <strong style="font-weight: normal;">
+                                        <span>Total charges<br/>salaires
+                                        </span>
+                                    </strong>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center" class="no_border_top t2_center">
+                                    <strong>
+                                        <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')"
+                                              t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                    </strong>
+                                </td>
+                                <td style="text-align:center" class="no_border_top t2_center">
+                                    <span t-esc="get_total_by_rule_category(o,'GROSS')+get_total_by_rule_category(o,'CHARGE_PAT')"
+                                          t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <p class="centrer top_40px" style="font-family:Calibri">DANS VOTRE INTERET ET POUR VOUS AIDER A FAIRE VALOIR VOS DROITS, CONSERVEZ
+                    CE BULLETIN DE PAIE SANS LIMITATION DE DUREE
+                </p>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_paie">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="gestion_de_paie.report_paie_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

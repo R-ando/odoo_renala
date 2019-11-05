@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="hr_payroll_cnaps_form" model="ir.ui.view">
+            <field name="name">hr.payroll.cnaps.form</field>
+            <field name="model">cnaps</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="mois"/>
+                    <button string="excel" type="object" name="generate_excel"/>
+                </form>
+            </field>
+        </record>
+        <act_window id="action_menuwizard" name="etat cnaps" res_model="cnaps" view_mode="form" target="new"/>
+        <menuitem id="menu_etat_cnaps"
+                  action="action_menuwizard"
+                  name="etat cnaps excel"
+                  parent="menu_payroll_etat_globale"
+                  sequence="22"/>
+    </data>
+</odoo>

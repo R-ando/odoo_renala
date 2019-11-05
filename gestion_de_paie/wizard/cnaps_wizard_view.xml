@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="hr_payroll_cnaps_form" model="ir.ui.view">
+            <field name="name">reportexcelcnaps</field>
+            <field name="model">cnaps.reportexcel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="mois"/>
+                        <field name="annees"/>
+                    </group>
+                    <footer>
+                         <button name="generateCnaps_excel" type="object" string="exporter" class="btn-primary"/>
+                        <button string="Annuler" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <act_window id="action_menuwizard" name="Etat CNAPS" res_model="cnaps.reportexcel" view_mode="form"
+                    target="new"/>
+
+        <menuitem id="menu_etat_cnaps"
+                  action="action_menuwizard"
+                  name="CNAPS"
+                  parent="menu_payroll_etat_globale"
+                  sequence="22"/>
+    </data>
+</odoo>
