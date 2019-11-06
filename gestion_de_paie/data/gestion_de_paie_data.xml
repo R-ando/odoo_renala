@@ -23,6 +23,7 @@
             <field name="cotisation_sante_patr">5.0</field>
             <field name="cotisation_sante_emp">1.0</field>
             <field name="conge_mens">2.5</field>
+            <field name="amount_allocation">4000</field>
         </record>
 
 <!-- HR SALARY RULE CATEGORIES-->
@@ -464,8 +465,20 @@ else : result = 0
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">Ce sont les Autres retenues.</field>
     </record>
+    <!-- Allocation familiale -->
+    <record id="hr_rule_basic_AF" model="hr.salary.rule">
+        <field name="name">Allocation familiale</field>
+        <field name="code">AF</field>
+        <field name="sequence">2</field>
+        <field name="category_id" ref="hr_payroll.ALW"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = employee.nombre_enfant_cnaps * employee.company_id.amount_allocation</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Montant de l'allocation familiale en fonction du nombre d’enfant alloué.</field>
+    </record>
 
-     <!-- Salary Structure -->
+    <!-- Salary Structure -->
 
      <record id="hr_payroll_salary_structure_base" model="hr.payroll.structure">
         <field name="code">Mg-Base-horaire</field>
