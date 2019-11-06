@@ -2,35 +2,26 @@
 
 from odoo import fields, models, api
 
-
 DICT_MONTH = {'01': 'Janvier', '02': u'Février', '03': 'Mars',
               '04': 'Avril', '05': 'Mai', '06': 'Juin',
               '07': 'Juillet', '08': 'Aout', '09': 'Septembre',
               '10': 'Octobre', '11': 'Novembre', '12': 'Decembre'}
 
 DICT_TRIM = {
-    '1': u'Première trimestre',
+    '1': u'Premier trimestre',
     '2': u'Deuxième trimestre',
     '3': u'Troisième trimestre',
     '4': u'Quatrième trimestre'
 }
 
+
 class CnapsReport(models.TransientModel):
     _name = "cnaps.reportexcel"
 
-    mois = fields.Selection(string="Mois", selection=[('1', 'Janvier'),
-                                                      ('2', u'Février'),
-                                                      ('3', 'Mars'),
-                                                      ('4', 'Avril'),
-                                                      ('5', 'Mai'),
-                                                      ('6', 'Juin'),
-                                                      ('7', 'Juillet'),
-                                                      ('8', 'Aout'),
-                                                      ('9', 'Septembre'),
-                                                      ('10', 'Octobre'),
-                                                      ('11', 'Novembre'),
-                                                      ('12', 'Decembre')
-                                                      ], required=True)
+    quarter = fields.Selection(string="Trimèstre", selection=[('1', u'Premier trimestre'),
+                                                              ('2', u'Deuxième trimestre'),
+                                                              ('3', u'Troisième trimestre'),
+                                                              ('4', u'Quatrième trimestre')], required=True)
 
     annees = fields.Selection(String="Années",
                               selection=[('0', '2000'), ('1', '2001'), ('2', '2002'), ('3', '2003'), ('4', '2004'),
@@ -48,47 +39,93 @@ class CnapsReport(models.TransientModel):
 
     @api.multi
     def generateCnaps_excel(self):
-        month_selected = dict(self._fields['mois'].selection).get(self.mois)
         years_selected = dict(self._fields['annees'].selection).get(self.annees)
+        trim = dict(self._fields['quarter'].selection).get(self.quarter)
         actions = {
             'type': 'ir.actions.act_url',
             'target': 'current',
             'url': '/web/binary/download_report_cnaps_file?p='
                    + format(self.env.user.partner_id.id) + '&m='
-                   + format(self.three_next_month(month_selected)) + "&c="
-                   + format(self.countEff_three_month(month_selected, years_selected)) + "&y="
+                   + format(self.three_next_month(trim)) + "&c="
+                   + format(self.countEff_three_month(trim, years_selected)) + "&y="
                    + format({'y': years_selected})
-                   + "&data_month1=" + format(self.cnaps_list(month_selected, years_selected, 'period1'))
-                   + "&data_month2=" + format(self.cnaps_list(month_selected, years_selected, 'period2'))
-                   + "&data_month3=" + format(self.cnaps_list(month_selected, years_selected, 'period3'))
+                   + "&data_month1=" + format(self.cnaps_list(trim, years_selected, 'period1'))
+                   + "&data_month2=" + format(self.cnaps_list(trim, years_selected, 'period2'))
+                   + "&data_month3=" + format(self.cnaps_list(trim, years_selected, 'period3'))
                    + '&plf=' + format(self.plafond()) + '&comp_inf='
                    + format(self.company_information())
         }
         return actions
 
-    def three_next_month(self, month_selected):
-        three_months = {}
-        months = dict(self._fields['mois'].selection)
-        keys = months.keys()
-        values = months.values()
-        indice_month = keys[values.index(month_selected)]
+    def three_next_month(self, trim):
+        mois = self.quarter_months(trim, '0')
+        indice_month = mois['p1'].split('-')[1]
+        months = DICT_MONTH
         indice_month = int(indice_month)
-        if indice_month <= 10:
-            three_months = {'mth1': months.get(str(indice_month)),
-                            'mth2': months.get(str(indice_month + 1)),
-                            'mth3': months.get(str(indice_month + 2))}
-        if indice_month == 11:
-            three_months = {'mth1': months.get(str(indice_month - 1)),
-                            'mth2': months.get(str(indice_month)),
-                            'mth3': months.get(str(indice_month + 1))}
-        if indice_month == 12:
-            three_months = {'mth1': months.get(str(indice_month - 2)),
-                            'mth2': months.get(str(indice_month - 1)),
-                            'mth3': months.get(str(indice_month))}
+        if indice_month <= 9:
+            three_months = {'mth1': months.get('0{}'.format(indice_month)),
+                            'mth2': months.get('0{}'.format(indice_month + 1)),
+                            'mth3': months.get('0{}'.format(indice_month + 2))}
+        else:
+            three_months = {'mth1': months.get('{}'.format(indice_month)),
+                            'mth2': months.get('{}'.format(indice_month + 1)),
+                            'mth3': months.get('{}'.format(indice_month + 2))
+                            }
         return three_months
 
+    def three_next_month2(self, month_selected):
+        keys = DICT_MONTH.keys()
+        vals = DICT_MONTH.values()
+        indice_month = keys[vals.index(month_selected)]
+        three_months = {}
+        months = DICT_MONTH
+        indice_month = int(indice_month)
+        if indice_month <= 9:
+            three_months = {'mth1': months.get('0{}'.format(indice_month)),
+                            'mth2': months.get('0{}'.format(indice_month + 1)),
+                            'mth3': months.get('0{}'.format(indice_month + 2))}
+        else:
+            three_months = {'mth1': months.get('{}'.format(indice_month)),
+                            'mth2': months.get('{}'.format(indice_month + 1)),
+                            'mth3': months.get('{}'.format(indice_month + 2))
+                            }
+        return three_months
+
+    def quarter_months(self, quarter, years):
+        if quarter == u'Premier trimestre':
+            return {
+                'p1': years + '-01-01',
+                'p2': years + '-03-31'
+            }
+        if quarter == u'Deuxième trimestre':
+            return {
+                'p1': years + '-04-01',
+                'p2': years + '-06-30'
+            }
+        if quarter == u'Troisième trimestre':
+            return {
+                'p1': years + '-07-01',
+                'p2': years + '-09-30'
+            }
+        if quarter == u'Quatrième trimestre':
+            return {
+                'p1': years + '-10-01',
+                'p2': years + '-12-31'
+            }
+
+    def period_to_trim(self, period, month):
+        rank_month = int(period[month].split('-')[1])
+        if rank_month <= 3:
+            return u'Premier trimestre'
+        if rank_month > 3 and rank_month <= 6:
+            return u'Deuxième trimestre'
+        if rank_month < 6 and rank_month <= 9:
+            return u'Troisième trimestre'
+        if rank_month > 9:
+            return u'Quatrième trimestre'
+
     def period_salary(self, month_selected, years_selected):
-        three_month = self.three_next_month(month_selected)
+        three_month = self.three_next_month2(month_selected)
         month_rank_mth1 = DICT_MONTH.keys()[DICT_MONTH.values().index(three_month['mth1'])]
         month_rank_mth2 = DICT_MONTH.keys()[DICT_MONTH.values().index(three_month['mth2'])]
         month_rank_mth3 = DICT_MONTH.keys()[DICT_MONTH.values().index(three_month['mth3'])]
@@ -98,8 +135,16 @@ class CnapsReport(models.TransientModel):
             'period3': years_selected + "-" + month_rank_mth3
         }
 
-    def countEff_three_month(self, month_selected, years_selected):
-        period = self.period_salary(month_selected, years_selected)
+    def trim_to_period(self, trim):
+
+        month = DICT_MONTH[trim['p1'].split('-')[1]]
+        years = trim['p1'].split('-')[0]
+        return self.period_salary(month, years)
+
+    def countEff_three_month(self, trim, years_selected):
+        mois = self.quarter_months(trim, years_selected)
+        month = DICT_MONTH[mois['p1'].split('-')[1]]
+        period = self.period_salary(month, years_selected)
         count_mth = {
             'count_mth1': str(self.env["hr.payslip"].search_count(
                 [("date_from", "like", period['period1'] + "%"), ("state", "=", "done"), ("credit_note", "=", False)])),
@@ -171,18 +216,19 @@ class CnapsReport(models.TransientModel):
                  ("credit_note", "=", False)],
                 limit=1)
         emp = self.env["hr.employee"].search([("id", "=", id)])
-        job = self.env["hr.contract"].search([("employee_id", "=", id)]).mapped("job_id")
+        contract = self.env["hr.contract"].search([("employee_id", "=", id)])
+        job = contract.mapped("job_id")
         return {
-            'period': period[period_n].replace("-", ""),
-            'name': emp.name_related.upper(),
-            'first_name': emp.first_name,
-            'embauche': payslipobj.date_from,
-            'debauche': payslipobj.date_to,
-            'salary': self.sal(self.getsalry_net(period[period_n], id)),
-            'job': job.name,
-            'num_cnaps': emp.num_cnaps_emp,
-            'num_emp': emp.num_emp,
-            'num_cin': emp.num_cin,
+            'period': period[period_n].replace("-", "") or u'',
+            'name': emp.name_related.upper() or u'',
+            'first_name': emp.first_name or u'',
+            'embauche': contract.mapped('date_start')[0] or u'',
+            'debauche': contract.mapped('date_end')[0] or u'',
+            'salary': self.sal(self.getsalry_net(period[period_n], id)) or u'',
+            'job': job.name or u'',
+            'num_cnaps': emp.num_cnaps_emp or u'',
+            'num_emp': emp.num_emp or u'',
+            'num_cin': emp.num_cin or u'',
 
         }
 
@@ -192,9 +238,11 @@ class CnapsReport(models.TransientModel):
         else:
             return 0
 
-    def cnaps_list(self, month_selected, years_selected, period_n):
+    def cnaps_list(self, trim, years_selected, period_n):
+        mois = self.quarter_months(trim, years_selected)
+        month = DICT_MONTH[mois['p1'].split('-')[1]]
         cnaps_emp = []
-        period = self.period_salary(month_selected, years_selected)
+        period = self.period_salary(month, years_selected)
         listIdpayslip = self.env["hr.payslip"].search(
             [("date_from", "like", period[period_n] + "%"), ("state", "=", "done"),
              ("credit_note", "=", False)]).mapped(
@@ -240,11 +288,11 @@ class CnapsReport(models.TransientModel):
     def company_information(self):
         partner = self.env['res.partner'].search([("id", "=", 1)])
         country_part_id = partner.mapped('country_id')
-        country = self.env['res.country'].search([("id", "=", country_part_id.id)])
+        conpany = partner.mapped('company_id')
         return {
             'name': str(partner.name) or u'',
             'matricule': str(partner.company_id.company_matricule) or u'',
-            'address': str(country.name) or u'',
+            'address': str(conpany.street + ' ' + conpany.street2) or u'',
             'tel': str(partner.company_id.phone) or u'',
             'email': str(partner.company_id.email) or u'',
             'employer_rate': str(self.plafond()['emp']) + '%',

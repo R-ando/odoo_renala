@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <form>
                     <group>
-                        <field name="mois"/>
+                        <field name="quarter"/>
                         <field name="annees"/>
                     </group>
                     <footer>
