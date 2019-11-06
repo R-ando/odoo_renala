@@ -39,7 +39,7 @@ class ExportReportCnapsController(http.Controller):
     def report_excel_employer(self, workbook, p, m, c, y, bold, full_border, data_month1, data_month2, data_month3,
                               plf, comp_inf_):
         left = workbook.add_format({'font_size': 10})
-        m_fmt = workbook.add_format({'num_format': '###0.00', 'font_size': 10, "border": 1})
+        m_fmt = workbook.add_format({'num_format': '###0.00', 'font_size': 10, "border": 1, "align": "right"})
         month = literal_eval(m)
         count_eff = literal_eval(c)
         annee = literal_eval(y)
