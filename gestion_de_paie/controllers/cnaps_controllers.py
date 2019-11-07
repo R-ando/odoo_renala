@@ -23,7 +23,8 @@ class ExportReportCnapsController(http.Controller):
             "border_color": "#171C1E",
             "font_size": 10
         })
-        self.report_excel_employer(workbook, p, m, c, y, bold, full_border, data_month1, data_month2, data_month3, plf, comp_inf_)
+        self.report_excel_employer(workbook, p, m, c, y, bold, full_border, data_month1, data_month2, data_month3, plf,
+                                   comp_inf_)
         self.month(workbook, data_month1, 1, plf)
         self.month(workbook, data_month2, 2, plf)
         self.month(workbook, data_month3, 3, plf)
@@ -100,6 +101,35 @@ class ExportReportCnapsController(http.Controller):
         worksheet_emp.write_formula('F23', "=sum(C23:E23)", m_fmt)
         worksheet_emp.write_formula('F24', "=sum(C24:E24)", m_fmt)
         worksheet_emp.write_formula('F25', "=sum(C25:E25)", m_fmt)
+
+        # cotisation fmmfp
+        worksheet_emp.write('A27', u'COTISATIONS FMFP', self.bold(workbook, 'left', 10, 0, True))
+        worksheet_emp.write('B28', u'Année et periode', self.bold(workbook, 'left', 10, 0, False))
+        worksheet_emp.write('C28', periode_et_annee, full_border)
+        worksheet_emp.write('B29', u'Taux Employeur', self.bold(workbook, 'left', 10, 0, False))
+        worksheet_emp.write('C29', str(plf['emp']) + '%', full_border)
+
+        worksheet_emp.write('A31', u'RECAPITULATION', self.bold(workbook, 'left', 10, 0, True))
+        worksheet_emp.write('B33', u'MOIS CONCERNE', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('C33', month['mth1'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('D33', month['mth2'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('E33', month['mth3'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('F33', u'TOTAUX', self.bold(workbook, 'left', 10, 1, True))
+        worksheet_emp.write('B34', u'Effectif mensuel(OBLIGATOIRE)', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('C34', '=C22', self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('D34', '=D22', self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('E34', '=E22', self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write_formula('F34', '=SUM(C34:E34)', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('B35', u'Totaux Salaire plafonnées', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('C35', '=C23', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('D35', '=D23', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('E35', '=E23', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write_formula('F35', '=SUM(C35:E35)', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('B36', u'Cotisation Employeur', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('C36', '=C24', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('D36', '=D24', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('E36', '=E24', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write_formula('F36', '=SUM(C36:E36)', self.bold(workbook, 'right', 10, 1, False))
 
     def bold(self, workbook, align, size, border, bol):
         bold_ = workbook.add_format({
@@ -226,7 +256,7 @@ class ExportReportCnapsController(http.Controller):
         worksheet_mth.write_formula('N{}'.format(cl + 3), "=sum(N3:N{})".format(cl + 2), rigth)
         worksheet_mth.write_formula('O{}'.format(cl + 3), "=sum(O3:O{})".format(cl + 2), rigth)
         worksheet_mth.write('P{}'.format(cl + 3), None, rigth)
-        #total cotisation
+        # total cotisation
         self.total_cot(worksheet_mth, 2, 14, cl, rigth)
 
     def position_month(self, worksheet, row, col, field_list, val):
