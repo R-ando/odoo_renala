@@ -268,7 +268,7 @@ class ExportReportOstieController(http.Controller):
         worksheet_ost.write('O14', "TOTAUX SALAIRES NON PLAFONNES", wrap)
         worksheet_ost.write('P14', "TOTAUX SALAIRES PLAFONNES", wrap)
         worksheet_ost.write('Q14', "PART EMPLOYEUR 5%", wrap)
-        worksheet_ost.write('R14', "PART TAVAILLEUR 1%", wrap)
+        worksheet_ost.write('R14', "PART EMPLOYEUR 1%", wrap)
 
         worksheet_ost.merge_range('A3:E3', u'Rue Dr Zamenhof Behoririka 101 ANTANANARIVO',
                                   self.bold(workbook, 'center', 8, 0, False))

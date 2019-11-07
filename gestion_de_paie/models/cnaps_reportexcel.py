@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from pygments.lexer import _inherit
 
-from ast import literal_eval
 from odoo import fields, models, api
 
 DICT_MONTH = {'01': 'Janvier', '02': u'Février', '03': 'Mars',
@@ -19,7 +17,6 @@ DICT_TRIM = {
 
 class CnapsReport(models.TransientModel):
     _name = "cnaps.reportexcel"
-
 
     quarter = fields.Selection(string="Trimèstre", selection=[('1', u'Premier trimestre'),
                                                               ('2', u'Deuxième trimestre'),
@@ -44,7 +41,6 @@ class CnapsReport(models.TransientModel):
     def generateCnaps_excel(self):
         years_selected = dict(self._fields['annees'].selection).get(self.annees)
         trim = dict(self._fields['quarter'].selection).get(self.quarter)
-        #print(self.fmfp_emp_list('2019-10'))
         actions = {
             'type': 'ir.actions.act_url',
             'target': 'current',
@@ -186,9 +182,10 @@ class CnapsReport(models.TransientModel):
                     from hr_payslip
                     inner join hr_employee on (hr_employee.id = hr_payslip.employee_id) 
                     inner join hr_payslip_line on (hr_payslip.id = hr_payslip_line.slip_id)
-                    where hr_payslip.date_from::text like '{}' and hr_payslip_line.code= '{}' and hr_payslip.state ='done' and hr_payslip.credit_note = False order by hr_employee.name_related""".format(
+                    where hr_payslip.date_from::text like '{}' and hr_payslip_line.code= '{}' and hr_payslip.state ='done' and payslip.credit_note = False order by hr_employee.name_related""".format(
             period + '%',
             code)
+
         self._cr.execute(query)
         for res in self.env.cr.fetchall():
             data_month.append(res)
@@ -202,6 +199,15 @@ class CnapsReport(models.TransientModel):
         period = self.period_salary(month_selected, years_selected)
         data_month = self.cnaps_month(period[period_n])
         return {i: data_month[i] for i in range(0, len(data_month))}
+
+    def data_code_payslip(self, month_selected, years_selected, period_n):
+        period = self.period_salary(month_selected, years_selected)
+        mount = {
+            'cnaps_pat': self.cnaps_code(period[period_n], 'CNAPS_PAT'),
+            'cnaps_emp': self.cnaps_code(period[period_n], 'CNAPS_EMP'),
+            'net': self.cnaps_code(period[period_n], 'NET')
+        }
+        return mount
 
     def employee_paysslip_list(self, period, period_n, id):
         payslipobj = \
@@ -281,6 +287,7 @@ class CnapsReport(models.TransientModel):
 
     def company_information(self):
         partner = self.env['res.partner'].search([("id", "=", 1)])
+        country_part_id = partner.mapped('country_id')
         conpany = partner.mapped('company_id')
         return {
             'name': str(partner.name) or u'',
@@ -290,38 +297,4 @@ class CnapsReport(models.TransientModel):
             'email': str(partner.company_id.email) or u'',
             'employer_rate': str(self.plafond()['emp']) + '%',
             'worker_rate': str(self.plafond()['patr']) + '%'
-        }
-
-    #cotisation fmfp
-    def cot_fmfp(self):
-
-        return
-
-    def to_list(self, list):
-        b = str(list)
-        c = b.replace(',)', '')
-        d = c.replace('(', '')
-        e = d.replace(' ', '')
-        return literal_eval(e)
-
-    def plafond(self):
-        company_obj = self.env['res.company'].search([('partner_id', '=', 1)])
-        return {
-            'emp': company_obj.mapped('cotisation_sante_emp')[0],  # =1
-            'patr': company_obj.mapped('cotisation_sante_patr')[0],  # =5
-            'plf_amount': company_obj.mapped('plafond_cnaps')[0]
-        }
-
-    def fmfp_emp_list(self, period):
-        total_fmfp = 0
-        nb_fmfp = 0
-        net_lst = self.to_list(self.cnaps_code(period, 'NET'))
-        plafond = float(self.plafond()['plf_amount'])
-        for n in net_lst:
-            if n > plafond:
-                total_fmfp = total_fmfp + n
-                nb_fmfp += 1
-        return {
-            'FMFP_m': total_fmfp,
-            'nb_fmfp': nb_fmfp
         }

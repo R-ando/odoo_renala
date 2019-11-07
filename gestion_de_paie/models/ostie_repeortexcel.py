@@ -12,7 +12,6 @@ _logger = logging.getLogger(__name__)
 class OstieReport(models.TransientModel):
     _name = "ostie.reportexcel"
 
-
     quarter = fields.Selection(string="Trimèstre", selection=[('1', u'Premier trimestre'),
                                                               ('2', u'Deuxième trimestre'),
                                                               ('3', u'Troisième trimestre'),
@@ -312,4 +311,3 @@ class OstieReport(models.TransientModel):
         d = c.replace('(', '')
         e = d.replace(' ', '')
         return literal_eval(e)
-
