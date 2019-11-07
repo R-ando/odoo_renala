@@ -40,6 +40,7 @@
                                     <field name="seuil_irsa"/>
                                     <field name="taux_irsa"/>
                                     <field name="abat_irsa"/>
+                                    <field name="amount_allocation"/>
                                 </group>
                                 <group>
                                     <field name="num_cnaps_patr"/>

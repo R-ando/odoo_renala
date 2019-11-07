@@ -469,7 +469,7 @@ else : result = 0
     <record id="hr_rule_basic_AF" model="hr.salary.rule">
         <field name="name">Allocation familiale</field>
         <field name="code">AF</field>
-        <field name="sequence">2</field>
+        <field name="sequence">20</field>
         <field name="category_id" ref="hr_payroll.ALW"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>

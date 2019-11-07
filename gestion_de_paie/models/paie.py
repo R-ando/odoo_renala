@@ -30,6 +30,7 @@ class res_company(models.Model):
     cotisation_sante_emp = fields.Float(u'Cotisation Employé Santé')
     org_sante = fields.Char('Organisme sanitaire', size=64)
     conge_mens = fields.Float(u'Nombre de jour congé  mensuel')
+    amount_allocation = fields.Integer('Montant Allocation Familiale')
 
     siret = fields.Char('SIRET', size=64)
     ape = fields.Char('APE', size=64)

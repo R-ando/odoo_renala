@@ -48,11 +48,18 @@
             <field name="arch" type="xml">
                 <field name="identification_id" position="after">
                     <field name="num_cnaps_emp" string="N° CNAPS"/>
-                    <field name="num_cin" string="N° CIN"/>
+                    <field name="num_cin" string="N° CIN" invisible="1"/>
+                    <field name="date_cin"/>
+                    <field name="lieu_cin"/>
                     <field name="num_emp" string="N° Matricule"/>
                 </field>
-            </field>
-        </record>
 
+                <!-- Add a field nombre_enfant_cnaps -->
+                <xpath expr="//field[@name='children']" position="after">
+                    <field name="nombre_enfant_cnaps"/>
+                </xpath>
+            </field>
+            
+        </record>
     </data>
 </odoo>
