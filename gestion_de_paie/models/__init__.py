@@ -7,6 +7,6 @@ from . import irsa
 from . import resource_calendar
 from . import cnaps_reportexcel
 from . import employee
-from .import ostie_repeortexcel
+from . import ostie_repeortexcel
 from . import company
-
+from . import hr_holidays

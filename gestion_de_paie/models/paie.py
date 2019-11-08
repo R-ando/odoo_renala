@@ -2,7 +2,6 @@
 
 from odoo import api, fields, models, tools, _
 import time
-from datetime import datetime
 import babel
 
 

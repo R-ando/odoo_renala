@@ -320,6 +320,26 @@
                                 </strong>
                             </td>
                         </tr>
+                        <!-- Add a line for "congé" -->
+                        <tr>
+                            <td><strong>Congé</strong></td>
+                            <td>
+                                Anc. Solde<br/>
+                                <span t-esc="o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from)"/>
+                            </td>
+                            <td>
+                                Acquis<br/>
+                                <span t-esc="get_employee_allocation_leaves(o.employee_id, o.date_from)"/>
+                            </td>
+                            <td>
+                                Pris<br/>
+                                <span t-esc="get_employee_request_leaves(o.employee_id, o.date_from, o.date_to)"/>
+                            </td>
+                            <td>
+                                Nouv. Solde<br/>
+                                <span t-field="o.employee_id.remaining_leaves"/>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
