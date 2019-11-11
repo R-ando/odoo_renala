@@ -53,7 +53,7 @@ class report_paie(models.AbstractModel):
         else : return '0,0'
 
     # Congé pris et approuvé durant la même période que celle du bulletin.
-    def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche):
+    def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche, map=True):
         holidays_obj = self.env['hr.holidays'].search([('employee_id', '=', employee_id.id)])
         pris = 0
         date_from_fiche = fields.Datetime.from_string(date_from_fiche)
@@ -69,18 +69,22 @@ class report_paie(models.AbstractModel):
                     pris += ho.number_of_days_temp
                 # Test if date of leaves is in current month
                 elif date_from_holidays <= date_to_fiche and date_to_holidays >= date_from_fiche:
-                    # Set the date_from
-                    if date_from_holidays <= date_from_fiche:
-                        date_from_calcul = date_from_fiche
+                    if map:
+                        # Set the date_from
+                        if date_from_holidays <= date_from_fiche:
+                            date_from_calcul = date_from_fiche
+                        else:
+                            date_from_calcul = date_from_holidays
+                        # Set the date_to
+                        if date_to_holidays <= date_to_fiche:
+                            date_to_calcul = date_to_holidays
+                        else:
+                            date_to_calcul = date_to_fiche
+                        # Calculate the number of day leaves in current month
+                        pris += (date_to_calcul - date_from_calcul).days + 1
                     else:
-                        date_from_calcul = date_from_holidays
-                    # Set the date_to
-                    if date_to_holidays <= date_to_fiche:
-                        date_to_calcul = date_to_holidays
-                    else:
-                        date_to_calcul = date_to_fiche
-                    # Calculate the number of day leaves in current month
-                    pris += (date_to_calcul - date_from_calcul).days + 1
+                        pris += ho.number_of_days_temp
+                    
                 
         return pris
 
