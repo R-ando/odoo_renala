@@ -270,12 +270,15 @@
                                 </t>
                             </td>
                             <td>
-                                <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','TM']">
+                     <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','PLUS','TM']">
+
                                     <span t-field="line.total"/>
                                 </t>
                             </td>
                             <td>
-                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'FMFP_EMP', 'AVANCE15','AVANCESP','AUTRES']">
+
+                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'FMFP_EMP', 'AVANCE15','AVANCESP','AUTRES','MOINS']">
+
                                     <span t-field="line.total"/>
                                 </t>
                             </td>
@@ -325,7 +328,7 @@
                             <td><strong>Congé</strong></td>
                             <td>
                                 Anc. Solde<br/>
-                                <span t-esc="o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from)"/>
+                                <span t-esc="o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from) + get_employee_request_leaves(o.employee_id, o.date_from, o.date_to, False)"/>
                             </td>
                             <td>
                                 Acquis<br/>

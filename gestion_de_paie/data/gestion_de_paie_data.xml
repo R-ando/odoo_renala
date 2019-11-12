@@ -83,6 +83,15 @@
         <field name="name">HOURS</field>
         <field name="code">HOURS</field>
     </record>
+    <!-- Add a new categories PLUS and MOINS for custom salary rules -->
+    <record id="hr_payroll.PLUS" model="hr.salary.rule.category">
+        <field name="name">PLUS</field>
+        <field name="code">PLUS</field>
+    </record>
+    <record id="hr_payroll.MOINS" model="hr.salary.rule.category">
+        <field name="name">MOINS</field>
+        <field name="code">MOINS</field>
+    </record>
 
       <!-- Contribution Register -->
 
@@ -120,7 +129,7 @@
         <field name="sequence">200</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = categories.BASIC + categories.ALW - categories.DED - CNAPS_EMP - OMSI_EMP</field>
+        <field name="amount_python_compute">result = categories.BASIC + categories.ALW - categories.DED - CNAPS_EMP - OMSI_EMP + categories.PLUS - categories.MOINS</field>
          <field name="appears_on_payslip" eval="False"/>
         <field name="note">C'est le salaire Net qui est le salaire Brut - toutes les retenues</field>
     </record>
@@ -490,6 +499,32 @@ else : result = 0
         <field name="amount_python_compute">result = employee.nombre_enfant_cnaps * employee.company_id.amount_allocation</field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">Montant de l'allocation familiale en fonction du nombre d’enfant alloué.</field>
+    </record>
+
+    <!-- Add a new categories PLUS and MOINS -->
+    <record id="hr_rule_basic_PLUS" model="hr.salary.rule">
+        <field name="name">Autres suppléments</field>
+        <field name="sequence" eval="100"/>
+        <field name="code">PLUS</field>
+        <field name="category_id" ref="hr_payroll.PLUS"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">if inputs.PLUS and inputs.PLUS.amount : result = inputs.PLUS.amount
+else : result = 0</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Montant ajouter automatiquement avec le salaire net.</field>
+    </record>
+    <record id="hr_rule_basic_MOINS" model="hr.salary.rule">
+        <field name="name">Autres déduction</field>
+        <field name="sequence" eval="100"/>
+        <field name="code">MOINS</field>
+        <field name="category_id" ref="hr_payroll.MOINS"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">if inputs.MOINS and inputs.MOINS.amount : result = inputs.MOINS.amount
+else : result = 0</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Montant déduit automatiquement sur le salaire net.</field>
     </record>
 
     <!-- Salary Structure -->
