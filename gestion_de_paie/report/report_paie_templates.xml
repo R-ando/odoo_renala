@@ -270,12 +270,12 @@
                                 </t>
                             </td>
                             <td>
-                                <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF']">
+                                <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','TM']">
                                     <span t-field="line.total"/>
                                 </t>
                             </td>
                             <td>
-                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA','AVANCE15','AVANCESP','AUTRES']">
+                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'FMFP_EMP', 'AVANCE15','AVANCESP','AUTRES']">
                                     <span t-field="line.total"/>
                                 </t>
                             </td>

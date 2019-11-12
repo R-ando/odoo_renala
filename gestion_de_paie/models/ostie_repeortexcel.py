@@ -311,3 +311,4 @@ class OstieReport(models.TransientModel):
         d = c.replace('(', '')
         e = d.replace(' ', '')
         return literal_eval(e)
+

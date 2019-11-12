@@ -23,6 +23,7 @@
             <field name="cotisation_sante_patr">5.0</field>
             <field name="cotisation_sante_emp">1.0</field>
             <field name="conge_mens">2.5</field>
+<!--            <field name="taux_fmfp">1.0</field>-->
             <field name="amount_allocation">4000</field>
         </record>
 
@@ -136,6 +137,19 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
         <field name="register_id" ref="hr_CNAPS_register"/>
         <field name="note">C'est la valeur de CNAPS de chaque salarié , qui s'appuit sur la valeur du salaire "Brut" calculé.</field>
     </record>
+
+     <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.GROSS"/>
+        <field name="name">FMFP</field>
+        <field name="code">FMFP_EMP</field>
+        <field name="sequence">108</field>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = categories.GROSS * 1/100</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Formation FMFP</field>
+    </record>
+
     <record id="hr_payroll_rules_CNAPS_PAT" model="hr.salary.rule">
         <field name="category_id" ref="CNAPS_PAT"/>
         <field name="name">CNAPS_PAT</field>
@@ -486,6 +500,18 @@ else : result = 0
                 <field name="company_id" ref="base.main_company"/>
         <field name="parent_id" ref="hr_payroll.structure_base"/>
         <field name="note">Cette rubrique représente la structure des employés Malagasy.</field>
+    </record>
+        <!--thirteenth month-->
+    <record id="hr_rule_basic_TM" model="hr.salary.rule">
+        <field name="name"> Treizième mois </field>
+        <field name="code">TM</field>
+        <field name="sequence" >21</field>
+        <field name="category_id" ref="hr_payroll.ALW"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.TM.amount</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">prime prévue par la convention collective ou le contrat de travail.</field>
     </record>
        </data>
 </odoo>

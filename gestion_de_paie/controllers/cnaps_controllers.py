@@ -12,9 +12,11 @@ class ExportReportCnapsController(http.Controller):
     """Function to export New Product Excel """
 
     @http.route('/web/binary/download_report_cnaps_file', type='http', auth="public")
-    def download_report_cnaps_file(self, p, m, c, y, data_month1, data_month2, data_month3, plf, comp_inf, **args):
+    def download_report_cnaps_file(self, p, m, c, y, data_month1, data_month2, data_month3, plf, comp_inf, fmfp,
+                                   **args):
         filename = "CNAPS.xlsx"
         output = io.BytesIO()
+        fmfp_ = literal_eval(fmfp)
         comp_inf_ = literal_eval(comp_inf)
         workbook = xlsxwriter.Workbook(output)
         bold = workbook.add_format({'bold': True, "font_size": 10})
@@ -23,7 +25,8 @@ class ExportReportCnapsController(http.Controller):
             "border_color": "#171C1E",
             "font_size": 10
         })
-        self.report_excel_employer(workbook, p, m, c, y, bold, full_border, data_month1, data_month2, data_month3, plf, comp_inf_)
+        self.report_excel_employer(workbook, p, m, c, y, bold, full_border, data_month1, data_month2, data_month3, plf,
+                                   comp_inf_, fmfp_)
         self.month(workbook, data_month1, 1, plf)
         self.month(workbook, data_month2, 2, plf)
         self.month(workbook, data_month3, 3, plf)
@@ -37,7 +40,7 @@ class ExportReportCnapsController(http.Controller):
         return workbook.add_format({'num_format': '###0.00', 'font_size': 10, "border": 1, 'align': align})
 
     def report_excel_employer(self, workbook, p, m, c, y, bold, full_border, data_month1, data_month2, data_month3,
-                              plf, comp_inf_):
+                              plf, comp_inf_, fmfp):
         left = workbook.add_format({'font_size': 10})
         m_fmt = workbook.add_format({'num_format': '###0.00', 'font_size': 10, "border": 1, "align": "right"})
         month = literal_eval(m)
@@ -100,6 +103,35 @@ class ExportReportCnapsController(http.Controller):
         worksheet_emp.write_formula('F23', "=sum(C23:E23)", m_fmt)
         worksheet_emp.write_formula('F24', "=sum(C24:E24)", m_fmt)
         worksheet_emp.write_formula('F25', "=sum(C25:E25)", m_fmt)
+
+        # cotisation fmmfp
+        worksheet_emp.write('A27', u'COTISATIONS FMFP', self.bold(workbook, 'left', 10, 0, True))
+        worksheet_emp.write('B28', u'Année et periode', self.bold(workbook, 'left', 10, 0, False))
+        worksheet_emp.write('C28', periode_et_annee, full_border)
+        worksheet_emp.write('B29', u'Taux Employeur', self.bold(workbook, 'left', 10, 0, False))
+        worksheet_emp.write('C29', str(plf['emp']) + '%', full_border)
+
+        worksheet_emp.write('A31', u'RECAPITULATION', self.bold(workbook, 'left', 10, 0, True))
+        worksheet_emp.write('B33', u'MOIS CONCERNE', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('C33', month['mth1'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('D33', month['mth2'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('E33', month['mth3'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('F33', u'TOTAUX', self.bold(workbook, 'left', 10, 1, True))
+        worksheet_emp.write('B34', u'Effectif mensuel(OBLIGATOIRE)', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('C34', fmfp['fmfp1']['nb_fmfp'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('D34', fmfp['fmfp2']['nb_fmfp'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write('E34', fmfp['fmfp3']['nb_fmfp'], self.bold(workbook, 'center', 10, 1, False))
+        worksheet_emp.write_formula('F34', '=SUM(C34:E34)', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('B35', u'Totaux Salaire plafonnées', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write('C35', fmfp['fmfp1']['m_fmfp'], self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('D35', fmfp['fmfp2']['m_fmfp'], self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('E35', fmfp['fmfp3']['m_fmfp'], self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write_formula('F35', '=SUM(C35:E35)', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('B36', u'Cotisation Employeur', self.bold(workbook, 'left', 10, 1, False))
+        worksheet_emp.write_formula('C36', '=C35*{}%'.format(plf['emp']), self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write_formula('D36', '=D35*{}%'.format(plf['emp']), self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write_formula('E36', '=E35*{}%'.format(plf['emp']), self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write_formula('F36', '=SUM(C36:E36)', self.bold(workbook, 'right', 10, 1, False))
 
     def bold(self, workbook, align, size, border, bol):
         bold_ = workbook.add_format({
@@ -200,7 +232,6 @@ class ExportReportCnapsController(http.Controller):
         worksheet_mth.write('N2', 'TRAVAILLEUR', align_center)
         worksheet_mth.write('O2', 'TOTAL', align_center)
         worksheet_mth.merge_range('P1:P2', u'N° CIN', merge_format)
-
         # ref employeur
         self.empty_col(worksheet_mth, 2, 4, cl, align_center)
         # avantage
@@ -226,7 +257,7 @@ class ExportReportCnapsController(http.Controller):
         worksheet_mth.write_formula('N{}'.format(cl + 3), "=sum(N3:N{})".format(cl + 2), rigth)
         worksheet_mth.write_formula('O{}'.format(cl + 3), "=sum(O3:O{})".format(cl + 2), rigth)
         worksheet_mth.write('P{}'.format(cl + 3), None, rigth)
-        #total cotisation
+        # total cotisation
         self.total_cot(worksheet_mth, 2, 14, cl, rigth)
 
     def position_month(self, worksheet, row, col, field_list, val):

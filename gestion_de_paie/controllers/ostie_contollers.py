@@ -223,7 +223,7 @@ class ExportReportOstieController(http.Controller):
         worksheet_ost.merge_range('I6:K6', "eMail : {}".format(comp_inf['email']),
                                   self.bold(workbook, 'center', 8, 0, True))
         worksheet_ost.write('G7', "STAT", left_border2)
-        worksheet_ost.write('H7', comp_inf['stat'], left_border2)
+        worksheet_ost.merge_range('H7:I7', comp_inf['stat'], self.bold(workbook, 'center', 8, 0, False))
         worksheet_ost.write('G8', "ACTIVITE", left_border2)
         worksheet_ost.write('L8', "REGIME", self.bold(workbook, 'center', 8, 0, True))
         worksheet_ost.merge_range('G9:H9', "Taux Employeur :", left_border3)
@@ -443,7 +443,7 @@ class ExportReportOstieController(http.Controller):
         self.part(worksheet, 14, 16, 5, row_count, self.wrap2(workbook, 'right'))
         self.part(worksheet, 14, 17, 1, row_count, self.wrap2(workbook, 'right'))
         # information
-        worksheet.merge_range('I4:K4', comp_inf['name'].upper(), self.bold(workbook, 'left', 11, 0, True))
+        worksheet.merge_range('I4:K4', comp_inf['name'].upper(), self.bold(workbook, 'left', 11, 0, False))
         worksheet.merge_range('I5:J5', comp_inf['address'], self.bold(workbook, 'center', 8, 0, False))
         worksheet.write('I9', comp_inf['employer_rate'], self.bold(workbook, 'center', 8, 0, False))
         worksheet.write('J9', 'Travailleur :', self.bold(workbook, 'center', 8, 0, False))
@@ -592,6 +592,28 @@ class ExportReportOstieController(http.Controller):
         for i in range(line):
             worksheet.write(row, col, i, wrap)
             row += 1
+
+    def quarter_months(self, quarter, years):
+        if quarter == u'Premier trimestre':
+            return {
+                'p1': years + '-01-01',
+                'p2': years + '-03-31'
+            }
+        if quarter == u'Deuxième trimestre':
+            return {
+                'p1': years + '-04-01',
+                'p2': years + '-06-30'
+            }
+        if quarter == u'Troisième trimestre':
+            return {
+                'p1': years + '-07-01',
+                'p2': years + '-09-30'
+            }
+        if quarter == u'Quatrième trimestre':
+            return {
+                'p1': years + '-10-01',
+                'p2': years + '-12-31'
+            }
 
     def str_(self, float):
         return str(float).replace(".", ",")

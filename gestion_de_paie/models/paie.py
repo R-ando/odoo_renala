@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 
 from odoo import api, fields, models, tools, _
+from datetime import datetime
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 import time
 import babel
 
@@ -34,6 +36,8 @@ class res_company(models.Model):
     siret = fields.Char('SIRET', size=64)
     ape = fields.Char('APE', size=64)
 
+    #taux_fmfp = fields.Float('taux fmfp')
+
 
 res_company()
 
@@ -62,6 +66,7 @@ class HrPayslip(models.Model):
 
     # Redefinition fonction onchange_employee()
 
+
     @api.onchange('employee_id', 'date_from')
     def onchange_employee(self):
         res = super(HrPayslip, self).onchange_employee()
@@ -74,19 +79,23 @@ class HrPayslip(models.Model):
             {'code': 'HS2', 'contract_id': self.contract_id.id, 'name': u'Heure supplémentaire 2'},
             {'code': 'HMNUIT', 'contract_id': self.contract_id.id, 'name': u'Heure majoré nuit'},
             {'code': 'HMDIM', 'contract_id': self.contract_id.id, 'name': u'Heure majoré dimanche'},
-            {'code': 'HMJF', 'contract_id': self.contract_id.id, 'name': u'Heure majoré jour férié'}]
+            {'code': 'HMJF', 'contract_id': self.contract_id.id, 'name': u'Heure majoré jour férié'}
+        ]
 
         worked_days_lines = self.worked_days_line_ids.browse([])
         for worked_days_data in worked_days_data_list:
             self.worked_days_line_ids += worked_days_lines.new(worked_days_data)
 
+        date_from = datetime.strptime(self.date_from, DEFAULT_SERVER_DATE_FORMAT).month
         input_data_list = [
-            #{'code': 'AVANCE15', 'contract_id': self.contract_id.id, 'amount': self.get_avance_salaire(), 'name': 'Avance quinzaine'},
+            # {'code': 'AVANCE15', 'contract_id': self.contract_id.id, 'amount': self.get_avance_salaire(), 'name': 'Avance quinzaine'},
             {'code': 'AVANCE15', 'contract_id': self.contract_id.id, 'name': 'Avance quinzaine'},
-
             {'code': 'AVANCESP', 'contract_id': self.contract_id.id, 'name': u'Avance spécial'},
             {'code': 'PRM', 'contract_id': self.contract_id.id, 'name': 'Prime'},
-            {'code': 'AUTRES', 'contract_id': self.contract_id.id, 'name': 'Autres retenues'}]
+            {'code': 'AUTRES', 'contract_id': self.contract_id.id, 'name': 'Autres retenues'},
+        ]
+        if date_from == 12:
+            input_data_list.append({'code': 'TM', 'contract_id': self.contract_id.id, 'name': u'Treizième mois'})
 
         input_lines = self.input_line_ids.browse([])
         for input_data in input_data_list:

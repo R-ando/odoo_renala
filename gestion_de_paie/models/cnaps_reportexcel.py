@@ -53,7 +53,8 @@ class CnapsReport(models.TransientModel):
                    + "&data_month2=" + format(self.cnaps_list(trim, years_selected, 'period2'))
                    + "&data_month3=" + format(self.cnaps_list(trim, years_selected, 'period3'))
                    + '&plf=' + format(self.plafond()) + '&comp_inf='
-                   + format(self.company_information())
+                   + format(self.company_information()) + '&fmfp='
+                   + format(self.fmfp_nbMount_list(trim, years_selected))
         }
         return actions
 
@@ -77,7 +78,6 @@ class CnapsReport(models.TransientModel):
         keys = DICT_MONTH.keys()
         vals = DICT_MONTH.values()
         indice_month = keys[vals.index(month_selected)]
-        three_months = {}
         months = DICT_MONTH
         indice_month = int(indice_month)
         if indice_month <= 9:
@@ -136,7 +136,6 @@ class CnapsReport(models.TransientModel):
         }
 
     def trim_to_period(self, trim):
-
         month = DICT_MONTH[trim['p1'].split('-')[1]]
         years = trim['p1'].split('-')[0]
         return self.period_salary(month, years)
@@ -210,14 +209,11 @@ class CnapsReport(models.TransientModel):
         return mount
 
     def employee_paysslip_list(self, period, period_n, id):
-        payslipobj = \
-            self.env["hr.payslip"].search(
-                [("date_from", "like", period[period_n] + "%"), ("employee_id", "=", id), ("state", "=", "done"),
-                 ("credit_note", "=", False)],
-                limit=1)
         emp = self.env["hr.employee"].search([("id", "=", id)])
         contract = self.env["hr.contract"].search([("employee_id", "=", id)])
         job = contract.mapped("job_id")
+        if period[period_n] == '2019-10':
+            print(id)
         return {
             'period': period[period_n].replace("-", "") or u'',
             'name': emp.name_related.upper() or u'',
@@ -246,7 +242,7 @@ class CnapsReport(models.TransientModel):
         listIdpayslip = self.env["hr.payslip"].search(
             [("date_from", "like", period[period_n] + "%"), ("state", "=", "done"),
              ("credit_note", "=", False)]).mapped(
-            'employee_id').mapped('id')
+            'employee_id').ids
         if listIdpayslip != []:
             for id in listIdpayslip:
                 cnaps_emp.append(self.employee_paysslip_list(period, period_n, id))
@@ -287,7 +283,6 @@ class CnapsReport(models.TransientModel):
 
     def company_information(self):
         partner = self.env['res.partner'].search([("id", "=", 1)])
-        country_part_id = partner.mapped('country_id')
         conpany = partner.mapped('company_id')
         return {
             'name': str(partner.name) or u'',
@@ -297,4 +292,65 @@ class CnapsReport(models.TransientModel):
             'email': str(partner.company_id.email) or u'',
             'employer_rate': str(self.plafond()['emp']) + '%',
             'worker_rate': str(self.plafond()['patr']) + '%'
+        }
+
+    def to_list(self, list):
+        b = str(list)
+        c = b.replace(',)', '')
+        d = c.replace('(', '')
+        e = d.replace(' ', '')
+        return literal_eval(e)
+
+    def plafond(self):
+        company_obj = self.env['res.company'].search([('partner_id', '=', 1)])
+        return {
+            'emp': company_obj.mapped('cotisation_sante_emp')[0],  # =1
+            'patr': company_obj.mapped('cotisation_sante_patr')[0],  # =5
+            'plf_amount': company_obj.mapped('plafond_cnaps')[0]
+        }
+
+    def fmfp_nbMount(self, period):
+        total_fmfp = 0
+        nb_fmfp = 0
+        contract_wage = self.env['hr.contract'].search([('date_start', 'like', period + '%')]).mapped('wage')
+        plafond = float(self.plafond()['plf_amount'])
+        for n in contract_wage:
+            if n > plafond:
+                total_fmfp = total_fmfp + n
+            else:
+                total_fmfp = total_fmfp + plafond
+            nb_fmfp += 1
+        return {
+            'm_fmfp': total_fmfp,
+            'nb_fmfp': nb_fmfp
+        }
+
+    def quarter_months(self, quarter, years):
+        if quarter == u'Premier trimestre':
+            return {
+                'p1': years + '-01-01',
+                'p2': years + '-03-31'
+            }
+        if quarter == u'Deuxième trimestre':
+            return {
+                'p1': years + '-04-01',
+                'p2': years + '-06-30'
+            }
+        if quarter == u'Troisième trimestre':
+            return {
+                'p1': years + '-07-01',
+                'p2': years + '-09-30'
+            }
+        if quarter == u'Quatrième trimestre':
+            return {
+                'p1': years + '-10-01',
+                'p2': years + '-12-31'
+            }
+
+    def fmfp_nbMount_list(self, trim, year):
+        period = self.trim_to_period(self.quarter_months(trim, year))
+        return {
+            'fmfp1': self.fmfp_nbMount(period['period1']),
+            'fmfp2': self.fmfp_nbMount(period['period2']),
+            'fmfp3': self.fmfp_nbMount(period['period3'])
         }
