@@ -10,3 +10,4 @@ from . import employee
 from . import ostie_repeortexcel
 from . import company
 from . import hr_holidays
+from . import irsa_reportexcel

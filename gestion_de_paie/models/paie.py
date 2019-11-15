@@ -32,11 +32,9 @@ class res_company(models.Model):
     org_sante = fields.Char('Organisme sanitaire', size=64)
     conge_mens = fields.Float(u'Nombre de jour congé  mensuel')
     amount_allocation = fields.Integer('Montant Allocation Familiale')
-
     siret = fields.Char('SIRET', size=64)
     ape = fields.Char('APE', size=64)
-
-    #taux_fmfp = fields.Float('taux fmfp')
+    seuil_fmfp = fields.Float('FMFP')
 
 
 res_company()
@@ -54,6 +52,7 @@ class hr_employee(models.Model):
 
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
+    paiement_mode_id = fields.Many2one(related='contract_id.payment_mode_id')
 
     def get_avance_salaire(self):
         advance_obj = self.env['hr.wage.advance']
@@ -94,9 +93,12 @@ class HrPayslip(models.Model):
             {'code': 'PRM', 'contract_id': self.contract_id.id, 'name': 'Prime'},
             {'code': 'AUTRES', 'contract_id': self.contract_id.id, 'name': 'Autres retenues'},
         ]
+        thirteen_month = self.env.ref('gestion_de_paie.hr_rule_basic_TM')
         if date_from == 12:
+            thirteen_month.write({'active': True})
             input_data_list.append({'code': 'TM', 'contract_id': self.contract_id.id, 'name': u'Treizième mois'})
-
+        else:
+            thirteen_month.write({'active': False})
         input_lines = self.input_line_ids.browse([])
         for input_data in input_data_list:
             self.input_line_ids += input_lines.new(input_data)

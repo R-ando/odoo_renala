@@ -17,6 +17,9 @@
                         <field name="sme" class="o_address_state" placeholder="Salaire minimal d'embauche"/>
                     </group>
                 </xpath>
+<!--                <xpath expr="//field[@name='num_cnaps_patr']" position="after">-->
+<!--                        <field name="seuil_fmfp" class="o_address_state" placeholder="seuil fmfp"/>-->
+<!--                </xpath>-->
             </field>
         </record>
     </data>

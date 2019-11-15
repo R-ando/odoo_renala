@@ -29,7 +29,7 @@
              'report/report_etat_salaire.xml',
              'wizard/cnaps_wizard_view.xml',
              'wizard/ostie_wizard_view.xml',
-
+             'wizard/irsa_wizard_view.xml',
              ],
     'demo': [],
     'test': [],

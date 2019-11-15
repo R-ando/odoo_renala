@@ -212,8 +212,6 @@ class CnapsReport(models.TransientModel):
         emp = self.env["hr.employee"].search([("id", "=", id)])
         contract = self.env["hr.contract"].search([("employee_id", "=", id)])
         job = contract.mapped("job_id")
-        if period[period_n] == '2019-10':
-            print(id)
         return {
             'period': period[period_n].replace("-", "") or u'',
             'name': emp.name_related.upper() or u'',
@@ -282,6 +280,7 @@ class CnapsReport(models.TransientModel):
             return 4
 
     def company_information(self):
+        print(self.id)
         partner = self.env['res.partner'].search([("id", "=", 1)])
         conpany = partner.mapped('company_id')
         return {

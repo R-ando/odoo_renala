@@ -32,7 +32,7 @@
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="//page" position="after">
-                        <page string="Configuration">
+                        <page string="Configuration RH">
                             <group string="Paie">
                                 <group>
                                     <field name="siret"/>
@@ -47,6 +47,8 @@
                                     <field name="plafond_cnaps"/>
                                     <field name="cotisation_cnaps_patr"/>
                                     <field name="cotisation_cnaps_emp"/>
+                                    <field name="seuil_fmfp"/>
+
                                 </group>
                                 <group>
                                     <field name="org_sante"/>
@@ -66,9 +68,21 @@
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                     <button name="print_payroll" type="object" string="Imprimer" class="btn-primary"/>
+                    <button name="print_payroll" type="object" string="Imprimer" class="btn-primary"/>
                 </xpath>
             </field>
         </record>
+
+        <record id="payement_mode_hr_payslip" model="ir.ui.view">
+            <field name="name">hr.payslip.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='credit_note']" position="after">
+                    <field name="paiement_mode_id"/>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </odoo>

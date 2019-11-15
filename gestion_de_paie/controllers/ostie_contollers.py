@@ -291,125 +291,125 @@ class ExportReportOstieController(http.Controller):
         worksheet_ost.merge_range('A12:C12', u'ORANGE MONEY  032 24 704 67',
                                   self.bold(workbook, 'left', 8, 0, False))
         # explication des contenues des colonne
-        nbl = row_count
-        worksheet_ost.merge_range('B{}:D{}'.format(nbl + 17, nbl + 17), u'EXPLICATION DES CONTENUS DES COLONNES ',
-                                  self.bold(workbook, 'left', 10, 0, True))
-        worksheet_ost.write('B{}'.format(nbl + 19), u'COLONNE', self.bold(workbook, 'center', 10, 1, True))
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 19, nbl + 19), u'DESCRIPTION', top_bottom)
-        worksheet_ost.write('H{}'.format(nbl + 19), u'EXEMPLE', self.bold(workbook, 'center', 10, 1, True))
-        worksheet_ost.write('B{}'.format(nbl + 20), u'A', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 21), u'B', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 22), u'C', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 23), u'D', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 24), u'E', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 25), u'F', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 26), u'G', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 27), u'H', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 28), None, left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 29), u'I', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 30), u'J', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 31), None, left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 32), None, left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 33), u'K', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 34), u'L,M,N', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 35), None, left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 36), u'O', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 37), u'P', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 38), None, left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 39), u'P', left_rigth)
-        worksheet_ost.write('B{}'.format(nbl + 40), u'Q', left_rigth_bottom)
-
-        worksheet_ost.write('H{}'.format(nbl + 20), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 21), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 22), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 23), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 24), u'M ou F', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 25), u'02/06/1983', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 26), u'04/01/2017', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 27), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 28), u'04/01/2017', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 29), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 30), u'033546', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 31), u'12345678901K', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 32), u'564234', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 33), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 34), u'1234567', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 35), None, left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 36), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 37), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 38), None, left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 39), u'', left_rigth)
-        worksheet_ost.write('H{}'.format(nbl + 40), u'', left_rigth_bottom)
-
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 20, nbl + 20), u'Numéro chronologique', font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 21, nbl + 21), u"N° matricule du travailleur chez l'employeur",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 22, nbl + 22),
-                                  u'Nom du travailleur : Toujours à renseigner, ne pas intervertir avec les prénoms',
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 23, nbl + 23),
-                                  u'Prénoms du travailleur : A renseigner si existant, ne pas intervertir avec le nom',
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 24, nbl + 24), u'Sexe : Masculin ou Féminin', font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 25, nbl + 25),
-                                  u'Date de naissance obligatoire. Mettre au format date JJ/MM/AAAA', font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 26, nbl + 26),
-                                  u"Date d'embauche : mettre au format date JJ/MM/AAAA", font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 27, nbl + 27),
-                                  u'Date de départ : A renseigner uniquement si le travailleur a été débauché au cours de ce',
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 28, nbl + 28), u'trimestre. Mettre au format date JJ/MM/AAAA',
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 29, nbl + 29), u'Fonction', font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 30, nbl + 30),
-                                  u"N° CNaPS : N° d'affiliation du travailleur. Si le numéro comporte des zéros devant,",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 31, nbl + 31),
-                                  u"tapez ces zéros. Ce numéro doit être renseigné sauf si le travailleur a été embauché au",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 32, nbl + 32),
-                                  u"cours du trimestre, auquel cas, la date d'entrée et le n° CIN doivent être renseignés",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 33, nbl + 33),
-                                  u"CIN : N° CIN du travailleur - N° passeport pour les expatriés", font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 34, nbl + 34),
-                                  u"Salaire du mois : Montant du salaire du mois, non plafonné, en format nombre sans ",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 35, nbl + 35), u"séparation de milliers, donc cadré à droite",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 36, nbl + 36),
-                                  u"Total non plafonné : Somme des colonnes L, M et N (format nombre)", font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 37, nbl + 37),
-                                  u"Total plafonné : Si la valeur de L ou M ou N est supérieur au plafond règlementaire,",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 38, nbl + 38),
-                                  u"faire la somme avec le plafond règlementaire, sinon mettre O (format nombre)",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 39, nbl + 39),
-                                  u"Cotisation part employeur : Valeur de P à multiplier par le taux employeur en vigueur ",
-                                  font_10)
-        worksheet_ost.merge_range('C{}:G{}'.format(nbl + 40, nbl + 40),
-                                  u"Cotisation part travailleur : Valeur de P à multiplier par le taux travailleur en vigueur ",
-                                  top_border)
-
-        # recommendation
-        worksheet_ost.merge_range('K{}:L{}'.format(nbl + 17, nbl + 17), u"RECOMMANDATIONS :",
-                                  self.bold(workbook, 'center', 10, 0, True))
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 19, nbl + 19), u"Toutes les colonnes doivent être remplies",
-                                  font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 20, nbl + 20),
-                                  u"Dans le cas contraire, le fichier sera retourné à l'employeur.", font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 22, nbl + 22),
-                                  u"Ne jamais insérer ni supprimer d'autres lignes à l'en-tête (ligne 1 à 14)", font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 24, nbl + 24), u"Ne jamais insérer d'autres colonnes", font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 26, nbl + 26), u"Ne pas intervertir les colonnes", font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 28, nbl + 28), u"Mettre au majuscule les noms et prénoms",
-                                  font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 30, nbl + 30), u"ainsi que les fonctions", font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 32, nbl + 32),
-                                  u"Faire apparaitre dans l'objet du mail ainsi que dans le nom de fichier", font_10)
-        worksheet_ost.merge_range('J{}:O{}'.format(nbl + 34, nbl + 34),
-                                  u"Ne pas oublier d'établir l'état récapitulatif (onglet RECAP COTISATION)", font_10)
+        # nbl = row_count
+        # worksheet_ost.merge_range('B{}:D{}'.format(nbl + 17, nbl + 17), u'EXPLICATION DES CONTENUS DES COLONNES ',
+        #                           self.bold(workbook, 'left', 10, 0, True))
+        # worksheet_ost.write('B{}'.format(nbl + 19), u'COLONNE', self.bold(workbook, 'center', 10, 1, True))
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 19, nbl + 19), u'DESCRIPTION', top_bottom)
+        # worksheet_ost.write('H{}'.format(nbl + 19), u'EXEMPLE', self.bold(workbook, 'center', 10, 1, True))
+        # worksheet_ost.write('B{}'.format(nbl + 20), u'A', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 21), u'B', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 22), u'C', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 23), u'D', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 24), u'E', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 25), u'F', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 26), u'G', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 27), u'H', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 28), None, left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 29), u'I', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 30), u'J', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 31), None, left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 32), None, left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 33), u'K', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 34), u'L,M,N', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 35), None, left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 36), u'O', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 37), u'P', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 38), None, left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 39), u'P', left_rigth)
+        # worksheet_ost.write('B{}'.format(nbl + 40), u'Q', left_rigth_bottom)
+        #
+        # worksheet_ost.write('H{}'.format(nbl + 20), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 21), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 22), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 23), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 24), u'M ou F', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 25), u'02/06/1983', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 26), u'04/01/2017', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 27), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 28), u'04/01/2017', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 29), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 30), u'033546', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 31), u'12345678901K', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 32), u'564234', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 33), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 34), u'1234567', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 35), None, left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 36), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 37), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 38), None, left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 39), u'', left_rigth)
+        # worksheet_ost.write('H{}'.format(nbl + 40), u'', left_rigth_bottom)
+        #
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 20, nbl + 20), u'Numéro chronologique', font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 21, nbl + 21), u"N° matricule du travailleur chez l'employeur",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 22, nbl + 22),
+        #                           u'Nom du travailleur : Toujours à renseigner, ne pas intervertir avec les prénoms',
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 23, nbl + 23),
+        #                           u'Prénoms du travailleur : A renseigner si existant, ne pas intervertir avec le nom',
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 24, nbl + 24), u'Sexe : Masculin ou Féminin', font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 25, nbl + 25),
+        #                           u'Date de naissance obligatoire. Mettre au format date JJ/MM/AAAA', font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 26, nbl + 26),
+        #                           u"Date d'embauche : mettre au format date JJ/MM/AAAA", font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 27, nbl + 27),
+        #                           u'Date de départ : A renseigner uniquement si le travailleur a été débauché au cours de ce',
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 28, nbl + 28), u'trimestre. Mettre au format date JJ/MM/AAAA',
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 29, nbl + 29), u'Fonction', font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 30, nbl + 30),
+        #                           u"N° CNaPS : N° d'affiliation du travailleur. Si le numéro comporte des zéros devant,",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 31, nbl + 31),
+        #                           u"tapez ces zéros. Ce numéro doit être renseigné sauf si le travailleur a été embauché au",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 32, nbl + 32),
+        #                           u"cours du trimestre, auquel cas, la date d'entrée et le n° CIN doivent être renseignés",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 33, nbl + 33),
+        #                           u"CIN : N° CIN du travailleur - N° passeport pour les expatriés", font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 34, nbl + 34),
+        #                           u"Salaire du mois : Montant du salaire du mois, non plafonné, en format nombre sans ",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 35, nbl + 35), u"séparation de milliers, donc cadré à droite",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 36, nbl + 36),
+        #                           u"Total non plafonné : Somme des colonnes L, M et N (format nombre)", font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 37, nbl + 37),
+        #                           u"Total plafonné : Si la valeur de L ou M ou N est supérieur au plafond règlementaire,",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 38, nbl + 38),
+        #                           u"faire la somme avec le plafond règlementaire, sinon mettre O (format nombre)",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 39, nbl + 39),
+        #                           u"Cotisation part employeur : Valeur de P à multiplier par le taux employeur en vigueur ",
+        #                           font_10)
+        # worksheet_ost.merge_range('C{}:G{}'.format(nbl + 40, nbl + 40),
+        #                           u"Cotisation part travailleur : Valeur de P à multiplier par le taux travailleur en vigueur ",
+        #                           top_border)
+        #
+        # # recommendation
+        # worksheet_ost.merge_range('K{}:L{}'.format(nbl + 17, nbl + 17), u"RECOMMANDATIONS :",
+        #                           self.bold(workbook, 'center', 10, 0, True))
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 19, nbl + 19), u"Toutes les colonnes doivent être remplies",
+        #                           font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 20, nbl + 20),
+        #                           u"Dans le cas contraire, le fichier sera retourné à l'employeur.", font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 22, nbl + 22),
+        #                           u"Ne jamais insérer ni supprimer d'autres lignes à l'en-tête (ligne 1 à 14)", font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 24, nbl + 24), u"Ne jamais insérer d'autres colonnes", font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 26, nbl + 26), u"Ne pas intervertir les colonnes", font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 28, nbl + 28), u"Mettre au majuscule les noms et prénoms",
+        #                           font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 30, nbl + 30), u"ainsi que les fonctions", font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 32, nbl + 32),
+        #                           u"Faire apparaitre dans l'objet du mail ainsi que dans le nom de fichier", font_10)
+        # worksheet_ost.merge_range('J{}:O{}'.format(nbl + 34, nbl + 34),
+        #                           u"Ne pas oublier d'établir l'état récapitulatif (onglet RECAP COTISATION)", font_10)
 
     def style(self, worksheet):
         worksheet.set_column('A:A', 3)

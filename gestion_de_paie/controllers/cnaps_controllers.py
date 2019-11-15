@@ -123,15 +123,26 @@ class ExportReportCnapsController(http.Controller):
         worksheet_emp.write('E34', fmfp['fmfp3']['nb_fmfp'], self.bold(workbook, 'center', 10, 1, False))
         worksheet_emp.write_formula('F34', '=SUM(C34:E34)', self.bold(workbook, 'left', 10, 1, False))
         worksheet_emp.write('B35', u'Totaux Salaire plafonnées', self.bold(workbook, 'left', 10, 1, False))
-        worksheet_emp.write('C35', fmfp['fmfp1']['m_fmfp'], self.bold(workbook, 'right', 10, 1, False))
-        worksheet_emp.write('D35', fmfp['fmfp2']['m_fmfp'], self.bold(workbook, 'right', 10, 1, False))
-        worksheet_emp.write('E35', fmfp['fmfp3']['m_fmfp'], self.bold(workbook, 'right', 10, 1, False))
-        worksheet_emp.write_formula('F35', '=SUM(C35:E35)', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write('C35', fmfp['fmfp1']['m_fmfp'], self.style_number(workbook, False))
+        worksheet_emp.write('D35', fmfp['fmfp2']['m_fmfp'], self.style_number(workbook, False))
+        worksheet_emp.write('E35', fmfp['fmfp3']['m_fmfp'], self.style_number(workbook, False))
+        worksheet_emp.write_formula('F35', '=SUM(C35:E35)', self.style_number(workbook, False))
         worksheet_emp.write('B36', u'Cotisation Employeur', self.bold(workbook, 'left', 10, 1, False))
-        worksheet_emp.write_formula('C36', '=C35*{}%'.format(plf['emp']), self.bold(workbook, 'right', 10, 1, False))
-        worksheet_emp.write_formula('D36', '=D35*{}%'.format(plf['emp']), self.bold(workbook, 'right', 10, 1, False))
-        worksheet_emp.write_formula('E36', '=E35*{}%'.format(plf['emp']), self.bold(workbook, 'right', 10, 1, False))
-        worksheet_emp.write_formula('F36', '=SUM(C36:E36)', self.bold(workbook, 'right', 10, 1, False))
+        worksheet_emp.write_formula('C36', '=C35*{}%'.format(plf['emp']), self.style_number(workbook, False))
+        worksheet_emp.write_formula('D36', '=D35*{}%'.format(plf['emp']), self.style_number(workbook, False))
+        worksheet_emp.write_formula('E36', '=E35*{}%'.format(plf['emp']), self.style_number(workbook, False))
+        worksheet_emp.write_formula('F36', '=SUM(C36:E36)', self.style_number(workbook, False))
+
+    def style_number(self, workbook, bol):
+        bold_ = workbook.add_format({
+            'num_format': '###0.00',
+            'align': 'right',
+            'valign': 'vcenter',
+            'font_size': 8,
+            'bold': bol,
+            'border':1,
+        })
+        return bold_
 
     def bold(self, workbook, align, size, border, bol):
         bold_ = workbook.add_format({

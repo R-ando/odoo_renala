@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="hr_payroll_irsa_form" model="ir.ui.view">
+            <field name="name">reportexcel_irsa</field>
+            <field name="model">irsa.reportexcel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="mois"/>
+                        <field name="annees"/>
+                    </group>
+                     <footer>
+                       <button name="generateIrsa_excel" type="object" string="Exporter" class="btn-primary"/>
+                        <button string="Annuler" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_menuwizard_irsa" name="Etat IRSA" res_model="irsa.reportexcel" view_mode="form"
+                    target="new"/>
+
+        <menuitem id="menu_etat_irsa"
+                  action="action_menuwizard_irsa"
+                  name="IRSA"
+                  parent="menu_payroll_etat_globale"
+                  sequence="24"/>
+    </data>
+</odoo>
