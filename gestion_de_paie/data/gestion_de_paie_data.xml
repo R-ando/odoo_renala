@@ -23,7 +23,6 @@
             <field name="cotisation_sante_patr">5.0</field>
             <field name="cotisation_sante_emp">1.0</field>
             <field name="conge_mens">2.5</field>
-<!--            <field name="taux_fmfp">1.0</field>-->
             <field name="amount_allocation">4000</field>
         </record>
 
@@ -541,7 +540,7 @@ else : result = 0</field>
         <field name="name"> Treizième mois </field>
         <field name="code">TM</field>
         <field name="sequence" >21</field>
-        <field name="category_id" ref="hr_payroll.ALW"/>
+        <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = inputs.TM.amount</field>
