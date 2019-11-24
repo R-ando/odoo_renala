@@ -121,6 +121,31 @@
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.BASIC + categories.ALW</field>
         </record>
+
+        <record id="hr_holiday_rest"  model="hr.salary.rule">
+            <field name="name">Congé payé</field>
+            <field name="sequence" eval="101"/>
+            <field name="code">CP</field>
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+             <field name="amount_python_compute">result = payslip.rest_leave</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="note">nombre de jours de congé restant</field>
+        </record>
+
+        <record id="hr_holiday_preavi"  model="hr.salary.rule">
+            <field name="name">Préavis</field>
+            <field name="sequence" eval="102"/>
+            <field name="code">PN</field>
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+             <field name="amount_python_compute">result = payslip.rest_leave * (categories.BASIC/22)</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="note">Préavis</field>
+        </record>
+
      <record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.NET"/>
         <field name="name">Salaire Net</field>
@@ -149,11 +174,11 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
      <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.GROSS"/>
         <field name="name">FMFP</field>
-        <field name="code">FMFP_EMP</field>
+        <field name="code">FMFP_PAT</field>
         <field name="sequence">108</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = categories.GROSS * 1/100</field>
+        <field name="amount_python_compute">result = categories.GROSS * employee.company_id.seuil_fmfp/100</field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">Formation FMFP</field>
     </record>

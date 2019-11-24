@@ -15,3 +15,4 @@ class Employee(models.Model):
     lieu_cin = fields.Char(string='Lieu de délivrance CIN')
     num_emp = fields.Char(string="N° Matricule")
     nombre_enfant_cnaps = fields.Integer(string=u"Nombre d'enfant allouée CNaPS")
+

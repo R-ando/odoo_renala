@@ -351,5 +351,6 @@ class CnapsReport(models.TransientModel):
         return {
             'fmfp1': self.fmfp_nbMount(period['period1']),
             'fmfp2': self.fmfp_nbMount(period['period2']),
-            'fmfp3': self.fmfp_nbMount(period['period3'])
+            'fmfp3': self.fmfp_nbMount(period['period3']),
+            'seuil_fmfp': self.env['res.company'].search([('partner_id', '=', '1')]).mapped('seuil_fmfp')
         }

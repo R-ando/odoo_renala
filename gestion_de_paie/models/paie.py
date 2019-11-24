@@ -1,10 +1,8 @@
 # -*- coding:utf-8 -*-
 
 from odoo import api, fields, models, tools, _
-from datetime import datetime
+from datetime import datetime, date
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
-import time
-import babel
 
 
 class hr_contract(models.Model):
@@ -48,11 +46,128 @@ class hr_employee(models.Model):
     num_cin = fields.Char(u'Numéro CIN', size=64)
 
 
-
-
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
     paiement_mode_id = fields.Many2one(related='contract_id.payment_mode_id')
+    stc = fields.Boolean(string='STC')
+    half_salary = fields.Boolean(string='Demi salaire')
+    rest_leave = fields.Integer(compute='_rest_leave', string=u"Congé payé")
+    priornotice = fields.Integer(string=u"Préavis", store=True)
+    average_gross = fields.Float(compute='get_average_gross', inverse='set_average_gross', string=u"SBR Moyen", store=True)
+    average_gross_notice = fields.Float(compute='get_average_gross', inverse='set_average_gross_notice', string=u"SBR moyen préavis", store=True)
+
+    @api.multi
+    @api.onchange('employee_id', 'date_from')
+    def _rest_leave(self):
+        activated_paid_leave = self.env.ref('gestion_de_paie.hr_holiday_rest')
+        activated_paid_leave.write({'active': True})
+        conge_pris = self._get_employee_request_leaves(self.employee_id, self.date_from, self.date_to, True)
+        conge_attr = self._get_employee_allocation_leaves(self.employee_id, self.date_from)
+        self.rest_leave = conge_attr - conge_pris
+
+    def set_average_gross(self):
+        for payslip in self:
+            payslip.average_gross = float(payslip.average_gross) if payslip.average_gross else False
+
+    def set_average_gross_notice(self):
+        for payslip in self:
+            payslip.average_gross_notice = float(payslip.average_gross_notice) if payslip.average_gross_notice else False
+
+    # tokon atao date start ian leiz a
+    @api.multi
+    @api.onchange('employee_id', 'date_from')
+    def get_average_gross(self):
+        if self.employee_id:
+            date_start = \
+            self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)]).mapped('date_start')[0].split(
+                '-')
+            date_from = self.date_from.split('-')
+            seniority = self.diff_month(datetime(int(date_from[0]), int(date_from[1]), int(date_from[2])),
+                                        datetime(int(date_start[0]), int(date_start[1]), int(date_start[2])))
+            payslip_obj = self.search([('state', '=', 'done')])
+            hr_payslip_line_obj = self.env['hr.payslip.line']
+            sum_gross_done = 0.0
+
+            if seniority < 12 and seniority != 0:
+                for line in payslip_obj:
+                    sum_gross_done += hr_payslip_line_obj.search([('slip_id', '=', line.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                self.average_gross = sum_gross_done / seniority
+                sum_gross_done_medium = 0.0
+                if seniority > 2:
+                    query = """ SELECT id from hr_payslip where employee_id = '{}' order by date_from desc limit 2 """.format(
+                        self.employee_id.id)
+                    self.env.cr.execute(query)
+                    two_payslip_id = self.env.cr.dictfetchall()
+                    for payslip_id in two_payslip_id:
+                        sum_gross_done_medium += hr_payslip_line_obj.search(
+                            [('slip_id', '=', payslip_id['id']), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                    self.average_gross_notice = sum_gross_done_medium / seniority
+                else:
+                    self.average_gross_notice = sum_gross_done / seniority
+            else:
+                last_year = int(self.date_from.split('-')[0]) - 1
+                payslip_obj_last_year = self.search(
+                    [('employee_id', '=', self.employee_id.id), ('date_from', 'like', str(last_year) + '%')])
+                for line in payslip_obj_last_year:
+                    sum_gross_done += \
+                    hr_payslip_line_obj.search([('slip_id', '=', line.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                self.average_gross = sum_gross_done / 12
+
+    def diff_month(self, d1, d2):
+        return (d1.year - d2.year) * 12 + d1.month - d2.month
+
+    # Congé pris et approuvé durant la même période que celle du bulletin
+    def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche, map=True):
+        holidays_obj = self.env['hr.holidays'].search([('employee_id', '=', employee_id.id)], limit=1)
+        pris = 0
+        date_from_fiche = fields.Datetime.from_string(date_from_fiche)
+        date_to_fiche = fields.Datetime.from_string(date_to_fiche)
+
+        for ho in holidays_obj:
+            date_from_holidays = fields.Datetime.from_string(ho.date_from)
+            date_to_holidays = fields.Datetime.from_string(ho.date_to)
+
+            if ho.type == 'remove':
+                # Test if days of leaves is wholly in the current mouth
+                if date_from_fiche <= date_from_holidays and date_to_fiche >= date_to_holidays:
+                    pris += ho.number_of_days_temp
+                # Test if date of leaves is in current month
+                elif date_from_holidays <= date_to_fiche and date_to_holidays >= date_from_fiche:
+                    if map:
+                        # Set the date_from
+                        if date_from_holidays <= date_from_fiche:
+                            date_from_calcul = date_from_fiche
+                        else:
+                            date_from_calcul = date_from_holidays
+                        # Set the date_to
+                        if date_to_holidays <= date_to_fiche:
+                            date_to_calcul = date_to_holidays
+                        else:
+                            date_to_calcul = date_to_fiche
+                        # Calculate the number of day leaves in current month
+                        pris += (date_to_calcul - date_from_calcul).days + 1
+                    else:
+                        pris += ho.number_of_days_temp
+
+        return pris
+
+    # Total de l’attribution de congé approuver de la  même période que la génération du bulletin.
+    def _get_employee_allocation_leaves(self, employee_id, date_from_fiche):
+        holidays_obj = self.env['hr.holidays'].search([('employee_id', '=', employee_id.id)])
+        acquis = 0
+        month_fiche = fields.Datetime.from_string(date_from_fiche).month
+        year_fiche = fields.Datetime.from_string(date_from_fiche).year
+
+        # Check the allocation validate in current month and year
+        for ho in holidays_obj:
+            if ho.type == 'add' and ho.state == 'validate' and int(
+                    ho.allocation_month) == month_fiche and ho.allocation_year == year_fiche:
+                acquis += ho.number_of_days_temp
+
+        return acquis
+
+    def prior_notice(self):
+        pass
 
     def get_avance_salaire(self):
         advance_obj = self.env['hr.wage.advance']
@@ -64,7 +179,6 @@ class HrPayslip(models.Model):
         return total_advance
 
     # Redefinition fonction onchange_employee()
-
 
     @api.onchange('employee_id', 'date_from')
     def onchange_employee(self):
@@ -210,7 +324,6 @@ class HrPayslip(models.Model):
     @api.multi
     def print_payroll(self):
         return self.env['report'].get_action(self, 'gestion_de_paie.report_paie')
-
 
     # ===========================================================================
     # def unlink(self, cr, uid, ids, context=None):

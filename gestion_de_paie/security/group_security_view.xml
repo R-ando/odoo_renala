@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="groupe_etat" model="res.groups">
+        <field name="name">Etat</field>
+    </record>
+</odoo>

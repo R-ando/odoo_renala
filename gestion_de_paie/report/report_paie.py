@@ -2,6 +2,7 @@
 
 from odoo import api, models, fields
 
+
 class report_paie(models.AbstractModel):
     _name = 'report.gestion_de_paie.report_paie'
 
@@ -13,52 +14,54 @@ class report_paie(models.AbstractModel):
 
         category_total = 0
         if cate_ids:
-            payslip_lines = payslip_line.search([('slip_id', '=', obj.id),('category_id', '=', cate_ids[0].id )])
+            payslip_lines = payslip_line.search([('slip_id', '=', obj.id), ('category_id', '=', cate_ids[0].id)])
             for line in payslip_lines:
                 category_total += line.total
 
         return category_total
-    
+
     def _get_employe_line(self, obj, parent_line):
-        
+
         payslip_line = self.env['hr.payslip.line']
 
-        line_ids = payslip_line.search([('slip_id', '=', obj.id), ('salary_rule_id.parent_rule_id.id', '=', parent_line.salary_rule_id.id )])
+        line_ids = payslip_line.search(
+            [('slip_id', '=', obj.id), ('salary_rule_id.parent_rule_id.id', '=', parent_line.salary_rule_id.id)])
         res = line_ids and line_ids[0] or False
 
         return res
-    
-    def _get_format(self,chiffre):
-        chiffre = '{:20,.2f}'.format(chiffre)
-        if (chiffre!=0):
-            a=str(chiffre)
-            a = a.replace(',','')
-            b=a.split('.')
-            c=b[0]
-            d=b[1]
-            e=c[::-1]
-            i=0
-            j=3
-            f=''
-            while(len(e[i:j])>0):
-                if (len(e[i:j])>=3):
-                    f+=e[i:j]+' '
-                elif (len(e[i:j])<3):
-                    f+=e[i:j]
-                i+=3
-                j+=3
-                    
-            g=f[::-1]+','+d
-            return g
-        else : return '0,0'
 
-    # Congé pris et approuvé durant la même période que celle du bulletin.
+    def _get_format(self, chiffre):
+        chiffre = '{:20,.2f}'.format(chiffre)
+        if (chiffre != 0):
+            a = str(chiffre)
+            a = a.replace(',', '')
+            b = a.split('.')
+            c = b[0]
+            d = b[1]
+            e = c[::-1]
+            i = 0
+            j = 3
+            f = ''
+            while (len(e[i:j]) > 0):
+                if (len(e[i:j]) >= 3):
+                    f += e[i:j] + ' '
+                elif (len(e[i:j]) < 3):
+                    f += e[i:j]
+                i += 3
+                j += 3
+
+            g = f[::-1] + ',' + d
+            return g
+        else:
+            return '0,0'
+
+    # Congé pris et approuvé durant la même période que celle du bulletin
     def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche, map=True):
         holidays_obj = self.env['hr.holidays'].search([('employee_id', '=', employee_id.id)])
         pris = 0
         date_from_fiche = fields.Datetime.from_string(date_from_fiche)
-        date_to_fiche = fields.Datetime.from_string(date_to_fiche)            
-        
+        date_to_fiche = fields.Datetime.from_string(date_to_fiche)
+
         for ho in holidays_obj:
             date_from_holidays = fields.Datetime.from_string(ho.date_from)
             date_to_holidays = fields.Datetime.from_string(ho.date_to)
@@ -84,8 +87,7 @@ class report_paie(models.AbstractModel):
                         pris += (date_to_calcul - date_from_calcul).days + 1
                     else:
                         pris += ho.number_of_days_temp
-                    
-                
+
         return pris
 
     # Total de l’attribution de congé approuver de la  même période que la génération du bulletin.
@@ -97,19 +99,19 @@ class report_paie(models.AbstractModel):
 
         # Check the allocation validate in current month and year
         for ho in holidays_obj:
-            if ho.type == 'add' and ho.state == 'validate' and int(ho.allocation_month) == month_fiche and ho.allocation_year == year_fiche:
+            if ho.type == 'add' and ho.state == 'validate' and int(
+                    ho.allocation_month) == month_fiche and ho.allocation_year == year_fiche:
                 acquis += ho.number_of_days_temp
-                
-        return acquis
 
+        return acquis
 
     @api.multi
     def render_html(self, docids, data=None):
-        #=======================================================================
+        # =======================================================================
         # self.model = self.env.context.get('active_model')
         # docs = self.env[self.model].browse(self.env.context.get('active_ids', []))
-        #=======================================================================
-        
+        # =======================================================================
+
         docargs = {
             'doc_ids': docids,
             'doc_model': 'hr.payslip',
@@ -122,4 +124,3 @@ class report_paie(models.AbstractModel):
             'data': data,
         }
         return self.env['report'].render('gestion_de_paie.report_paie', docargs)
-

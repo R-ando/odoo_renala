@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ostie,access_ostie,model_ostie,base.group_user,1,0,0,0
+access_cnaps,access_cnaps,model_cnaps,base.group_user,1,0,0,0
+access_irsa,access_irsa,model_irsa,base.group_user,1,0,0,0
+access_hr_payment_mode,access_hr_payment_mode,model_hr_payment_mode,base.group_user,1,0,0,0
+access_etat_salaire,access_etat_salaire,model_etat_salaire,base.group_user,1,0,0,0

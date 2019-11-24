@@ -6,6 +6,7 @@ from datetime import datetime
 class HrHolidays(models.Model):
     _inherit = 'hr.holidays'
 
+
     def _get_current_month(self):
         return str(datetime.today().month)
 
@@ -32,3 +33,6 @@ class HrHolidays(models.Model):
         string="Année d'attribution",
         default=_get_current_year,
     )
+
+    def get_total_leave(self):
+        return

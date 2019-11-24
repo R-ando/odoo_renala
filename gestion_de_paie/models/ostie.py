@@ -7,7 +7,7 @@ class ostie(models.Model):
     _name = "ostie"
     _description = "Etat ostie"
     
-    employee_id = fields.Many2one('hr.employee',string=u'Employé')
+    employee_id = fields.Many2one('hr.employee', string=u'Employé')
     num_emp = fields.Char('Matricule', size=128)
     num_cin = fields.Char('CIN', size=128)
     name_related = fields.Char('Nom', size=128)
