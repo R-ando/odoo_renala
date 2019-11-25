@@ -36,7 +36,9 @@
                         </h3>
                     </div>
                 </xpath>
-
+                <xpath expr="//field[@name='address_home_id']" position="after">
+                    <field name="seniority" context="{'show_address': 1}"/>
+                </xpath>
             </field>
         </record>
         <!-- vue formulaire employé -->
@@ -59,7 +61,7 @@
                     <field name="nombre_enfant_cnaps"/>
                 </xpath>
             </field>
-            
+
         </record>
     </data>
 </odoo>
