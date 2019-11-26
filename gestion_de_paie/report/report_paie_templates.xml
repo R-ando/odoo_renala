@@ -270,7 +270,7 @@
                                 </t>
                             </td>
                             <td>
-                     <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','PLUS','TM']">
+                     <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','PLUS','TM','CP']">
 
                                     <span t-field="line.total"/>
                                 </t>

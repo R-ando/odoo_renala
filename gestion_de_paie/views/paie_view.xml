@@ -62,17 +62,16 @@
                 </data>
             </field>
         </record>
-        <!--        <record id="print_btn" model="ir.ui.view">-->
-        <!--            <field name="type">form</field>-->
-        <!--            <field name="model">hr.payslip</field>-->
-        <!--            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>-->
-        <!--            <field name="arch" type="xml">-->
-        <!--                <xpath expr="//header" position="inside">-->
-        <!--                    <button name="print_payroll" type="object" string="Imprimer" class="btn-primary"/>-->
-        <!--                </xpath>-->
-        <!--            </field>-->
-        <!--        </record>-->
-
+        <record id="print_btn" model="ir.ui.view">
+            <field name="type">form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="print_payroll" type="object" string="Imprimer" class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
         <record id="payement_mode_hr_payslip" model="ir.ui.view">
             <field name="name">hr.payslip.form</field>
             <field name="model">hr.payslip</field>
@@ -83,13 +82,18 @@
                 </xpath>
                 <xpath expr="//group[@col='4']" position="after">
                     <group col="4">
-                        <field name="rest_leave" attrs="{'invisible':[('stc','=', False)]}"/>
+                        <field name="rest_leave" attrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>
                         <field name="stc"/>
-                        <field name="priornotice" attrs="{'invisible':[('stc','=', False)]}"/>
-                        <field name="half_salary"/>
-                        <field name="average_gross" attrs="{'invisible':[('stc','=', False)]}"/>
-                        <field name="average_gross_notice" attrs="{'invisible':[('stc','=', False)]}"/>
                     </group>
+<!--                    <group col="4">-->
+<!--                         <field name="priornotice" aattrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>-->
+<!--                        <field name="half_salary"/>-->
+<!--                        <field name="average_gross" attrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>-->
+<!--                        <field name="average_gross_notice" attrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>-->
+<!--                        <field name="base" attrs="{'readonly': False}"/>-->
+<!--                        <field name="number_days_worked" attrs="{'readonly': False}"/>-->
+<!--                        <field name="missed_days" attrs="{'readonly': False}"/>-->
+<!--                    </group>-->
                 </xpath>
             </field>
         </record>
