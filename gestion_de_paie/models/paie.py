@@ -35,9 +35,6 @@ class res_company(models.Model):
     seuil_fmfp = fields.Float('FMFP')
 
 
-res_company()
-
-
 class hr_employee(models.Model):
     _inherit = 'hr.employee'
 
@@ -48,6 +45,7 @@ class hr_employee(models.Model):
 
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
+
     paiement_mode_id = fields.Many2one(related='contract_id.payment_mode_id')
     stc = fields.Boolean(string='STC', store=True)
     half_salary = fields.Boolean(string='Demi salaire')
@@ -64,12 +62,7 @@ class HrPayslip(models.Model):
         else:
             return 0
 
-    @api.multi
-    @api.onchange('employee_id')
-    def li(self):
-        return self._rest_leave()
-
-    rest_leave = fields.Integer(string=u"Congé payé", compute=li, store=True)
+    rest_leave = fields.Integer(string=u"Congé payé")
 
     # @api.model
     # @api.onchange('employee_id', 'date_from')
@@ -98,6 +91,7 @@ class HrPayslip(models.Model):
     #             return sum_gross_done / seniority
 
     def get_average_gross(self):
+        average_gross = 0.0
         if self.employee_id:
             date_start = \
                 self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)]).mapped('date_start')[
@@ -108,6 +102,7 @@ class HrPayslip(models.Model):
             payslips = self.search([('state', '=', 'done'), ('employee_id', '=', self.employee_id.id)])
             hr_payslip_line_obj = self.env['hr.payslip.line']
             sum_gross_done = 0.0
+
             if seniority < 12 and seniority != 0:
                 for payslip in payslips:
                     print payslip.id
@@ -134,19 +129,14 @@ class HrPayslip(models.Model):
             print "ts mandalo"
         return average_gross
 
-    def test(self):
-        return 9
 
-    @api.onchange('employee_id', 'date_from')
-    def _average_gross2(self):
-        return self.test()
 
-    @api.model
-    def _average_gross(self):
-        return 9
 
-    average_gross_notice = fields.Float(string=u"SBR moyen préavis", default=_average_gross)
-    average_gross = fields.Float(string="SBR Moyen", default=_average_gross)
+
+
+    average_gross_notice = fields.Float(string=u"SBR moyen préavis")
+    average_gross = fields.Float(string="SBR Moyen")
+
 
     def diff_month(self, d1, d2):
         return (d1.year - d2.year) * 12 + d1.month - d2.month
@@ -251,6 +241,8 @@ class HrPayslip(models.Model):
         for input_data in input_data_list:
             self.input_line_ids += input_lines.new(input_data)
 
+        # set average_gross
+        self.average_gross = self.get_average_gross()
         return
 
     etat_salaire_id = fields.Many2one('etat.salaire', string='Etat salaire')

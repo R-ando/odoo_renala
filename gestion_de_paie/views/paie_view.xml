@@ -81,19 +81,21 @@
                     <field name="paiement_mode_id"/>
                 </xpath>
                 <xpath expr="//group[@col='4']" position="after">
-                    <group col="4">
-                        <field name="rest_leave" attrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>
-                        <field name="stc"/>
+                    <group>
+                        <group>
+                            <field name="stc"/>
+                            <field name="half_salary"/>
+                        </group>
+                        <group attrs="{'invisible':[('stc','=',False)],'readonly':False}">
+                            <field name="rest_leave"/>
+                            <field name="priornotice"/>
+                            <field name="average_gross"/>
+                            <field name="average_gross_notice"/>
+                            <field name="base" attrs="{'readonly': False}"/>
+                            <field name="number_days_worked" attrs="{'readonly': False}"/>
+                            <field name="missed_days" attrs="{'readonly': False}"/>
+                        </group>
                     </group>
-<!--                    <group col="4">-->
-<!--                         <field name="priornotice" aattrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>-->
-<!--                        <field name="half_salary"/>-->
-<!--                        <field name="average_gross" attrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>-->
-<!--                        <field name="average_gross_notice" attrs="{'invisible':[('stc','=', False)], 'readonly': False}"/>-->
-<!--                        <field name="base" attrs="{'readonly': False}"/>-->
-<!--                        <field name="number_days_worked" attrs="{'readonly': False}"/>-->
-<!--                        <field name="missed_days" attrs="{'readonly': False}"/>-->
-<!--                    </group>-->
                 </xpath>
             </field>
         </record>
