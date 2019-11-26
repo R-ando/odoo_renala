@@ -9,11 +9,11 @@ class report_cnaps(models.AbstractModel):
     def _get_date_start_filter(self):
         #TODO recuperer la date de debut de filtre
         return "2017-03"
-    
+
     def _get_date_end_filter(self):
         #TODO recuperer la date de fin de filtre
         return "2017-06"
-    
+
     def _get_passport_or_cin(self, obj):
         if obj.employee_id.num_cin:
             return obj.employee_id.num_cin
@@ -21,11 +21,11 @@ class report_cnaps(models.AbstractModel):
             return obj.employee_id.passport_id
         else:
             return "-"
-    
+
     def _get_annee_mois(self, ddd):
         strpdate = datetime.datetime.strptime(ddd, "%Y-%m-%d")
         return str(strpdate.year) + "-" + str(strpdate.month)
-    
+
 
     @api.multi
     def render_html(self, docids, data=None):
@@ -33,7 +33,7 @@ class report_cnaps(models.AbstractModel):
         # self.model = self.env.context.get('active_model')
         # docs = self.env[self.model].browse(self.env.context.get('active_ids', []))
         #=======================================================================
-        
+
         docargs = {
             'doc_ids': docids,
             'doc_model': 'cnaps',
@@ -46,7 +46,7 @@ class report_cnaps(models.AbstractModel):
         }
         return self.env['report'].render('gestion_de_paie.report_cnaps', docargs)
 
-     
 
-    
-    
+
+
+
