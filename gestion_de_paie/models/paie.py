@@ -141,11 +141,12 @@ class HrPayslip(models.Model):
     def _average_gross2(self):
         return self.test()
 
+    @api.model
     def _average_gross(self):
         return 9
 
-    average_gross_notice = fields.Float(string=u"SBR moyen préavis", default='')
-    average_gross = fields.Float(string="SBR Moyen")
+    average_gross_notice = fields.Float(string=u"SBR moyen préavis", default=_average_gross)
+    average_gross = fields.Float(string="SBR Moyen", default=_average_gross)
 
     def diff_month(self, d1, d2):
         return (d1.year - d2.year) * 12 + d1.month - d2.month
