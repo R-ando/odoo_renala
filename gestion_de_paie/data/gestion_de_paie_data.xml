@@ -135,6 +135,19 @@
             <field name="note">nombre de jours de congé restant</field>
         </record>
 
+        <record id="hr_holiday_rest"  model="hr.salary.rule">
+            <field name="name">Congé payé</field>
+            <field name="sequence" eval="101"/>
+            <field name="code">CP</field>
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="quantity">payslip.rest_leave</field>
+             <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="note">nombre de jours de congé restant</field>
+        </record>
+
         <record id="hr_holiday_preavi"  model="hr.salary.rule">
             <field name="name">Préavis</field>
             <field name="sequence" eval="102"/>
