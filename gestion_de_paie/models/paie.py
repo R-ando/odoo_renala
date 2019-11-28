@@ -52,19 +52,24 @@ class HrPayslip(models.Model):
     half_salary = fields.Boolean(string='Demi salaire')
     priornotice = fields.Integer(string=u"Préavis", store=True)
     base = fields.Integer(string="Base", store=True, default='30')
-    number_days_worked = fields.Integer(string="Nombre de jours travaillé", default='30')
+    number_days_worked = fields.Float(string="Nombre de jours travaillé", default='30')
     missed_days = fields.Integer(string="Jours Manqué", store=True)
-    average_gross_notice = fields.Float(string=u"SBR moyen préavis", store=True)
-    average_gross = fields.Float(string="SBR Moyen", store=True)
-    rest_leave = fields.Float(string=u"Congé payé", store=True)
+    average_gross_notice = fields.Float(string=u"SBR moyen préavis", store=True, compute='get_average_gross_notice')
+    average_gross = fields.Float(string="SBR Moyen", store=True, compute='get_average_gross')
+    rest_leave = fields.Float(string=u"Congé payé", store=True, compute='_rest_leave')
 
+    @api.depends('employee_id')
     def _rest_leave(self):
         if self.employee_id:
             conge_pris = self._get_employee_request_leaves(self.employee_id, self.date_from, self.date_to, True)
             conge_attr = self._get_employee_allocation_leaves(self.employee_id, self.date_from)
-            return conge_attr - conge_pris
+            self.rest_leave = conge_attr - conge_pris
+        else:
+            self.rest_leave = 0.0
 
+    @api.depends('employee_id')
     def get_average_gross(self):
+        average_gross = 0.0
         if self.employee_id:
             date_start = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)]).mapped('date_start')[0]
             date_from = datetime.strptime(self.date_from, tools.DEFAULT_SERVER_DATE_FORMAT)
@@ -89,11 +94,12 @@ class HrPayslip(models.Model):
             else:
                 raise UserError(_('la date debut de contrat est vide'))
         else:
-            raise UserError(_("l'employer n'exixte pas"))
-        return average_gross
+            self.average_gross = 0.0
+        self.average_gross = average_gross
 
-
+    @api.depends('employee_id')
     def get_average_gross_notice(self):
+        average_gross_notice = 0.0
         if self.employee_id:
             date_start = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)]).mapped('date_start')[0]
             date_from = datetime.strptime(self.date_from, tools.DEFAULT_SERVER_DATE_FORMAT)
@@ -123,15 +129,17 @@ class HrPayslip(models.Model):
             else:
                 raise UserError(_('la date debut de contrat est vide'))
         else:
-            raise UserError(_("l'employer n'exixte pas"))
-        return average_gross_notice
-
-
-
-
+            self.average_gross_notice = 0.0
+        self.average_gross_notice = average_gross_notice
+        #return average_gross_notice
 
     def diff_month(self, d1, d2):
         return (d1.year - d2.year) * 12 + d1.month - d2.month
+
+    # def half_salary(self):
+    #     if self.half_salary:
+    #         gross = self.env['hr.payslip.line'].search([('code', '=', 'GROSS'), ('slip_id', '=', self.id)]).mapped('amount')
+
 
     # Congé pris et approuvé durant la même période que celle du bulletin
     def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche, map=True):
@@ -234,9 +242,9 @@ class HrPayslip(models.Model):
             self.input_line_ids += input_lines.new(input_data)
 
         #    set average_gross
-        self.average_gross = self.get_average_gross()
-        self.average_gross_notice = self.get_average_gross_notice()
-        self.rest_leave = self._rest_leave()
+        # self.average_gross = self.get_average_gross()
+        # self.average_gross_notice = self.get_average_gross_notice()
+        # self.rest_leave = self._rest_leave()
         return
 
     etat_salaire_id = fields.Many2one('etat.salaire', string='Etat salaire')
@@ -511,10 +519,13 @@ class HrPayslip(models.Model):
     def compute_sheet(self):
         for payslip in self:
             activated_paid_leave = self.env.ref('gestion_de_paie.hr_holiday_rest')
+            activated_paid_sbr = self.env.ref('gestion_de_paie.hr_holiday_sbr')
             if payslip.stc:
                 activated_paid_leave.write({'active': True})
+                activated_paid_sbr.write({'active': True})
             else:
                 activated_paid_leave.write({'active': False})
+                activated_paid_sbr.write({'active': False})
             number = payslip.number or self.env['ir.sequence'].next_by_code('salary.slip')
             # delete old payslip lines
             payslip.line_ids.unlink()
@@ -525,6 +536,14 @@ class HrPayslip(models.Model):
             lines = [(0, 0, line) for line in self.get_payslip_lines(contract_ids, payslip.id)]
             payslip.write({'line_ids': lines, 'number': number})
         return True
+
+    #quantité du congé
+class hrSalaryRule(models.Model):
+    _inherit = 'hr.salary.rule'
+    quatity_compute = fields.Many2one('hr.payslip')
+
+
+
 
     # ===========================================================================
     # def unlink(self, cr, uid, ids, context=None):

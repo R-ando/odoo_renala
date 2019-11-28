@@ -105,6 +105,8 @@ class report_paie(models.AbstractModel):
 
         return acquis
 
+
+
     @api.multi
     def render_html(self, docids, data=None):
         # =======================================================================
@@ -121,6 +123,7 @@ class report_paie(models.AbstractModel):
             'get_format': self._get_format,
             'get_employee_request_leaves': self._get_employee_request_leaves,
             'get_employee_allocation_leaves': self._get_employee_allocation_leaves,
-            'data': data,
+            'data': data
+
         }
         return self.env['report'].render('gestion_de_paie.report_paie', docargs)

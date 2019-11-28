@@ -22,6 +22,18 @@
                     vertical-align: baseline;
                     font-family:Calibri;
                     }
+
+                    .cadre11 {
+
+                    font-size: x-large;
+                    border:2px solid #E2E2E0;
+                    padding: 1%;
+                    width: 420px;
+                    height: 50px;
+                    background-color : #E2E2E0;
+                    vertical-align: baseline;
+                    font-family:Calibri;
+                    }
                     .cadre2 {
                     font-size: small;
                     border:1px solid #E2E2E0;
@@ -115,7 +127,12 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="titre">
-                            <h2 class="cadre1">BULLETIN DE PAIE</h2>
+                            <t t-if="o.stc">
+                                <h2 class="cadre1">BULLETIN DE PAIE POUR SOLDE TOUS COMPTE</h2>
+                            </t>
+                            <t t-if="o.stc == False">
+                                <h2 class="cadre11">BULLETIN DE PAIE</h2>
+                            </t>
                         </div>
                         <p style="font-family:Calibri">
                             <span>
@@ -147,12 +164,15 @@
                                     <br/>
                                     Indice :
                                     <br/>
-                                    Entrée :  <span t-field="o.contract_id.date_start"/>
+                                    Entrée :
+                                    <span t-field="o.contract_id.date_start"/>
                                     <br/>
-                                    Sortie :  <span t-field="o.contract_id.date_end"/>
+                                    Sortie :
+                                    <span t-field="o.contract_id.date_end"/>
 
                                     <br/>
-                                    ORG Médicale : <span t-field="o.employee_id.company_id.org_sante"/>
+                                    ORG Médicale :
+                                    <span t-field="o.employee_id.company_id.org_sante"/>
                                 </td>
                                 <td class="no_border gauche">
                                     <span t-field="o.employee_id.num_emp"/>
@@ -266,17 +286,14 @@
                             <td>
                                 <t t-if="line.code not in ['CNAPS_EMP','OMSI_EMP','IRSA','AVANCE15','AVANCESP','PRM'] and get_employe_line(o,line)">
                                     <span t-esc="get_format(get_employe_line(o,line).total)"/>
-
                                 </t>
                             </td>
                             <td>
-                     <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','PLUS','TM','CP']">
-
+                                <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','PLUS','TM','CP','SBR']">
                                     <span t-field="line.total"/>
                                 </t>
                             </td>
                             <td>
-
                                 <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'FMFP_EMP', 'AVANCE15','AVANCESP','AUTRES','MOINS']">
 
                                     <span t-field="line.total"/>
@@ -316,7 +333,6 @@
                                     <span t-esc="get_format(get_total_by_rule_category(o,'TOTAL_DED'))"/>
                                 </strong>
                             </td>
-                            <td style="background-color: #E5E5E5"></td>
                             <td style="background-color: #E5E5E5">
                                 <strong>
                                     <span t-esc="get_format(get_total_by_rule_category(o,'CHARGE_PAT'))"/>
@@ -325,21 +341,27 @@
                         </tr>
                         <!-- Add a line for "congé" -->
                         <tr>
-                            <td><strong>Congé</strong></td>
                             <td>
-                                Anc. Solde<br/>
+                                <strong>Congé</strong>
+                            </td>
+                            <td>
+                                Anc. Solde
+                                <br/>
                                 <span t-esc="o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from) + get_employee_request_leaves(o.employee_id, o.date_from, o.date_to, False)"/>
                             </td>
                             <td>
-                                Acquis<br/>
+                                Acquis
+                                <br/>
                                 <span t-esc="get_employee_allocation_leaves(o.employee_id, o.date_from)"/>
                             </td>
                             <td>
-                                Pris<br/>
+                                Pris
+                                <br/>
                                 <span t-esc="get_employee_request_leaves(o.employee_id, o.date_from, o.date_to)"/>
                             </td>
                             <td>
-                                Nouv. Solde<br/>
+                                Nouv. Solde
+                                <br/>
                                 <span t-field="o.employee_id.remaining_leaves"/>
                             </td>
                         </tr>
@@ -395,7 +417,8 @@
                     </div>
                 </div>
 
-                <p class="centrer top_40px" style="font-family:Calibri">DANS VOTRE INTERET ET POUR VOUS AIDER A FAIRE VALOIR VOS DROITS, CONSERVEZ
+                <p class="centrer top_40px" style="font-family:Calibri">DANS VOTRE INTERET ET POUR VOUS AIDER A FAIRE
+                    VALOIR VOS DROITS, CONSERVEZ
                     CE BULLETIN DE PAIE SANS LIMITATION DE DUREE
                 </p>
             </div>

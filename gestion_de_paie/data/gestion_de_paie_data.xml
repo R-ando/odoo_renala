@@ -129,35 +129,23 @@
             <field name="category_id" ref="hr_payroll.GROSS"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="quantity">payslip.rest_leave</field>
+            <field name="quantity">2.5</field>
+            <field name="quatity_compute.rest_leave"/>
              <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="note">nombre de jours de congé restant</field>
         </record>
 
-        <record id="hr_holiday_rest"  model="hr.salary.rule">
-            <field name="name">Congé payé</field>
-            <field name="sequence" eval="101"/>
-            <field name="code">CP</field>
-            <field name="category_id" ref="hr_payroll.GROSS"/>
-            <field name="condition_select">none</field>
-            <field name="amount_select">code</field>
-            <field name="quantity">payslip.rest_leave</field>
-             <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="note">nombre de jours de congé restant</field>
-        </record>
-
-        <record id="hr_holiday_preavi"  model="hr.salary.rule">
-            <field name="name">Préavis</field>
+        <record id="hr_holiday_sbr"  model="hr.salary.rule">
+            <field name="name">SBR Moyen</field>
             <field name="sequence" eval="102"/>
-            <field name="code">PN</field>
+            <field name="code">SBR</field>
             <field name="category_id" ref="hr_payroll.GROSS"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-             <field name="amount_python_compute">result = payslip.rest_leave * (categories.BASIC/22)</field>
+             <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / 30</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="note">Préavis</field>
+            <field name="note">Salaire brute Moyen</field>
         </record>
 
      <record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
