@@ -89,7 +89,7 @@
                         <group>
                             <field name="base" attrs="{'readonly': False}"/>
                             <field name="missed_days" attrs="{'readonly': False}"/>
-                            <field name="number_days_worked" attrs="{'readonly': False}"/>
+                            <field name="number_days_worked" attrs="{'readonly': True}"/>
                             <field name="rest_leave" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
                             <field name="priornotice" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
                             <field name="average_gross" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>

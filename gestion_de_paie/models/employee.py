@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
-from odoo import models, fields, api
-from datetime import date, datetime
-
+from odoo import api, fields, models, tools, _
+from datetime import datetime, date
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
+from odoo.exceptions import UserError, ValidationError
 
 class Employee(models.Model):
     _inherit = 'hr.employee'
@@ -19,11 +20,13 @@ class Employee(models.Model):
     seniority = fields.Char(string=u'Encieneté', compute='get_seniority')
 
     @api.multi
+    @api.multi
     def get_seniority(self):
         for employee in self:
-            date_start = self.env['hr.contract'].search([('employee_id', '=', employee.id)]).mapped('date_start')[0].split('-')
+            date_start = self.env['hr.contract'].search([('employee_id', '=', employee.id)]).mapped('date_start')
             if date_start:
-                dif_m = self.diff_month(date.today(), datetime(int(date_start[0]), int(date_start[1]), int(date_start[2])))
+                date_start = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
+                dif_m = self.diff_month(date.today(), date_start)
                 if dif_m < 13:
                     if dif_m == 12:
                         employee.seniority = '1 ans'
@@ -38,6 +41,7 @@ class Employee(models.Model):
                     employee.seniority = str(ans) + 'ans/' + str(mois) + 'mois'
             else:
                 employee.seniority = '0'
+
 
     def diff_month(self, d1, d2):
         return (d1.year - d2.year) * 12 + d1.month - d2.month
