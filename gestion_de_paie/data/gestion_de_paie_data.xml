@@ -92,6 +92,10 @@
         <field name="code">MOINS</field>
     </record>
 
+     <record id="hr_payroll.FMFP_PAT" model="hr.salary.rule.category">
+        <field name="name">FMFP_PAT</field>
+        <field name="code">FMFP_PAT</field>
+    </record>
       <!-- Contribution Register -->
 
     <record id="hr_CNAPS_register" model="hr.contribution.register">
@@ -174,13 +178,16 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
     </record>
 
      <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.GROSS"/>
+        <field name="category_id" ref="hr_payroll.FMFP_PAT"/>
         <field name="name">FMFP</field>
         <field name="code">FMFP_PAT</field>
-        <field name="sequence">108</field>
+        <field name="sequence">106</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = categories.GROSS * employee.company_id.seuil_fmfp/100</field>
+        <field name="amount_python_compute">if categories.GROSS > employee.company_id.plafond_cnaps:
+    result = employee.company_id.plafond_cnaps * employee.company_id.seuil_fmfp / 100
+else:
+    result = categories.GROSS * employee.company_id.seuil_fmfp / 100</field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">Formation FMFP</field>
     </record>
@@ -232,7 +239,7 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
         <field name="sequence" eval="107"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result=CNAPS_PAT+OMSI_PAT</field>
+        <field name="amount_python_compute">result=CNAPS_PAT+OMSI_PAT+FMFP_PAT</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="note">C'est le total des cotisations de l'employeur .</field>
     </record>

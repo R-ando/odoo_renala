@@ -266,6 +266,7 @@
                             	        -get_total_by_rule_category(o,'OMSI')
                             	        -o.employee_id.company_id.abat_irsa*o.employee_id.children)"/>
                                 </t>
+
                             </td>
                             <td>
                                 <t t-if="line.amount_select == 'percentage'">
@@ -294,7 +295,7 @@
                                 </t>
                             </td>
                             <td>
-                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'FMFP_EMP', 'AVANCE15','AVANCESP','AUTRES','MOINS']">
+                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES','MOINS']">
 
                                     <span t-field="line.total"/>
                                 </t>
@@ -306,6 +307,9 @@
                                 <t t-if="line.code == 'OMSI_EMP'">
                                     <span t-esc="get_format(o.employee_id.company_id.cotisation_sante_patr)"/>
                                 </t>
+                                 <t t-if="line.code == 'FMFP_PAT'">
+                                    <span t-esc="get_format(o.employee_id.company_id.seuil_fmfp)"/>
+                                </t>
                             </td>
                             <td>
                                 <t t-if="line.code == 'CNAPS_EMP'">
@@ -314,8 +318,12 @@
                                 <t t-if="line.code == 'OMSI_EMP'">
                                     <span t-esc="get_format(get_total_by_rule_category(o,'OMSI_PAT'))"/>
                                 </t>
+                                 <t t-if="line.code == 'FMFP_PAT'">
+                                    <span t-esc="get_format(get_total_by_rule_category(o,'FMFP_PAT'))"/>
+                                </t>
                             </td>
                         </tr>
+
                         <tr>
                             <td style="background-color: #E5E5E5">
                                 <strong>TOTAL</strong>
@@ -333,6 +341,7 @@
                                     <span t-esc="get_format(get_total_by_rule_category(o,'TOTAL_DED'))"/>
                                 </strong>
                             </td>
+                            <td style="background-color: #E5E5E5"></td>
                             <td style="background-color: #E5E5E5">
                                 <strong>
                                     <span t-esc="get_format(get_total_by_rule_category(o,'CHARGE_PAT'))"/>
