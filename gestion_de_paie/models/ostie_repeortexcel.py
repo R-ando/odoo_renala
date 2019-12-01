@@ -210,15 +210,22 @@ class OstieReport(models.TransientModel):
         partner = self.env['res.partner'].search([("id", "=", 1)])
         conpany = partner.mapped('company_id')
         return {
-            'name': str(partner.name) or u'',
-            'matricule': str(partner.company_id.company_matricule) or u'',
-            'stat': str(partner.company_id.vat) or u'',
-            'address': str(conpany.street + ' ' + conpany.street2) or u'',
-            'tel': str(partner.phone) or u'',
-            'email': str(partner.email) or u'',
-            'employer_rate': str(self.plafond()['emp']) + '%',
-            'worker_rate': str(self.plafond()['patr']) + '%'
+            'name': self.str2(partner.name),
+            'matricule': self.str2(partner.company_id.company_matricule),
+            'stat': self.str2(partner.company_id.vat),
+            'address': self.str2(conpany.street) + ' ' + self.str2(conpany.street2),
+            'tel': self.str2(partner.phone),
+            'email': self.str2(partner.email),
+            'employer_rate': self.str2(self.plafond()['emp']) + '%',
+            'worker_rate': self.str2(self.plafond()['patr']) + '%'
         }
+
+    def str2(self, val):
+        if val:
+            return str(val)
+        else:
+            return ''
+
 
     def countEff_three_month(self, trim, years_selected):
         quarter = self.quarter_months(trim, years_selected)

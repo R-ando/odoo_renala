@@ -15,10 +15,10 @@
                         </h3>
                     </div>
                 </xpath>
-                <xpath expr="//field[@widget='many2many_tags']" position="replace">
+                <!--xpath expr="//field[@widget='many2many_tags']" position="replace">
                     <field name="category_ids" widget="many2many_tags" placeholder="e.g. Part Time"
                            options="{'no_create_edit': True}" groups="hr.group_hr_user" attrs="{'invisible':True}"/>
-                </xpath>
+                </xpath-->
                 <xpath expr="//div[@class='oe_title']" position="replace">
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only"/>

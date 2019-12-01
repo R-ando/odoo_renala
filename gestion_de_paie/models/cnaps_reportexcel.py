@@ -284,21 +284,20 @@ class CnapsReport(models.TransientModel):
         partner = self.env['res.partner'].search([("id", "=", 1)])
         conpany = partner.mapped('company_id')
         return {
-            'name': str(partner.name) or u'',
-            'matricule': str(partner.company_id.company_matricule) or u'',
-            'address': str(conpany.street + ' ' + conpany.street2) or u'',
-            'tel': str(partner.company_id.phone) or u'',
-            'email': str(partner.company_id.email) or u'',
-            'employer_rate': str(self.plafond()['emp']) + '%',
-            'worker_rate': str(self.plafond()['patr']) + '%'
+            'name': self.str2(partner.name),
+            'matricule': self.str2(partner.company_id.company_matricule),
+            'address': self.str2(conpany.street) + ' ' + self.str2(conpany.street2),
+            'tel': self.str2(partner.company_id.phone),
+            'email': self.str2(partner.company_id.email),
+            'employer_rate': self.str2(self.plafond()['emp']) + '%',
+            'worker_rate': self.str2(self.plafond()['patr']) + '%'
         }
 
-    def to_list(self, list):
-        b = str(list)
-        c = b.replace(',)', '')
-        d = c.replace('(', '')
-        e = d.replace(' ', '')
-        return literal_eval(e)
+    def str2(self, val):
+        if val:
+            return str(val)
+        else:
+            return ''
 
     def plafond(self):
         company_obj = self.env['res.company'].search([('partner_id', '=', 1)])

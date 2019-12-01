@@ -86,7 +86,6 @@ class HrPayslip(models.Model):
                 dern_paie = datetime.strptime(first_paie_dates[0]['dern_paie'], tools.DEFAULT_SERVER_DATE_FORMAT)
                 seniority = self.diff_month(dern_paie, date_start)
                 if seniority < 12 and seniority != 0:
-
                     payslips = self.search([('employee_id', '=', self.employee_id.id)])
                     average_gross_done = 0.0
                     for payslip in payslips:
@@ -118,8 +117,9 @@ class HrPayslip(models.Model):
             query_ = """select min(date_from) as first_paie, max(date_to) as dern_paie from hr_payslip where employee_id = '{}'""".format(self.employee_id.id)
             self.env.cr.execute(query_)
             first_paie_dates = self.env.cr.dictfetchall()
+            print(first_paie_dates)
             payslip_line = self.env['hr.payslip.line']
-            if first_paie_dates:
+            if first_paie_dates[0]['first_paie'] is not None or first_paie_dates[0]['dern_paie'] is not None:
                 date_start = datetime.strptime(first_paie_dates[0]['first_paie'], tools.DEFAULT_SERVER_DATE_FORMAT)
                 dern_paie = datetime.strptime(first_paie_dates[0]['dern_paie'], tools.DEFAULT_SERVER_DATE_FORMAT)
                 seniority = self.diff_month(dern_paie, date_start)
@@ -151,7 +151,7 @@ class HrPayslip(models.Model):
                 else:
                     average_gross_notice = 0.0
             else:
-                raise UserError(_('la date debut de contrat est vide'))
+                raise UserError(_("cet employer n'a pas encore de contrat"))
         else:
             self.average_gross_notice = 0.0
         self.average_gross_notice = average_gross_notice

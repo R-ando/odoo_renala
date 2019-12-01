@@ -67,14 +67,20 @@ class Irsareport(models.TransientModel):
         partner = self.env['res.partner'].search([("id", "=", 1)])
         conpany = partner.mapped('company_id')
         return {
-            'name': str(partner.name) or u'',
-            'matricule': str(partner.company_id.company_matricule) or u'',
-            'address': str(conpany.street + ' ' + conpany.street2) or u'',
-            'tel': str(partner.company_id.phone) or u'',
-            'email': str(partner.company_id.email) or u'',
+            'name': self.str2(partner.name),
+            'matricule': self.str2(partner.company_id.company_matricule),
+            'address': self.str2(conpany.street) + ' ' + self.str2(conpany.street2),
+            'tel': self.str2(partner.company_id.phone),
+            'email': self.str2(partner.company_id.email),
             'm': month,
             'y': str(years)
         }
+
+    def str2(self, val):
+        if val:
+            return str(val)
+        else:
+            return ''
 
     def sex(self, sexe):
         if sexe == 'male':
