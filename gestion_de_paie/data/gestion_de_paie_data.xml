@@ -96,6 +96,11 @@
         <field name="name">FMFP_PAT</field>
         <field name="code">FMFP_PAT</field>
     </record>
+
+    <record id="hr_payroll.PREAVIS" model="hr.salary.rule.category">
+        <field name="name">PREAVIS</field>
+        <field name="code">PREAVIS</field>
+    </record>
       <!-- Contribution Register -->
 
     <record id="hr_CNAPS_register" model="hr.contribution.register">
@@ -114,7 +119,11 @@
             <field name="category_id" ref="hr_payroll.BASIC"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = contract.wage</field>
+<!--            <field name="amount_python_compute">result = contract.wage</field>-->
+        <field name="amount_python_compute">if payslip.half_salary:
+    result = payslip.missed_days * (categories.BASIC/2) / 30
+else:
+    result = contract.wage/HWORK</field>
         </record>
         <record id="hr_payroll.hr_rule_taxable" model="hr.salary.rule">
             <field name="name">Salaire Brut</field>
@@ -175,6 +184,23 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="register_id" ref="hr_CNAPS_register"/>
         <field name="note">C'est la valeur de CNAPS de chaque salarié , qui s'appuit sur la valeur du salaire "Brut" calculé.</field>
+    </record>
+
+ <record id="hr_payroll_rules_preavis" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">PREAVIS</field>
+        <field name="code">PREAVIS</field>
+        <field name="sequence">100</field>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">if payslip.priornotice > 0 and payslip.stc:
+    result = payslip.preavis
+elif payslip.priornotice &lt; 0 and payslip.stc:
+    result = -payslip.preavis
+else:
+    result = 0</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Formation FMFP</field>
     </record>
 
      <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
@@ -293,10 +319,7 @@ else:
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">percentage</field>
-        <field name="amount_python_compute">if payslip.half_salary:
-    result = payslip.missed_days * (categories.BASIC/2) / 30
-else:
-    result = contract.wage/HWORK</field>
+         <field name="amount_percentage_base">contract.wage/HWORK</field>
         <field name="quantity">HWORK</field>
         <field name="amount_percentage">100</field>
         <field name="appears_on_payslip" eval="True"/>

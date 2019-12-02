@@ -295,7 +295,7 @@
                                 </t>
                             </td>
                             <td>
-                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES','MOINS']">
+                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES','MOINS','PREAVIS']">
 
                                     <span t-field="line.total"/>
                                 </t>
