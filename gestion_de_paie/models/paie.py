@@ -70,14 +70,18 @@ class HrPayslip(models.Model):
 
     @api.depends('employee_id')
     def get_preavis(self):
-        query = """ SELECT id from hr_payslip where employee_id = '{}'  order by date_from desc limit 2 """.format(self.employee_id.id)
+        query = """ SELECT id from hr_payslip where employee_id = '{}'  order by date_from desc limit 2 """.format(
+            self.employee_id.id)
         self.env.cr.execute(query)
         two_payslip_id = self.env.cr.dictfetchall()
         sum_amount = 0.0
-        if two_payslip_id[0]['id'] is not None:
-            i = 1
+        i = 1
+        if two_payslip_id != {}:
             for payslip in two_payslip_id:
-                sum_amount += self.env['hr.payslip.line'].search([('slip_id', '=', payslip['id']), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                gross_amount = self.env['hr.payslip.line'].search(
+                    [('slip_id', '=', payslip['id']), ('code', '=', 'GROSS')]).mapped('amount')
+                if gross_amount != []:
+                    sum_amount += gross_amount[0]
                 i = + 1
         self.preavis = sum_amount / i
 
@@ -91,7 +95,8 @@ class HrPayslip(models.Model):
     def get_average_gross(self):
         average_gross = 0.0
         if self.employee_id:
-            query_ = """select min(date_from) as first_paie, max(date_to) as dern_paie from hr_payslip where employee_id = '{}'""".format(self.employee_id.id)
+            query_ = """select min(date_from) as first_paie, max(date_to) as dern_paie from hr_payslip where employee_id = '{}'""".format(
+                self.employee_id.id)
             self.env.cr.execute(query_)
             first_paie_dates = self.env.cr.dictfetchall()
             payslip_line_obj = self.env['hr.payslip.line']
@@ -103,18 +108,23 @@ class HrPayslip(models.Model):
                     payslips = self.search([('employee_id', '=', self.employee_id.id)])
                     average_gross_done = 0.0
                     for payslip in payslips:
-                        if payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount'):
-                            average_gross_done += payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                        if payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped(
+                                'amount'):
+                            average_gross_done += \
+                            payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped(
+                                'amount')[0]
                     average_gross = average_gross_done / seniority
                 elif seniority > 12:
-                    payslip_line_obj_last_year = self.search([('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=12)
+                    payslip_line_obj_last_year = self.search(
+                        [('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=12)
                     average_gross_last_year = 0.0
                     for payslip_line in payslip_line_obj_last_year:
                         if payslip_line_obj.search([('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped(
                                 'amount'):
                             average_gross_last_year += \
-                            payslip_line_obj.search([('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped(
-                                'amount')[0]
+                                payslip_line_obj.search(
+                                    [('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped(
+                                    'amount')[0]
                     average_gross = average_gross_last_year / 12
                 else:
                     average_gross = 0.0
@@ -128,7 +138,8 @@ class HrPayslip(models.Model):
     def get_average_gross_notice(self):
         average_gross_notice = 0.0
         if self.employee_id:
-            query_ = """select min(date_from) as first_paie, max(date_to) as dern_paie from hr_payslip where employee_id = '{}'""".format(self.employee_id.id)
+            query_ = """select min(date_from) as first_paie, max(date_to) as dern_paie from hr_payslip where employee_id = '{}'""".format(
+                self.employee_id.id)
             self.env.cr.execute(query_)
             first_paie_dates = self.env.cr.dictfetchall()
             payslip_line = self.env['hr.payslip.line']
@@ -143,15 +154,20 @@ class HrPayslip(models.Model):
                     two_payslip_id = self.env.cr.dictfetchall()
                     sum_gross_done_notice = 0.
                     for payslip_id in two_payslip_id:
-                        if payslip_line.search([('slip_id', '=', payslip_id['id']), ('code', '=', 'GROSS')]).mapped('amount'):
-                            sum_gross_done_notice += payslip_line.search([('slip_id', '=', payslip_id['id']), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                        if payslip_line.search([('slip_id', '=', payslip_id['id']), ('code', '=', 'GROSS')]).mapped(
+                                'amount'):
+                            sum_gross_done_notice += \
+                            payslip_line.search([('slip_id', '=', payslip_id['id']), ('code', '=', 'GROSS')]).mapped(
+                                'amount')[0]
                     average_gross_notice = sum_gross_done_notice / seniority
                 elif seniority < 2:
                     sum_gross_done = 0.0
                     payslips = self.search([('employee_id', '=', self.employee_id.id)])
                     for payslip in payslips:
                         if payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount'):
-                            sum_gross_done += payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                            sum_gross_done += \
+                            payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped(
+                                'amount')[0]
                     average_gross_notice = sum_gross_done / seniority
                 else:
                     average_gross_notice = 0.0
@@ -390,6 +406,7 @@ class HrPayslip(models.Model):
 
     @api.multi
     def print_payroll(self):
+        self.appears_on_payslip()
         return self.env['report'].get_action(self, 'gestion_de_paie.report_paie')
 
     # =========================================================================================
@@ -546,14 +563,7 @@ class HrPayslip(models.Model):
     @api.multi
     def compute_sheet(self):
         for payslip in self:
-            activated_paid_leave = self.env.ref('gestion_de_paie.hr_holiday_rest')
-            activated_paid_sbr = self.env.ref('gestion_de_paie.hr_holiday_sbr')
-            if payslip.stc:
-                activated_paid_leave.write({'active': True})
-                activated_paid_sbr.write({'active': True})
-            else:
-                activated_paid_leave.write({'active': False})
-                activated_paid_sbr.write({'active': False})
+            self.appears_on_payslip()
             number = payslip.number or self.env['ir.sequence'].next_by_code('salary.slip')
             # delete old payslip lines
             payslip.line_ids.unlink()
@@ -564,6 +574,25 @@ class HrPayslip(models.Model):
             lines = [(0, 0, line) for line in self.get_payslip_lines(contract_ids, payslip.id)]
             payslip.write({'line_ids': lines, 'number': number})
         return True
+
+    @api.multi
+    def appears_on_payslip(self):
+        for payslip in self:
+            activated_paid_leave = self.env.ref('gestion_de_paie.hr_holiday_rest')
+            activated_paid_sbr = self.env.ref('gestion_de_paie.hr_holiday_sbr')
+            activated_paid_preavis = self.env.ref('gestion_de_paie.hr_payroll_rules_preavis')
+            if payslip.stc:
+                activated_paid_leave.write({'active': True})
+                activated_paid_sbr.write({'active': True})
+                activated_paid_preavis.write({'active': True})
+            else:
+                activated_paid_leave.write({'active': False})
+                activated_paid_sbr.write({'active': False})
+                activated_paid_preavis.write({'active': False})
+            if payslip.priornotice == 0:
+                activated_paid_preavis.write({'active': False})
+            else:
+                activated_paid_preavis.write({'active': True})
 
     # quantité du congé
 

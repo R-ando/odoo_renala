@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, models, fields
+from math import *
 
 
 class report_paie(models.AbstractModel):
@@ -54,6 +55,9 @@ class report_paie(models.AbstractModel):
             return g
         else:
             return '0,0'
+
+    def absolute_value(self, val):
+        return self._get_format(-1*val)
 
     # Congé pris et approuvé durant la même période que celle du bulletin
     def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche, map=True):
@@ -123,7 +127,8 @@ class report_paie(models.AbstractModel):
             'get_format': self._get_format,
             'get_employee_request_leaves': self._get_employee_request_leaves,
             'get_employee_allocation_leaves': self._get_employee_allocation_leaves,
-            'data': data
+            'data': data,
+            'absolute_value':self.absolute_value,
 
         }
         return self.env['report'].render('gestion_de_paie.report_paie', docargs)

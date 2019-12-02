@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hide_header_template_payroll">
+           <field name="external_layout_header"/>
+           <field name="inherit_id" ref="report.external_layout_header"/>
+           <field name="arch" type="xml">
+				 <xpath expr="//div[@class='header']" position="replace">
+                    <div class="col-xs-3"></div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

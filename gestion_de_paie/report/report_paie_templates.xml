@@ -12,7 +12,6 @@
                     font-family:Calibri;
                     }
                     .cadre1 {
-
                     font-size: x-large;
                     border:2px solid #E2E2E0;
                     padding: 1%;
@@ -24,12 +23,10 @@
                     }
 
                     .cadre11 {
-
-                    font-size: x-large;
                     border:2px solid #E2E2E0;
                     padding: 1%;
                     width: 420px;
-                    height: 50px;
+                    height: 45px;
                     background-color : #E2E2E0;
                     vertical-align: baseline;
                     font-family:Calibri;
@@ -128,10 +125,10 @@
                     <div class="col-xs-6">
                         <div class="titre">
                             <t t-if="o.stc">
-                                <h2 class="cadre1">BULLETIN DE PAIE POUR SOLDE TOUS COMPTE</h2>
+                                <h4 class="cadre11">BULLETIN DE PAIE POUR SOLDE TOUS COMPTE</h4>
                             </t>
                             <t t-if="o.stc == False">
-                                <h2 class="cadre11">BULLETIN DE PAIE</h2>
+                                <h2 class="cadre1">BULLETIN DE PAIE</h2>
                             </t>
                         </div>
                         <p style="font-family:Calibri">
@@ -290,13 +287,23 @@
                                 </t>
                             </td>
                             <td>
+                                <t t-if="line.code in ['PREAVIS']">
+                                    <t t-if="line.total > 0  ">
+                                        <span t-field="line.total"/>
+                                    </t>
+                                </t>
+
                                 <t t-if="line.code in ['BASIC','HS1','HS2','HMNUIT','HMJF','HMDIM','GROSS','NET','PRM','AF','PLUS','TM','CP','SBR']">
                                     <span t-field="line.total"/>
                                 </t>
                             </td>
                             <td>
-                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES','MOINS','PREAVIS']">
-
+                                <t t-if="line.code in ['PREAVIS']">
+                                    <t t-if="line.total &lt; 0  ">
+                                        <span t-esc="absolute_value(line.total)"/>
+                                    </t>
+                                </t>
+                                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES','MOINS']">
                                     <span t-field="line.total"/>
                                 </t>
                             </td>
@@ -307,9 +314,11 @@
                                 <t t-if="line.code == 'OMSI_EMP'">
                                     <span t-esc="get_format(o.employee_id.company_id.cotisation_sante_patr)"/>
                                 </t>
-                                 <t t-if="line.code == 'FMFP_PAT'">
+                                <t t-if="line.code == 'FMFP_PAT'">
                                     <span t-esc="get_format(o.employee_id.company_id.seuil_fmfp)"/>
                                 </t>
+
+
                             </td>
                             <td>
                                 <t t-if="line.code == 'CNAPS_EMP'">
@@ -318,9 +327,10 @@
                                 <t t-if="line.code == 'OMSI_EMP'">
                                     <span t-esc="get_format(get_total_by_rule_category(o,'OMSI_PAT'))"/>
                                 </t>
-                                 <t t-if="line.code == 'FMFP_PAT'">
+                                <t t-if="line.code == 'FMFP_PAT'">
                                     <span t-esc="get_format(get_total_by_rule_category(o,'FMFP_PAT'))"/>
                                 </t>
+
                             </td>
                         </tr>
 

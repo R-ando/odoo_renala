@@ -123,7 +123,7 @@
         <field name="amount_python_compute">if payslip.half_salary:
     result = payslip.missed_days * (categories.BASIC/2) / 30
 else:
-    result = contract.wage/HWORK</field>
+    result = contract.wage</field>
         </record>
         <record id="hr_payroll.hr_rule_taxable" model="hr.salary.rule">
             <field name="name">Salaire Brut</field>
@@ -187,7 +187,7 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
     </record>
 
  <record id="hr_payroll_rules_preavis" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="category_id" ref="hr_payroll.PREAVIS"/>
         <field name="name">PREAVIS</field>
         <field name="code">PREAVIS</field>
         <field name="sequence">100</field>
@@ -199,8 +199,8 @@ elif payslip.priornotice &lt; 0 and payslip.stc:
     result = -payslip.preavis
 else:
     result = 0</field>
-        <field name="appears_on_payslip" eval="True"/>
-        <field name="note">Formation FMFP</field>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="note">preavis</field>
     </record>
 
      <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
