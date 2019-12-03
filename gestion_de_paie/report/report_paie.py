@@ -59,6 +59,15 @@ class report_paie(models.AbstractModel):
     def absolute_value(self, val):
         return self._get_format(-1*val)
 
+    def stc_db_state(self):
+        for payslip in self:
+            stc_ = self.env['hr.payslip'].search([('stc', '=', payslip.stc), ('employee_id', '=', payslip.employee_id.id),('date_from', '=', payslip.date_from)], limit=1).mapped('stc')
+            if stc_:
+                stc_ = stc_[0]
+            else:
+                stc_ = False
+        return stc_
+
     # Congé pris et approuvé durant la même période que celle du bulletin
     def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche, map=True):
         holidays_obj = self.env['hr.holidays'].search([('employee_id', '=', employee_id.id)])
@@ -129,6 +138,7 @@ class report_paie(models.AbstractModel):
             'get_employee_allocation_leaves': self._get_employee_allocation_leaves,
             'data': data,
             'absolute_value':self.absolute_value,
+            'stc_db_state': self.stc_db_state,
 
         }
         return self.env['report'].render('gestion_de_paie.report_paie', docargs)

@@ -145,21 +145,26 @@ else:
             <field name="quantity">2.5</field>
             <field name="quatity_compute.rest_leave"/>
              <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
-            <field name="appears_on_payslip" eval="True"/>
+            <field name="appears_on_payslip" eval="False"/>
             <field name="note">nombre de jours de congé restant</field>
         </record>
 
-        <record id="hr_holiday_sbr"  model="hr.salary.rule">
-            <field name="name">SBR Moyen</field>
-            <field name="sequence" eval="102"/>
-            <field name="code">SBR</field>
-            <field name="category_id" ref="hr_payroll.GROSS"/>
+        <record id="hr_payroll_rules_preavis" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.PREAVIS"/>
+            <field name="name">PREAVIS</field>
+            <field name="code">PREAVIS</field>
+            <field name="sequence">102</field>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-             <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / 30</field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="note">Salaire brute Moyen</field>
-        </record>
+            <field name="amount_python_compute">if payslip.priornotice > 0 and payslip.stc:
+        result = payslip.preavis
+    elif payslip.priornotice &lt; 0 and payslip.stc:
+        result = -payslip.preavis
+    else:
+        result = 0</field>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="note">preavis</field>
+    </record>
 
      <record id="hr_payroll.hr_rule_net" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.NET"/>
@@ -184,23 +189,6 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="register_id" ref="hr_CNAPS_register"/>
         <field name="note">C'est la valeur de CNAPS de chaque salarié , qui s'appuit sur la valeur du salaire "Brut" calculé.</field>
-    </record>
-
- <record id="hr_payroll_rules_preavis" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.PREAVIS"/>
-        <field name="name">PREAVIS</field>
-        <field name="code">PREAVIS</field>
-        <field name="sequence">100</field>
-        <field name="condition_select">none</field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">if payslip.priornotice > 0 and payslip.stc:
-    result = payslip.preavis
-elif payslip.priornotice &lt; 0 and payslip.stc:
-    result = -payslip.preavis
-else:
-    result = 0</field>
-        <field name="appears_on_payslip" eval="False"/>
-        <field name="note">preavis</field>
     </record>
 
      <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
