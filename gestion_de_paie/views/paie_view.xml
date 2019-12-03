@@ -85,15 +85,15 @@
                         <group>
                             <field name="stc"/>
                             <field name="half_salary"/>
+                            <field name="rest_leave" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
+                            <field name="priornotice" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
+                            <field name="average_gross" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
+                            <field name="average_gross_notice" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
                         </group>
                         <group>
                             <field name="base" attrs="{'readonly': False}"/>
                             <field name="missed_days" attrs="{'readonly': False}"/>
                             <field name="number_days_worked" attrs="{'readonly': True}"/>
-                            <field name="rest_leave" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
-                            <field name="priornotice" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
-                            <field name="average_gross" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
-                            <field name="average_gross_notice" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
                         </group>
                     </group>
                 </xpath>

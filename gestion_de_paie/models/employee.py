@@ -26,11 +26,12 @@ class Employee(models.Model):
             date_start = self.env['hr.contract'].search([('employee_id', '=', employee.id)]).mapped('date_start')
             if date_start:
                 date_start = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
+                print(date_start)
                 dif_m = self.diff_month(date.today(), date_start)
                 if dif_m < 13:
                     if dif_m == 12:
                         employee.seniority = '1 ans'
-                    if dif_m == 0:
+                    elif dif_m == 0:
                         d0 = date(int(date_start[0]), int(date_start[1]), int(date_start[2]))
                         employee.seniority = str(date.today() - d0) + 'jours'
                     else:
