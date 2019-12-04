@@ -89,6 +89,7 @@
                             <field name="priornotice" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
                             <field name="average_gross" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
                             <field name="average_gross_notice" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
+                            <field name="additional_gross" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
                         </group>
                         <group>
                             <field name="base" attrs="{'readonly': False}"/>

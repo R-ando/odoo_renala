@@ -101,6 +101,11 @@
         <field name="name">PREAVIS</field>
         <field name="code">PREAVIS</field>
     </record>
+
+    <record id="hr_payroll.BASIC2" model="hr.salary.rule.category">
+        <field name="name">BASIC2</field>
+        <field name="code">BASIC2</field>
+    </record>
       <!-- Contribution Register -->
 
     <record id="hr_CNAPS_register" model="hr.contribution.register">
@@ -152,17 +157,17 @@ else:
         <record id="hr_payroll_rules_preavis" model="hr.salary.rule">
             <field name="category_id" ref="hr_payroll.PREAVIS"/>
             <field name="name">PREAVIS</field>
-            <field name="code">PREAVIS</field>
+            <field name="code">PR</field>
             <field name="sequence">102</field>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">if payslip.priornotice > 0 and payslip.stc:
-        result = payslip.preavis
-    elif payslip.priornotice &lt; 0 and payslip.stc:
-        result = -payslip.preavis
-    else:
-        result = 0</field>
-            <field name="appears_on_payslip" eval="False"/>
+    result = payslip.preavis
+elif payslip.priornotice &lt; 0 and payslip.stc:
+    result = -payslip.preavis
+else:
+    result = 0</field>
+            <field name="appears_on_payslip" eval="True"/>
             <field name="note">preavis</field>
     </record>
 
@@ -300,6 +305,21 @@ else:
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">C'est la valeur de l'IRSA de chaque salarié , qui s'appuit sur la valeur du salaire "Imposable" calculé.</field>
     </record>
+
+    <record id="hr_rule_basic2_hor" model="hr.salary.rule">
+        <field name="name">Salaire de base</field>
+        <field name="code">BASIC2</field>
+        <field name="sequence">5</field>
+        <field name="category_id" ref="hr_payroll.BASIC2"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = contract.wage
+if payslip.half_salary:
+    result = result / 2</field>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="note">valeur de la salaire de base en fonction de la cochage de la demi-salaire</field>
+    </record>
+
     <record id="hr_rule_basic_hor" model="hr.salary.rule">
         <field name="name">Salaire de base horaire</field>
         <field name="code">BASIC</field>
@@ -307,7 +327,7 @@ else:
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">percentage</field>
-         <field name="amount_percentage_base">contract.wage/HWORK</field>
+         <field name="amount_percentage_base">categories.BASIC2/HWORK</field>
         <field name="quantity">HWORK</field>
         <field name="amount_percentage">100</field>
         <field name="appears_on_payslip" eval="True"/>
