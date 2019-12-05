@@ -28,7 +28,7 @@
              'report/report_irsa.xml',
              'report/report_etat_salaire_templates.xml',
              'report/report_etat_salaire.xml',
-             #'report/header_paie.xml',
+             'report/header_paie.xml',
              'wizard/cnaps_wizard_view.xml',
              'wizard/ostie_wizard_view.xml',
              'wizard/irsa_wizard_view.xml',

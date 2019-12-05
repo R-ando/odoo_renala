@@ -148,7 +148,6 @@ else:
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="quantity">2.5</field>
-            <field name="quatity_compute.rest_leave"/>
              <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
             <field name="appears_on_payslip" eval="False"/>
             <field name="note">nombre de jours de congé restant</field>
@@ -164,9 +163,7 @@ else:
             <field name="amount_python_compute">if payslip.priornotice > 0 and payslip.stc:
     result = payslip.preavis
 elif payslip.priornotice &lt; 0 and payslip.stc:
-    result = -payslip.preavis
-else:
-    result = 0</field>
+    result = -payslip.preavis</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="note">preavis</field>
     </record>

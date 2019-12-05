@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models, tools, _
 from datetime import datetime, date
+from odoo.tools.translate import _
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.exceptions import UserError, ValidationError
 
@@ -17,25 +18,23 @@ class Employee(models.Model):
     lieu_cin = fields.Char(string='Lieu de délivrance CIN')
     num_emp = fields.Char(string="N° Matricule")
     nombre_enfant_cnaps = fields.Integer(string=u"Nombre d'enfant allouée CNaPS")
-    seniority = fields.Char(string=u'Ancieneté', compute='get_seniority')
+    seniority = fields.Char(string=u'Ancienneté', compute='get_seniority')
 
-    @api.multi
     @api.multi
     def get_seniority(self):
         for employee in self:
             date_start = self.env['hr.contract'].search([('employee_id', '=', employee.id)]).mapped('date_start')
             if date_start:
-                date_start = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
-                print(date_start)
-                dif_m = self.diff_month(date.today(), date_start)
+                date_start_ = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
+                dif_m = self.diff_month(date.today(), date_start_)
                 if dif_m < 13:
                     if dif_m == 12:
                         employee.seniority = '1 ans'
                     elif dif_m == 0:
-                        d0 = date(int(date_start[0]), int(date_start[1]), int(date_start[2]))
-                        employee.seniority = str(date.today() - d0) + 'jours'
+                        d0 = date(date_start_.year, date_start_.month, date_start_.day)
+                        employee.seniority = str(date.today() - d0).replace('day, 0:00:00', ' jours ')
                     else:
-                        employee.seniority = str(dif_m) + 'mois'
+                        employee.seniority = str(dif_m) + ' mois'
                 else:
                     mois = dif_m % 12
                     ans = (dif_m - mois) / 12
