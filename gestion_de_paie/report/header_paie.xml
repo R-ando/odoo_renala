@@ -2,12 +2,12 @@
 <odoo>
     <data>
         <record id="hide_header_template_payroll" model="ir.ui.view">
-            <field name="external_layout_header"/>
-            <field name="inherit_id" ref="report.external_layout_header"/>
+            <field name="name">report.paperformat</field>
+            <field name="model">report.paperformat</field>
+            <field name="inherit_id" ref="report.paperformat_view_form "/>
             <field name="arch" type="xml">
-                <xpath expr="//div['1']" position="replace">
-
-
+                <xpath expr="//field[@name='margin_top']" position="replace">
+                    <field name="margin_top">10</field>
                 </xpath>
             </field>
         </record>

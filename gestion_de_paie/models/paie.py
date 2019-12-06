@@ -104,21 +104,19 @@ class HrPayslip(models.Model):
                 if seniority < 12 and seniority != 0:
                     payslips = self.search([('employee_id', '=', self.employee_id.id)])
                     average_gross_done = 0.0
+                    gross_curent = 0.0
                     for payslip in payslips:
                         if payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount'):
                             average_gross_done += payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
-                    average_gross = (average_gross_done + self.additional_gross) / seniority
+                            gross_curent = payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                    average_gross = (average_gross_done + self.additional_gross + gross_curent) / seniority
                 elif seniority > 12:
                     payslip_line_obj_last_year = self.search(
                         [('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=12)
                     average_gross_last_year = 0.0
                     for payslip_line in payslip_line_obj_last_year:
-                        if payslip_line_obj.search([('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped(
-                                'amount'):
-                            average_gross_last_year += \
-                                payslip_line_obj.search(
-                                    [('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped(
-                                    'amount')[0]
+                        if payslip_line_obj.search([('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped('amount'):
+                            average_gross_last_year += payslip_line_obj.search([('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
                     average_gross = (average_gross_last_year + self.additional_gross) / 12
                 else:
                     average_gross = 0.0
@@ -140,21 +138,22 @@ class HrPayslip(models.Model):
                 date_from = datetime.strptime(self.date_from, tools.DEFAULT_SERVER_DATE_FORMAT)
                 seniority = self.diff_month(date_start, date_from)
                 if seniority >= 2:
-                    payslip2obj = self.search([('employee_id', '=', self.employee_id.id)], limit=2, order='date_from desc')
+                    payslip2obj = self.search([('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=2, order='date_from desc')
                     sum_gross_done_notice = 0.0
                     for payslip in payslip2obj:
                         if payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]):
+                            print(payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0])
                             sum_gross_done_notice += payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
                     average_gross_notice = (sum_gross_done_notice + self.additional_gross) / seniority
                 elif seniority < 2 and seniority != 0:
                     sum_gross_done = 0.0
                     payslips = self.search([('employee_id', '=', self.employee_id.id)])
+                    gross_curent = 0.0
                     for payslip in payslips:
                         if payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]):
-                            sum_gross_done += \
-                                payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped(
-                                    'amount')[0]
-                    average_gross_notice = (sum_gross_done + self.additional_gross) / seniority
+                            sum_gross_done += payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                            gross_curent = payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
+                    average_gross_notice = (sum_gross_done + self.additional_gross + gross_curent) / seniority
                 else:
                     average_gross_notice = 0.0
             else:

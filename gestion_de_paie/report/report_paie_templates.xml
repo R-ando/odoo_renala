@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <template id="external_layout">
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+        <t t-raw="0"/>
+        <t t-call="report.external_layout_footer"/>
+    </template>
+
+
     <template id="report_paie_document">
-        <t t-call="report.external_layout">
+        <t t-call="gestion_de_paie.external_layout">
             <!-- Debut du rapport -->
             <div class="page">
                 <style>
+
                     .titre {
                     text-align:center;
                     width: 400px;
@@ -288,10 +304,10 @@
                             </td>
                             <td>
                                 <t t-if="o.stc and o.priornotice!=0">
-                                        <t t-if="line.code in ['PREAVIS']">
-                                            <t t-if="line.total > 0  ">
-                                                <span t-field="line.total"/>
-                                            </t>
+                                    <t t-if="line.code in ['PR']">
+                                        <t t-if="line.total > 0  ">
+                                            <span t-field="line.total"/>
+                                        </t>
                                     </t>
                                 </t>
                                 <t t-if="o.stc and o.rest_leave!=0">
@@ -305,14 +321,14 @@
                             </td>
                             <td>
                                 <t t-if="o.stc and o.priornotice!=0">
-                                    <t t-if="line.code in ['PREAVIS']">
+                                    <t t-if="line.code in ['PR']">
                                         <t t-if="line.total &lt; 0  ">
                                             <span t-esc="absolute_value(line.total)"/>
                                         </t>
                                     </t>
                                 </t>
                                 <t t-if=" line.code in ['MOINS'] and line.total != 0 ">
-                                        <span t-field="line.total"/>
+                                    <span t-field="line.total"/>
                                 </t>
                                 <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES']">
                                     <span t-field="line.total"/>
