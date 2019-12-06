@@ -12,7 +12,6 @@
             <t t-set="company" t-value="res_company"></t>
         </t>
         <t t-raw="0"/>
-        <t t-call="report.external_layout_footer"/>
     </template>
 
 
