@@ -17,6 +17,7 @@
              'views/company_view.xml',
              'views/payment_view.xml',
              'views/hr_holidays_view.xml',
+             'views/etat_payslip_view.xml',
              'data/gestion_de_paie_data.xml',
              'report/report_paie_templates.xml',
              'report/report_paie.xml',

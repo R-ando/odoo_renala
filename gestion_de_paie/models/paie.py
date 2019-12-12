@@ -527,7 +527,6 @@ class HrPayslip(models.Model):
 
     @api.multi
     def compute_sheet(self):
-        self.appears_on_payslip()
         for payslip in self:
             self.appears_on_calcul()
             number = payslip.number or self.env['ir.sequence'].next_by_code('salary.slip')

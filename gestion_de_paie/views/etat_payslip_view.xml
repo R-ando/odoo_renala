@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <menuitem id="menu_payroll_etat_globale"
+    	name="Etat de paie"
+        parent="hr_payroll.menu_hr_payroll_root"
+        sequence="17"/>
+    </data>
+</odoo>
