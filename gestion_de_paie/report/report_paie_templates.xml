@@ -278,7 +278,11 @@
                             	        -get_total_by_rule_category(o,'OMSI')
                             	        -o.employee_id.company_id.abat_irsa*o.employee_id.children)"/>
                                 </t>
-
+                                <t t-if="o.stc and o.rest_leave!=0">
+                                    <t t-if="line.code == 'CP'">
+                                        <span t-esc="get_format(o.average_gross)"/>
+                                    </t>
+                                </t>
                             </td>
                             <td>
                                 <t t-if="line.amount_select == 'percentage'">
@@ -300,12 +304,17 @@
                                 <t t-if="line.code not in ['CNAPS_EMP','OMSI_EMP','IRSA','AVANCE15','AVANCESP','PRM'] and get_employe_line(o,line)">
                                     <span t-esc="get_format(get_employe_line(o,line).total)"/>
                                 </t>
+                                <t t-if="o.stc and o.rest_leave!=0">
+                                    <t t-if="line.code in ['CP']">
+                                        <span t-field="o.rest_leave"/>
+                                    </t>
+                                </t>
                             </td>
                             <td>
                                 <t t-if="o.stc and o.priornotice!=0">
                                     <t t-if="line.code in ['PR']">
-                                        <t t-if="line.total > 0  ">
-                                            <span t-field="line.total"/>
+                                        <t t-if="o.priornotice > 0  ">
+                                            <span t-esc="absolute_value(line.total).replace('-','')"/>
                                         </t>
                                     </t>
                                 </t>
@@ -321,8 +330,8 @@
                             <td>
                                 <t t-if="o.stc and o.priornotice!=0">
                                     <t t-if="line.code in ['PR']">
-                                        <t t-if="line.total &lt; 0  ">
-                                            <span t-esc="absolute_value(line.total)"/>
+                                        <t t-if="o.priornotice &lt; 0  ">
+                                            <span t-esc="absolute_value(line.total).replace('-','')"/>
                                         </t>
                                     </t>
                                 </t>
@@ -340,7 +349,7 @@
                                 <t t-if="line.code == 'OMSI_EMP'">
                                     <span t-esc="get_format(o.employee_id.company_id.cotisation_sante_patr)"/>
                                 </t>
-                                <t t-if="line.code == 'FMFP_PAT'">
+                                <t t-if="line.code == 'FMFP_PAT' and line.amount!=0">
                                     <span t-esc="get_format(o.employee_id.company_id.seuil_fmfp)"/>
                                 </t>
                             </td>
@@ -351,7 +360,7 @@
                                 <t t-if="line.code == 'OMSI_EMP'">
                                     <span t-esc="get_format(get_total_by_rule_category(o,'OMSI_PAT'))"/>
                                 </t>
-                                <t t-if="line.code == 'FMFP_PAT'">
+                                <t t-if="line.code == 'FMFP_PAT' and line.amount!=0">
                                     <span t-esc="get_format(get_total_by_rule_category(o,'FMFP_PAT'))"/>
                                 </t>
 

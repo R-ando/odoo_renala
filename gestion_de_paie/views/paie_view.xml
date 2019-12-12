@@ -62,7 +62,7 @@
                 </data>
             </field>
         </record>
-        <record id="print_btn" model="ir.ui.view">
+        <record id="print_payslip_btn" model="ir.ui.view">
             <field name="type">form</field>
             <field name="model">hr.payslip</field>
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
