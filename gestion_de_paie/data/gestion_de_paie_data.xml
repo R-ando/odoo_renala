@@ -606,7 +606,7 @@ else : result = 0</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = inputs.TM.amount</field>
-        <field name="appears_on_payslip" eval="True"/>
+        <field name="appears_on_payslip" eval="False"/>
         <field name="note">prime prévue par la convention collective ou le contrat de travail.</field>
     </record>
        </data>

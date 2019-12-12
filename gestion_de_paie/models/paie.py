@@ -62,6 +62,11 @@ class HrPayslip(models.Model):
     additional_gross = fields.Float(string="SBR additionnel", store=True, delault=0.00)
     #first_name = fields.Char(related='employee_id.first_name')
 
+    @api.model_cr
+    def init(self):
+        thirteen_month = self.env.ref('gestion_de_paie.hr_rule_basic_TM')
+        thirteen_month.write({'active': False})
+
 
     @api.depends('employee_id')
     def _rest_leave(self):
