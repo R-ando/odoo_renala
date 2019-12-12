@@ -147,23 +147,18 @@ else:
             <field name="category_id" ref="hr_payroll.GROSS"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="quantity">2.5</field>
-             <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
+            <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
             <field name="appears_on_payslip" eval="False"/>
             <field name="note">nombre de jours de congé restant</field>
         </record>
 
         <record id="hr_payroll_rules_preavis" model="hr.salary.rule">
-            <field name="category_id" ref="hr_payroll.PREAVIS"/>
-            <field name="name">PREAVIS</field>
+            <field name="name">Préavis</field>
             <field name="code">PR</field>
-            <field name="sequence" eval="102"/>
+             <field name="category_id" ref="hr_payroll.PREAVIS"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">if payslip.priornotice > 0 and payslip.stc:
-    result = payslip.preavis
-elif payslip.priornotice &lt; 0 and payslip.stc:
-    result = -payslip.preavis</field>
+            <field name="amount_python_compute">result = payslip.preavis</field>
             <field name="appears_on_payslip" eval="False"/>
             <field name="note">preavis</field>
     </record>
@@ -179,6 +174,7 @@ elif payslip.priornotice &lt; 0 and payslip.stc:
          <field name="appears_on_payslip" eval="False"/>
         <field name="note">C'est le salaire Net qui est le salaire Brut - toutes les retenues</field>
     </record>
+
     <record id="hr_payroll_rules_CNAPS_EMP" model="hr.salary.rule">
         <field name="category_id" ref="CNAPS"/>
         <field name="name">CNAPS</field>
@@ -191,21 +187,6 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="register_id" ref="hr_CNAPS_register"/>
         <field name="note">C'est la valeur de CNAPS de chaque salarié , qui s'appuit sur la valeur du salaire "Brut" calculé.</field>
-    </record>
-
-     <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.FMFP_PAT"/>
-        <field name="name">FMFP</field>
-        <field name="code">FMFP_PAT</field>
-        <field name="sequence">106</field>
-        <field name="condition_select">none</field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">if categories.GROSS > employee.company_id.plafond_cnaps:
-    result = employee.company_id.plafond_cnaps * employee.company_id.seuil_fmfp / 100
-else:
-    result = categories.GROSS * employee.company_id.seuil_fmfp / 100</field>
-        <field name="appears_on_payslip" eval="True"/>
-        <field name="note">Formation FMFP</field>
     </record>
 
     <record id="hr_payroll_rules_CNAPS_PAT" model="hr.salary.rule">
@@ -248,6 +229,20 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="note">C'est la valeur de la cotisation médical de chaque salarié qui se base sur la valeur de salaire "de Base". Elle doit être réglée chaque trimestre .</field>
     </record>
+     <record id="hr_payroll_rules_FMFP" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.FMFP_PAT"/>
+        <field name="name">FMFP</field>
+        <field name="code">FMFP_PAT</field>
+        <field name="sequence" eval="106"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">if categories.GROSS > employee.company_id.plafond_cnaps:
+    result = employee.company_id.plafond_cnaps * employee.company_id.seuil_fmfp / 100
+else:
+    result = categories.GROSS * employee.company_id.seuil_fmfp / 100</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Formation FMFP</field>
+    </record>
     <record id="hr_payroll_rules_CHARGE_PAT" model="hr.salary.rule">
         <field name="category_id" ref="CHARGE_PAT"/>
         <field name="name">CHARGE_PAT</field>
@@ -266,7 +261,9 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
         <field name="sequence" eval="150"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result=categories.DED+CNAPS_EMP+OMSI_EMP</field>
+        <field name="amount_python_compute">result=categories.DED+CNAPS_EMP+OMSI_EMP
+if payslip.priornotice &lt; 0 and payslip.stc:
+    result = result + categories.PREAVIS</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="note">C'est le total des déductions du salaire .</field>
     </record>

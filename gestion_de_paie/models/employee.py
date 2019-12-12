@@ -3,9 +3,6 @@
 
 from odoo import api, fields, models, tools, _
 from datetime import datetime, date
-from odoo.tools.translate import _
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
-from odoo.exceptions import UserError, ValidationError
 
 class Employee(models.Model):
     _inherit = 'hr.employee'
