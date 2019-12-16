@@ -8,7 +8,7 @@ class Employee(models.Model):
     _inherit = 'hr.employee'
     _name = 'hr.employee'
 
-    first_name = fields.Char(string="Prenom", size=128)
+    first_name = fields.Char(string="Prenom", size=128, required=True)
     num_cnaps_emp = fields.Char(string="N° CNAPS")
     num_cin = fields.Char(string="N° CIN", size=10)
     date_cin = fields.Date(string='Date CIN')
@@ -16,6 +16,12 @@ class Employee(models.Model):
     num_emp = fields.Char(string="N° Matricule")
     nombre_enfant_cnaps = fields.Integer(string=u"Nombre d'enfant allouée CNaPS")
     seniority = fields.Char(string=u'Ancienneté', compute='get_seniority')
+    #make field obligatory
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female')
+    ], groups='hr.group_hr_user', required=True)
+    birthday = fields.Date('Date of Birth', groups='hr.group_hr_user',  required=True)
 
     @api.multi
     def get_seniority(self):
