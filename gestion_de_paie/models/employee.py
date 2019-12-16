@@ -16,6 +16,12 @@ class Employee(models.Model):
     num_emp = fields.Char(string="N° Matricule")
     nombre_enfant_cnaps = fields.Integer(string=u"Nombre d'enfant allouée CNaPS", required=True)
     seniority = fields.Char(string=u'Ancienneté', compute='get_seniority')
+    #make field obligatory
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female')
+    ], groups='hr.group_hr_user', required=True)
+    birthday = fields.Date('Date of Birth', groups='hr.group_hr_user',  required=True)
 
     @api.multi
     def get_seniority(self):
