@@ -82,6 +82,7 @@ class HrPayslip(models.Model):
         if self.priornotice < 0:
             priornotice = self.priornotice * -1
         preavis = (self.average_gross_notice * priornotice) / self.base
+        print(preavis)
         return preavis
 
 
