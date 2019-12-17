@@ -22,6 +22,21 @@ class Employee(models.Model):
         ('female', 'Female')
     ], groups='hr.group_hr_user', required=True)
     birthday = fields.Date('Date of Birth', groups='hr.group_hr_user',  required=True)
+    department_id = fields.Many2one('hr.department', string='Department', required=True)
+    job_id = fields.Many2one('hr.job', string='Job Title', required=True)
+
+    def if_exist(self, name):
+        if not name:
+            return ''
+        else:
+            return name
+    @api.multi
+    def name_get(self):
+        data = []
+        for employee in self:
+            name = self.if_exist(employee.name_related).upper() + ' ' + self.if_exist(employee.first_name)
+            data.append((employee.id, name))
+        return data
 
     @api.multi
     def get_seniority(self):

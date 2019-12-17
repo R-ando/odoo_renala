@@ -62,5 +62,29 @@
                 </xpath>
             </field>
         </record>
+        <!--      liste employé  (tree view) -->
+        <record id="employe_list_tree" model="ir.ui.view">
+            <field name="name">hr.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="first_name"/>
+                </xpath>
+            </field>
+        </record>
+        <!--     liste employé (kaban view)   -->
+        <record id="employee_list_kaban" model="ir.ui.view">
+            <field name="name">hr.employee.kanban</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <strong>
+                        <field name="first_name"/>
+                    </strong>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
