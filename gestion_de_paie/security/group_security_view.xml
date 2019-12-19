@@ -3,4 +3,7 @@
     <record id="groupe_etat" model="res.groups">
         <field name="name">Etat</field>
     </record>
+    <record id="groupe_etat_paie" model="res.groups">
+        <field name="name">Etat de paie</field>
+    </record>
 </odoo>

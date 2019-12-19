@@ -4,8 +4,8 @@
     <data>
 		<record id="hr_payroll_ostie_tree_filter" model="ir.ui.view">
             <field name="name">hr.payroll.ostie.tree.filter</field>
-            <field name="model">ostie</field>
-            <field name="arch" type="xml">	
+            <field name="model">hr.etatOstie.repport</field>
+            <field name="arch" type="xml">
 				<search string="Recherche">
 					<field name="num_emp" string="Matricule"/>
 					<field name="num_cin" string="CIN"/>
@@ -35,7 +35,7 @@
                 </tree>
             </field>
         </record>
-        <!-- <record id="hr_payroll_ostie_form" model="ir.ui.view">
+        <record id="hr_payroll_ostie_form" model="ir.ui.view">
             <field name="name">hr.payroll.ostie.form</field>
             <field name="model">ostie</field>
             <field name="arch" type="xml">
@@ -57,10 +57,8 @@
 			    	</sheet>
                 </form>
             </field>
-        </record> -->
+        </record>
         
-        <!-- ACTIONS -->
-        	
 		<record id="open_payroll_ostie" model="ir.actions.act_window">
             <field name="name">Etat OSTIE</field>
             <field name="res_model">ostie</field>
@@ -68,13 +66,11 @@
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="hr_payroll_ostie_tree"/>
         </record>
-        
         <!-- MENUS -->
-        
-        <!--menuitem id="menu_payroll_ostie"
+        <menuitem id="menu_payroll_ostie"
+            name="ETAT OSTIE"
             action="open_payroll_ostie"
-            parent="menu_payroll_etat_globale"
-            sequence="20"/-->
-
+            parent="etat_payslip_menu"
+            sequence="19"/>
     </data>
 </odoo>

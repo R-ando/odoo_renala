@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="etat_payslip_menu"
+                  name="Etat de paie"
+                  parent="hr_payroll.menu_hr_payroll_root"
+                  sequence="19"/>
+    </data>
+</odoo>

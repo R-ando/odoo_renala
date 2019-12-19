@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
+from odoo import api, models, fields
 
-from odoo import fields, models
-from odoo.exceptions import ValidationError
-
-class ostie(models.Model):
-    _name = "ostie"
+class RepportPayslipOstie(models.Model):
+    _name = "etatostie"
     _description = "Etat ostie"
 
     payslip_id = fields.Many2one('hr.payslip', string=u'Employé')
+    name = fields.Char(required=True)
     num_emp = fields.Char('Matricule', size=128)
     num_cin = fields.Char('CIN', size=128)
     name_related = fields.Char('Nom', size=128)
@@ -21,16 +20,3 @@ class ostie(models.Model):
     totalomsi = fields.Float('TOTAL OMSI')
     avantage = fields.Float('Avantage du mois')
     temps_presence = fields.Float('Temps presence')
-
-
-
-
-
-    #===========================================================================
-    # def unlink(self, cr, uid, ids, context=None):
-    #     context = context or {}
-    #     if not context.get('forcer_suppresion'):
-    #         raise ValidationError( 'Supprimer le bulletin de paie lié pour une suppression')
-    #
-    #     super(ostie, self).unlink(cr, uid, ids, context=context)
-    #===========================================================================

@@ -32,9 +32,9 @@
                 </tree>
             </field>
         </record>
-        
+
         <!-- ACTIONS -->
-        
+
 		<record id="open_payroll_irsa" model="ir.actions.act_window">
             <field name="name">Etat IRSA</field>
             <field name="res_model">irsa</field>
@@ -45,10 +45,10 @@
         
         <!-- MENUS -->
         
-        <!--menuitem id="menu_payroll_irsa"
-            action="open_payroll_irsa"
-            parent="menu_payroll_etat_globale"
-            sequence="21"/-->
+<!--        <menuitem id="menu_payroll_irsa"-->
+<!--            action="open_payroll_irsa"-->
+<!--            parent="etat_payslip_menu"-->
+<!--            sequence="20"/>-->
 
     </data>
 </odoo>

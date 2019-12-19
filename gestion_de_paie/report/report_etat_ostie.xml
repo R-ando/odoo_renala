@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="etat_ostie_tree_filter" model="ir.ui.view">
+            <field name="name">hr.payroll.etatostie.tree.filter</field>
+            <field name="model">etatostie</field>
+            <field name="arch" type="xml">
+				<search string="Recherche">
+					<field name="num_emp" string="Matricule"/>
+					<!-- <field name="num_cin" string="CIN"/> -->
+					<group expand="0" string="Group By...">
+                        <filter string="filtre par mois" icon="terp-personal+" domain="[]" context="{'group_by':'date_from'}"/>
+                        <filter string="nom" icon="terp-personal+" domain="[]" context="{'group_by':'name_related'}"/>
+                    </group>
+				</search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="etat_ostie_tree">
+            <field name="name">hr.payroll.etatostie.tree</field>
+            <field name="model">etatostie</field>
+            <field name="arch" type="xml">
+                <tree string="ostie" edit="false" create="false">
+                    <field name="num_emp"/>
+                    <field name="name_related"/>
+                    <field name="name"/>
+                    <field name="basic"/>
+                    <field name="omsi"/>
+                    <field name="omsiemp"/>
+                    <field name="brut"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="show_etat_ostie">
+            <field name="name">etatostie</field>
+            <field name="res_model">etatostie</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etat_ostie_tree"/>
+        </record>
+
+        <menuitem id="session_menu"
+                  name="OSTIE"
+                  action="show_etat_ostie"
+                  parent="etat_payslip_menu"
+                  sequence="1"/>
+    </data>
+</odoo>
