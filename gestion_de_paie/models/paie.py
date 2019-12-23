@@ -284,7 +284,6 @@ class HrPayslip(models.Model):
     ostie_id = fields.Many2one('ostie', string='Etat OSTIE')
     irsa_id = fields.Many2one('irsa', string='Etat IRSA')
     cnaps_id = fields.Many2one('cnaps', string='Etat CNAPS')
-
     @api.model
     def create(self, vals):
         payslip_id = super(HrPayslip, self).create(vals)
@@ -299,11 +298,23 @@ class HrPayslip(models.Model):
             'date_from': data.date_from,
             'date_to': data.date_to,
         }
+        data_ostie = {
+            'employee_id': data.employee_id.id,
+            'num_emp': data.employee_id.num_emp,
+            'name_related': data.employee_id.name,
+            'date_from': data.date_from,
+            'date_to': data.date_to,
+            'omsi': '',
+            'omsiemp': '',
+            'brut': '',
+            'net': '',
+        }
 
         etat_id = self.env['etat.salaire'].create(vals).id
         ostie_id = self.env['ostie'].create(vals).id
         irsa_id = self.env['irsa'].create(vals).id
         cnaps_id = self.env['cnaps'].create(vals).id
+        print(ostie_id)
 
         payslip_obj.browse(payslip_id.id).write({
             'etat_salaire_id': etat_id,
