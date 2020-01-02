@@ -11,7 +11,6 @@ class RepportPayslipOstie(models.Model):
 
     payslip_id = fields.Many2one('hr.payslip', string=u'Bulletin')
     num_emp = fields.Char('Matricule', size=128)
-    employee = fields.Char(u'Employé', size=128)
     basic = fields.Float('Salaire de base')
     omsi = fields.Float('OSTIE Travailleur')
     omsiemp = fields.Float('OSTIE Employeur')
