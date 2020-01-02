@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="example_page" name="Example page" page="True">
+        <div class="oe_structure">
+          <div class="container">
+            <center><h3>Etat</h3></center>
+            <p>
+              <h1>Eto etat OSTIE</h1> <br/>
+              <a t-attf-href="/example/detail" class="btn btn-info">Company detail page</a>
+            </p>
+          </div>
+        </div>
+    </template>
+</odoo>

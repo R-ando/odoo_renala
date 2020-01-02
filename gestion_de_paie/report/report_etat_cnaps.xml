@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="etat_ostie_tree_filter" model="ir.ui.view">
-            <field name="name">hr.payroll.etat.ostie.tree.filter</field>
+        <record id="etat_cnaps_tree_filter" model="ir.ui.view">
+            <field name="name">hr.payroll.etat.cnaps.tree.filter</field>
             <field name="model">etat.ostie</field>
             <field name="arch" type="xml">
                 <search string="Recherche">
@@ -17,29 +17,28 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="etat_ostie_tree">
-            <field name="name">hr.payroll.etat.ostie.tree</field>
-            <field name="model">etat.ostie</field>
+        <record model="ir.ui.view" id="etat_cnaps_tree">
+            <field name="name">hr.payroll.etat.cnaps.tree</field>
+            <field name="model">etat.cnaps</field>
             <field name="arch" type="xml">
-                <tree string="ostie" edit="false" create="false" delete="false">
+                <tree string="cnaps" edit="false" create="false">
                     <field name="num_emp"/>
                     <field name="employee"/>
                     <field name="basic"/>
                     <field name="brut"/>
-                    <field name="omsi"/>
-                    <field name="omsiemp"/>
+                    <field name="cnapspat"/>
+                    <field name="cnapsemp"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
                 </tree>
             </field>
         </record>
-
-        <record model="ir.ui.view" id="etat_ostie_form">
-            <field name="name">hr.payroll.etat.ostie.form</field>
-            <field name="model">etat.ostie</field>
+        <record model="ir.ui.view" id="etat_cnaps_form">
+            <field name="name">hr.payroll.etat.cnaps.form</field>
+            <field name="model">etat.cnaps</field>
             <field name="arch" type="xml">
-                <form string="ostie" edit="false" create="false" delete="false">
-                    <group col="4">
+                <form string="Etat CNAPS" edit="false" create="false" delete="false">
+                    <group>
                         <group>
                             <field name="num_emp"/>
                             <field name="employee"/>
@@ -53,26 +52,25 @@
                         <group>
                             <field name="basic"/>
                             <field name="brut"/>
-                            <field name="omsi"/>
-                            <field name="omsiemp"/>
+                            <field name="cnapspat"/>
+                            <field name="cnapsemp"/>
                         </group>
                     </group>
                 </form>
             </field>
         </record>
-
-        <record model="ir.actions.act_window" id="show_etat_ostie">
-            <field name="name">etatostie</field>
-            <field name="res_model">etat.ostie</field>
+        <record model="ir.actions.act_window" id="show_etat_cnaps">
+            <field name="name">etatcnaps</field>
+            <field name="res_model">etat.cnaps</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="etat_ostie_tree"/>
+            <field name="view_id" ref="etat_cnaps_tree"/>
         </record>
 
-        <menuitem id="session_menu"
-                  name="OSTIE"
-                  action="show_etat_ostie"
+        <menuitem id="etat_cnaps_menu"
+                  name="CNAPS"
+                  action="show_etat_cnaps"
                   parent="etat_payslip_menu"
-                  sequence="1"/>
+                  sequence="2"/>
     </data>
 </odoo>
