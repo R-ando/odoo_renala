@@ -9,6 +9,11 @@ import io
 
 class ExportReportOstieController(http.Controller):
 
+    @http.route('/web/etatostie', type='http', auth='public')
+    def show_etat_ostie(self):
+        print("OKKKKKKKK")
+        return http.request.render('gestion_de_paie.example_page')
+
     @http.route('/web/binary/download_report_ostie_file', type='http', auth="public")
     def download_report_ostie_file(self, sante, plf, comp_inf, y, eff, mc, plf32, trim, eft):  #
         plf = literal_eval(plf)

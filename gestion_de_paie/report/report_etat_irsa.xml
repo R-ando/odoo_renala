@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="etat_irsa_tree_filter" model="ir.ui.view">
+            <field name="name">hr.payroll.etat.irsa.tree.filter</field>
+            <field name="model">etat.irsa</field>
+            <field name="arch" type="xml">
+                <search string="Recherche">
+                    <field name="num_emp" string="Matricule"/>
+                    <!-- <field name="num_cin" string="CIN"/> -->
+                    <group expand="0" string="Group By...">
+                        <filter string="filtre par mois" icon="terp-personal+" domain="[]"
+                                context="{'group_by':'date_from'}"/>
+                        <filter string="nom" icon="terp-personal+" domain="[]" context="{'group_by':'name_related'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="etat_irsa_tree">
+            <field name="name">hr.payroll.etat.irsa.tree</field>
+            <field name="model">etat.irsa</field>
+            <field name="arch" type="xml">
+                <tree string="irsa" edit="false" create="false">
+                    <field name="num_emp"/>
+                    <field name="employee"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="brut"/>
+                    <field name="net"/>
+                    <field name="irsa"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="etat_irsa_form">
+            <field name="name">hr.payroll.etat.irsa.form</field>
+            <field name="model">etat.irsa</field>
+            <field name="arch" type="xml">
+                <form string="irsa" edit="false" create="false">
+                    <group col="4">
+                        <group>
+                            <field name="num_emp"/>
+                            <field name="employee"/>
+                            <label for="date_from" string="Période"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/>
+                                -
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="brut"/>
+                            <field name="net"/>
+                            <field name="irsa"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_etat_irsa">
+            <field name="name">etatirsa</field>
+            <field name="res_model">etat.irsa</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="etat_irsa_tree"/>
+        </record>
+
+        <menuitem id="etat_irsa_menu"
+                  name="IRSA"
+                  action="show_etat_irsa"
+                  parent="etat_payslip_menu"
+                  sequence="3"/>
+    </data>
+</odoo>
