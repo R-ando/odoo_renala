@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import time
 from datetime import datetime, timedelta
 from dateutil import relativedelta
@@ -10,6 +11,7 @@ class RepportPayslipOstie(models.Model):
     _auto = False
 
     payslip_id = fields.Many2one('hr.payslip', string=u'Bulletin')
+    employee = fields.Char(u'Employé', size=128)
     num_emp = fields.Char('Matricule', size=128)
     basic = fields.Float('Salaire de base')
     omsi = fields.Float('OSTIE Travailleur')
