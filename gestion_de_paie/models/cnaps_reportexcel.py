@@ -280,7 +280,6 @@ class CnapsReport(models.TransientModel):
             return 4
 
     def company_information(self):
-        print(self.id)
         partner = self.env['res.partner'].search([("id", "=", 1)])
         conpany = partner.mapped('company_id')
         return {
@@ -310,11 +309,17 @@ class CnapsReport(models.TransientModel):
     def fmfp_nbMount(self, period):
         total_fmfp = 0
         nb_fmfp = 0
-        contract_wage = self.env['hr.contract'].search([('date_start', 'like', period + '%')]).mapped('wage')
+        query = """
+        SELECT DISTINCT c.wage as wage from hr_payslip p
+        inner join hr_contract c on c.id = p.contract_id
+        where p.state = 'done' and p.credit_note is False and p.date_from::text like '{}'
+        """.format(period + '%')
+        self._cr.execute(query)
+        contract_wage = self.env.cr.dictfetchall()
         plafond = float(self.plafond()['plf_amount'])
-        for n in contract_wage:
-            if n > plafond:
-                total_fmfp = total_fmfp + n
+        for w in contract_wage:
+            if w['wage'] > plafond:
+                total_fmfp = total_fmfp + w['wage']
             else:
                 total_fmfp = total_fmfp + plafond
             nb_fmfp += 1
