@@ -82,7 +82,7 @@
                 </xpath>
                 <xpath expr="//group[1]" position="after">
                     <group>
-                         <group>
+                        <group>
                             <field name="base" attrs="{'readonly': False}"/>
                             <field name="missed_days" attrs="{'readonly': False}"/>
                             <field name="number_days_worked" attrs="{'readonly': True}"/>
@@ -101,6 +101,10 @@
 
                     </group>
                 </xpath>
+                <!--xpath expr="//button[@name='compute_sheet']" position="replace">
+                    <button string="Calculer la feuille" name="compute_sheet" type="object" states="draft"
+                            class="oe_highlight" modifiers="{'invisible': [['state', 'not in', ['draft']]]}"/>
+                </xpath-->
             </field>
         </record>
     </data>

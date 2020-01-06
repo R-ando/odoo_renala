@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend_" name="notification_btn" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/gestion_de_paie/static/src/js/custom_widget.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>
