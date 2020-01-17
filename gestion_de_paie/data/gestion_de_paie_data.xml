@@ -158,7 +158,9 @@ else:
              <field name="category_id" ref="hr_payroll.PREAVIS"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = payslip.preavis</field>
+            <field name="amount_python_compute">result = (payslip.average_gross_notice * payslip.priornotice) / payslip.base
+if result &lt; 0:
+    result = result * -1</field>
             <field name="appears_on_payslip" eval="False"/>
             <field name="note">preavis</field>
     </record>
@@ -309,7 +311,7 @@ else:
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = contract.wage
 if payslip.half_salary:
-    result = result / 2</field>
+    result = (result / 2) / 30</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="note">valeur de la salaire de base en fonction de la cochage de la demi-salaire</field>
     </record>

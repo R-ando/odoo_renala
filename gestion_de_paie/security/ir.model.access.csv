@@ -4,7 +4,6 @@ access_cnaps,access_cnaps,model_cnaps,base.group_user,1,0,0,0
 access_irsa,access_irsa,model_irsa,base.group_user,1,0,0,0
 access_hr_payment_mode,access_hr_payment_mode,model_hr_payment_mode,base.group_user,1,0,0,0
 access_etat_salaire,access_etat_salaire,model_etat_salaire,base.group_user,1,0,0,0
-access_etatostie,access_etatostie,model_etatostie,base.group_user,1,0,0,0
 access_etat_ostie,access_etat_ostie,model_etat_ostie,base.group_user,1,0,0,0
 access_etat_cnaps,access_etat_cnaps,model_etat_cnaps,base.group_user,1,0,0,0
 access_etat_irsa,access_etat_irsa,model_etat_irsa,base.group_user,1,0,0,0

@@ -58,31 +58,42 @@ class HrPayslip(models.Model):
     missed_days = fields.Float(string="Jours Manqué", store=True)
     average_gross_notice = fields.Float(string=u"SBR moyen préavis", store=True, compute='compute_sheet')
     average_gross = fields.Float(string="SBR Moyen", store=True, compute='compute_sheet')
-    rest_leave = fields.Float(string=u"Congé payé", store=True, compute='_rest_leave')
+    rest_leave = fields.Float(string=u"Congé payé", store=True, compute='compute_sheet')
     preavis = fields.Float(compute='compute_sheet', store=True)
     additional_gross = fields.Float(string="SBR additionnel", store=True, delault=0.00)
+    leave_paye = fields.Float(delault=0.00)
 
     # first_name = fields.Char(related='employee_id.first_name')
 
     @api.model_cr
     def init(self):
-        thirteen_month = self.env.ref('gestion_de_paie.hr_rule_basic_TM')
-        thirteen_month.write({'active': False})
+        if self:
+            thirteen_month = self.env.ref('gestion_de_paie.hr_rule_basic_TM')
+            thirteen_month.write({'active': False})
+        else:   
+            pass    
 
-    @api.depends('employee_id')
     def _rest_leave(self):
         if self.employee_id:
             conge_pris = self._get_employee_request_leaves(self.employee_id, self.date_from, self.date_to, True)
             conge_attr = self._get_employee_allocation_leaves(self.employee_id, self.date_from)
-            self.rest_leave = conge_attr - conge_pris
+            rest_leave = conge_attr - conge_pris
+            if self.rest_leave != 0:
+                rest_leave = self.rest_leave
         else:
-            self.rest_leave = 0.0
+            rest_leave = 0
+
+        return rest_leave
+
+    @api.onchange('rest_leave')
+    def if_onchange_restleave(self):
+        self.leave_paye = self.rest_leave
 
     def get_preavis(self):
         priornotice = self.priornotice
         if self.priornotice < 0:
             priornotice = self.priornotice * -1
-        preavis = (self.average_gross_notice * priornotice) / self.base
+        preavis = (self.get_average_gross_notice_funct() * priornotice) / self.base
         return preavis
 
     @api.depends('missed_days', 'base')
@@ -99,6 +110,7 @@ class HrPayslip(models.Model):
 
     @api.multi
     def get_average_gross_funct(self):
+        additional_gross = self.additional_gross
         for payslip in self:
             average_gross = 0.0
             if payslip.employee_id:
@@ -119,6 +131,7 @@ class HrPayslip(models.Model):
                                 average_gross_done = average_gross_done + payslip_line_obj.search(
                                     [('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped('amount')[0]
                         average_gross = (average_gross_done + payslip.additional_gross) / seniority
+
                     elif seniority > 12:
                         payslip_line_obj_last_year = payslip.search(
                             [('employee_id', '=', payslip.employee_id.id), ('date_from', '<', payslip.date_from)],
@@ -132,7 +145,7 @@ class HrPayslip(models.Model):
                                     payslip_line_obj.search(
                                         [('slip_id', '=', payslip_line.id), ('code', '=', 'GROSS')]).mapped(
                                         'amount')[0]
-                        average_gross = (average_gross_last_year + payslip.additional_gross) / 12
+                        average_gross = (average_gross_last_year + additional_gross) / 12
                     else:
                         average_gross = 0.0
                 else:
@@ -179,7 +192,6 @@ class HrPayslip(models.Model):
                 raise UserError(_("cet employer n'a pas encore de contrat"))
         else:
             self.average_gross_notice = 0.0
-
         return average_gross_notice
 
     # Congé pris et approuvé durant la même période que celle du bulletin
@@ -568,16 +580,9 @@ class HrPayslip(models.Model):
             payslip.average_gross = payslip.get_average_gross_funct()
             payslip.average_gross_notice = payslip.get_average_gross_notice_funct()
             payslip.preavis = payslip.get_preavis()
+            payslip.rest_leave = payslip._rest_leave()
 
-        return {
-            'name': 'Message',
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'custom.pop.message',
-            'target': 'new',
-            'context': {'default_name': "calcul effectué"}
-        }
+        return True
 
     @api.multi
     def appears_on_calcul(self):
@@ -587,30 +592,30 @@ class HrPayslip(models.Model):
             stc_ = payslip.env['hr.payslip'].search(
                 [('stc', '=', payslip.stc), ('employee_id', '=', payslip.employee_id.id),
                  ('date_from', '=', payslip.date_from)], limit=1).mapped('stc')
-            if payslip.stc or stc_[0]:
-                activated_paid_leave.write({'active': True})
-                activated_paid_leave.write({'appears_on_payslip': True})
-                activated_paid_preavis.write({'active': True})
-                activated_paid_preavis.write({'appears_on_payslip': True})
+            if stc_[0] or payslip.stc or payslip.rest_leave != 0:
+                appears = True
             else:
-                activated_paid_leave.write({'active': False})
-                activated_paid_leave.write({'appears_on_payslip': False})
+                appears = False    
+
+            activated_paid_leave.write({'active': appears})
+            activated_paid_leave.write({'appears_on_payslip': appears})
+            activated_paid_preavis.write({'active': appears})
+            activated_paid_preavis.write({'appears_on_payslip': appears})
+
+            if payslip.priornotice == 0 or appears is False:
                 activated_paid_preavis.write({'active': False})
                 activated_paid_preavis.write({'appears_on_payslip': False})
-            if payslip.priornotice == 0:
-                activated_paid_preavis.write({'active': False})
-                activated_paid_preavis.write({'appears_on_payslip': False})
             else:
                 activated_paid_preavis.write({'active': True})
                 activated_paid_preavis.write({'appears_on_payslip': True})
-            if payslip.rest_leave == 0:
+            if payslip.rest_leave == 0 or appears is False:
                 activated_paid_leave.write({'appears_on_payslip': False})
                 activated_paid_leave.write({'active': False})
             else:
                 activated_paid_leave.write({'appears_on_payslip': True})
                 activated_paid_leave.write({'active': True})
 
-            if payslip.priornotice < 0:
+            if payslip.priornotice < 0 or appears is False:
                 activated_paid_preavis.write({'sequence': 150})
             else:
                 activated_paid_preavis.write({'sequence': 102})
