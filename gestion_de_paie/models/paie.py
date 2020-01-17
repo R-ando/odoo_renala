@@ -58,10 +58,10 @@ class HrPayslip(models.Model):
     missed_days = fields.Float(string="Jours Manqué", store=True)
     average_gross_notice = fields.Float(string=u"SBR moyen préavis", store=True, compute='compute_sheet')
     average_gross = fields.Float(string="SBR Moyen", store=True, compute='compute_sheet')
-    rest_leave = fields.Float(string=u"Congé payé", store=True, compute='compute_sheet')
     preavis = fields.Float(compute='compute_sheet', store=True)
     additional_gross = fields.Float(string="SBR additionnel", store=True, delault=0.00)
     leave_paye = fields.Float(delault=0.00)
+    rest_leave = fields.Float(string=u"Congé payé", store=True)
 
     # first_name = fields.Char(related='employee_id.first_name')
 
@@ -73,17 +73,14 @@ class HrPayslip(models.Model):
         else:   
             pass    
 
+    @api.onchange('employee_id')
     def _rest_leave(self):
         if self.employee_id:
             conge_pris = self._get_employee_request_leaves(self.employee_id, self.date_from, self.date_to, True)
             conge_attr = self._get_employee_allocation_leaves(self.employee_id, self.date_from)
-            rest_leave = conge_attr - conge_pris
-            if self.rest_leave != 0:
-                rest_leave = self.rest_leave
+            self.rest_leave = conge_attr - conge_pris
         else:
-            rest_leave = 0
-
-        return rest_leave
+            pass
 
     @api.onchange('rest_leave')
     def if_onchange_restleave(self):
@@ -581,7 +578,7 @@ class HrPayslip(models.Model):
             payslip.average_gross = payslip.get_average_gross_funct()
             payslip.average_gross_notice = payslip.get_average_gross_notice_funct()
             payslip.preavis = payslip.get_preavis()
-            payslip.rest_leave = payslip._rest_leave()
+
 
         return True
 
