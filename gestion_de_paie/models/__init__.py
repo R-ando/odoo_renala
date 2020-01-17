@@ -1,14 +1,14 @@
-from . import hr_payment_mode
-from . import paie
-from . import etat_salaire
-from . import cnaps
-from . import ostie
-from . import irsa
-from . import resource_calendar
-from . import cnaps_reportexcel
-from . import employee
-from . import ostie_repeortexcel
-from . import company
-from . import hr_holidays
-from . import irsa_reportexcel
-from . import message_
+import hr_payment_mode
+import paie
+import etat_salaire
+import cnaps
+import ostie
+import irsa
+import resource_calendar
+import cnaps_reportexcel
+import employee
+import ostie_repeortexcel
+import company
+import hr_holidays
+import irsa_reportexcel
+import message_
