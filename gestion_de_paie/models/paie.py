@@ -116,11 +116,11 @@ class HrPayslip(models.Model):
                 payslip_line_obj = payslip.env['hr.payslip.line']
                 if date_start:
                     date_start = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
-                    date_from = datetime.strptime(payslip.date_from, tools.DEFAULT_SERVER_DATE_FORMAT)
-                    seniority = payslip.diff_month(date_start, date_from)
+                    date_to = datetime.strptime(payslip.date_to, tools.DEFAULT_SERVER_DATE_FORMAT)
+                    seniority = payslip.diff_month(date_start, date_to)
                     if seniority <= 12 and seniority != 0:
                         payslips = payslip.search(
-                            [('employee_id', '=', payslip.employee_id.id), ('date_from', '<', payslip.date_from)])
+                            [('employee_id', '=', payslip.employee_id.id), ('date_to', '<', payslip.date_to)])
                         average_gross_done = 0.0
                         for payslip in payslips:
                             if payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]).mapped(
@@ -131,7 +131,7 @@ class HrPayslip(models.Model):
 
                     elif seniority > 12:
                         payslip_line_obj_last_year = payslip.search(
-                            [('employee_id', '=', payslip.employee_id.id), ('date_from', '<', payslip.date_from)],
+                            [('employee_id', '=', payslip.employee_id.id), ('date_to', '<', payslip.date_to)],
                             limit=12)
                         average_gross_last_year = 0.0
                         for payslip_line in payslip_line_obj_last_year:
@@ -159,12 +159,12 @@ class HrPayslip(models.Model):
             payslip_line = self.env['hr.payslip.line']
             if date_start:
                 date_start = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
-                date_from = datetime.strptime(self.date_from, tools.DEFAULT_SERVER_DATE_FORMAT)
-                seniority = self.diff_month(date_start, date_from)
+                date_to = datetime.strptime(self.date_to, tools.DEFAULT_SERVER_DATE_FORMAT)
+                seniority = self.diff_month(date_start, date_to)
                 if seniority > 2:
                     payslip2obj = self.search(
-                        [('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=2,
-                        order='date_from desc')
+                        [('employee_id', '=', self.employee_id.id), ('date_to', '<', self.date_to)], limit=2,
+                        order='date_to desc')
                     sum_gross_done_notice = 0.0
                     for payslip in payslip2obj:
                         if payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'GROSS')]):
