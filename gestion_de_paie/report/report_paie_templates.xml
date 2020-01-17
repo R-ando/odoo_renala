@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <template id="external_layout">
         <t t-if="not o and doc">
             <t t-set="o" t-value="doc"/>
@@ -13,8 +12,6 @@
         </t>
         <t t-raw="0"/>
     </template>
-
-
     <template id="report_paie_document">
         <t t-call="gestion_de_paie.external_layout">
             <!-- Debut du rapport -->

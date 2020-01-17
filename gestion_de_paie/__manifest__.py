@@ -22,7 +22,7 @@
              'views/message_pop_view.xml',
              'data/gestion_de_paie_data.xml',
              'report/report_paie_templates.xml',
-             'report/report_paie.xml',
+             #'report/report_paie.xml',
              'report/report_cnaps_templates.xml',
              'report/report_cnaps.xml',
              'report/report_ostie_templates.xml',
