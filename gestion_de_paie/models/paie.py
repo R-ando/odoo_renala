@@ -185,7 +185,8 @@ class HrPayslip(models.Model):
                                     'amount')[0]
                     average_gross_notice = (sum_gross_done + self.additional_gross) / seniority
                 elif seniority < 0:
-                    raise UserError(_("la date de paiement doit être superieur à l'ancienneté"))
+                    pass
+                    #raise UserError(_("la date de paiement doit être superieur à l'ancienneté"))
                 else:
                     average_gross_notice = 0.0
             else:
