@@ -4,7 +4,7 @@
     <data>
 		<record id="hr_payroll_ostie_tree_filter" model="ir.ui.view">
             <field name="name">hr.payroll.ostie.tree.filter</field>
-            <field name="model">hr.etatOstie.repport</field>
+            <field name="model">ostie</field>
             <field name="arch" type="xml">
 				<search string="Recherche">
 					<field name="num_emp" string="Matricule"/>
@@ -58,7 +58,7 @@
                 </form>
             </field>
         </record>
-        
+
 		<record id="open_payroll_ostie" model="ir.actions.act_window">
             <field name="name">Etat OSTIE</field>
             <field name="res_model">ostie</field>

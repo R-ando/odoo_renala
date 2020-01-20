@@ -1,3 +1,3 @@
-import cnaps_controllers
-import ostie_contollers
-import irsa_controller
+from . import cnaps_controllers
+from . import ostie_contollers
+from . import irsa_controller

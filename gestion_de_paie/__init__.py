@@ -1,3 +1,3 @@
-import models
-import report
-import controllers
+from . import models
+from . import report
+from . import controllers
