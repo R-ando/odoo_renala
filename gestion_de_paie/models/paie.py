@@ -584,40 +584,39 @@ class HrPayslip(models.Model):
 
     @api.multi
     def appears_on_calcul(self):
-        # for payslip in self:
-        #     activated_paid_leave = payslip.env.ref('gestion_de_paie.hr_holiday_rest')
-        #     activated_paid_preavis = payslip.env.ref('gestion_de_paie.hr_payroll_rules_preavis')
-        #     stc_ = payslip.env['hr.payslip'].search(
-        #         [('stc', '=', payslip.stc), ('employee_id', '=', payslip.employee_id.id),
-        #          ('date_from', '=', payslip.date_from)], limit=1).mapped('stc')
-        #     if stc_[0] or payslip.stc or payslip.rest_leave != 0:
-        #         appears = True
-        #     else:
-        #         appears = False
+        for payslip in self:
+            activated_paid_leave = payslip.env.ref('gestion_de_paie.hr_holiday_rest')
+            activated_paid_preavis = payslip.env.ref('gestion_de_paie.hr_payroll_rules_preavis')
+            stc_ = payslip.env['hr.payslip'].search(
+                [('stc', '=', payslip.stc), ('employee_id', '=', payslip.employee_id.id),
+                 ('date_from', '=', payslip.date_from)], limit=1).mapped('stc')
+            if stc_[0] or payslip.stc or payslip.rest_leave != 0:
+                appears = True
+            else:
+                appears = False
 
-        #     activated_paid_leave.write({'active': appears})
-        #     activated_paid_leave.write({'appears_on_payslip': appears})
-        #     activated_paid_preavis.write({'active': appears})
-        #     activated_paid_preavis.write({'appears_on_payslip': appears})
+            activated_paid_leave.write({'active': appears})
+            activated_paid_leave.write({'appears_on_payslip': appears})
+            activated_paid_preavis.write({'active': appears})
+            activated_paid_preavis.write({'appears_on_payslip': appears})
 
-        #     if payslip.priornotice == 0 or appears is False:
-        #         activated_paid_preavis.write({'active': False})
-        #         activated_paid_preavis.write({'appears_on_payslip': False})
-        #     else:
-        #         activated_paid_preavis.write({'active': True})
-        #         activated_paid_preavis.write({'appears_on_payslip': True})
-        #     if payslip.rest_leave == 0 or appears is False:
-        #         activated_paid_leave.write({'appears_on_payslip': False})
-        #         activated_paid_leave.write({'active': False})
-        #     else:
-        #         activated_paid_leave.write({'appears_on_payslip': True})
-        #         activated_paid_leave.write({'active': True})
+            if payslip.priornotice == 0 or appears is False:
+                activated_paid_preavis.write({'active': False})
+                activated_paid_preavis.write({'appears_on_payslip': False})
+            else:
+                activated_paid_preavis.write({'active': True})
+                activated_paid_preavis.write({'appears_on_payslip': True})
+            if payslip.rest_leave == 0 or appears is False:
+                activated_paid_leave.write({'appears_on_payslip': False})
+                activated_paid_leave.write({'active': False})
+            else:
+                activated_paid_leave.write({'appears_on_payslip': True})
+                activated_paid_leave.write({'active': True})
 
-        #     if payslip.priornotice < 0 or appears is False:
-        #         activated_paid_preavis.write({'sequence': 150})
-        #     else:
-        #         activated_paid_preavis.write({'sequence': 102})
-        return True
+            if payslip.priornotice < 0 or appears is False:
+                activated_paid_preavis.write({'sequence': 150})
+            else:
+                activated_paid_preavis.write({'sequence': 102})
 
     # quantité du congée
 
