@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <template id="external_layout_header">
+        <t t-if="'company_id' in o.employee_id">
+            <t t-set="company" t-value="o.employee_id.company_id"/>
+            <div class="header">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"
+                             style="max-height: 80px;"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
     <template id="external_layout">
         <t t-if="not o and doc">
             <t t-set="o" t-value="doc"/>
@@ -10,6 +23,7 @@
         <t t-if="not o or not 'company_id' in o">
             <t t-set="company" t-value="res_company"></t>
         </t>
+        <t t-call="gestion_de_paie.external_layout_header"/>
         <t t-raw="0"/>
     </template>
     <template id="report_paie_document">
@@ -133,17 +147,6 @@
                 </style>
 
                 <div class="oe_structure"/>
-                <t t-if="'company_id' in o.employee_id">
-                    <t t-set="company" t-value="o.employee_id.company_id"/>
-                </t>
-                <div class="header">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"
-                                 style="max-height: 80px;"/>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="titre">
