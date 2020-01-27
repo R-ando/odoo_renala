@@ -133,6 +133,17 @@
                 </style>
 
                 <div class="oe_structure"/>
+                <t t-if="'company_id' in o.employee_id">
+                    <t t-set="company" t-value="o.employee_id.company_id"/>
+                </t>
+                <div class="header">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"
+                                 style="max-height: 80px;"/>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="titre">
@@ -203,10 +214,14 @@
                         <div class="cadre2">
                             <span t-field="o.employee_id.company_id.name"/>
                             <br/>
-                            SIRET :
-                            <span t-field="o.employee_id.company_id.siret"/>
-                            APE :
-                            <span t-field="o.employee_id.company_id.ape"/>
+                            <t t-if="o.employee_id.company_id.nif">
+                                NIF :
+                                <span t-field="o.employee_id.company_id.nif"/>
+                            </t>
+                            <t t-if="o.employee_id.company_id.stat">
+                                STAT :
+                                <span t-field="o.employee_id.company_id.stat"/>
+                            </t>
                         </div>
                         <br/>
                         <br/>
