@@ -620,7 +620,7 @@ else : result = 0</field>
         <record id="hr_rule_info" model="hr.salary.rule">
             <field name="name">BASE IMPOSABLE</field>
             <field name="code">INFO</field>
-            <field name="sequence">1</field>
+            <field name="sequence">200</field>
             <field name="category_id" ref="gestion_de_paie.info"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
