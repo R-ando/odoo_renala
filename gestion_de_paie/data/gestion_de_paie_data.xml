@@ -611,5 +611,23 @@ else : result = 0</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="note">prime prévue par la convention collective ou le contrat de travail.</field>
     </record>
+
+        <record id="info" model="hr.salary.rule.category">
+            <field name="name">INFO</field>
+            <field name="code">INFO</field>
+        </record>
+
+        <record id="hr_rule_info" model="hr.salary.rule">
+            <field name="name">BASE IMPOSABLE</field>
+            <field name="code">INFO</field>
+            <field name="sequence">1</field>
+            <field name="category_id" ref="gestion_de_paie.info"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.GROSS - categories.CNAPS - categories.OMSI
+            </field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="note">BASE IMPOSABLE</field>
+        </record>
        </data>
 </odoo>
