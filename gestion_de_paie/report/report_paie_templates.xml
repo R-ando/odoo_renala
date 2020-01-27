@@ -222,10 +222,14 @@
                                     NIF :
                                     <span t-field="o.employee_id.company_id.nif"/>
                                 </t>
+                            </div>
+                            <div>
                                 <t t-if="o.employee_id.company_id.nstat">
                                     STAT :
                                     <span t-field="o.employee_id.company_id.nstat"/>
                                 </t>
+                            </div>
+                            <div>
                                 <t t-if="o.employee_id.company_id.rcs">
                                     RCS :
                                     <span t-field="o.employee_id.company_id.rcs"/>
