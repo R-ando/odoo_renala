@@ -8,8 +8,6 @@
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='website']" position="after">
-                    <field name="stat"/>
-                    <field name="nif"/>
                     <field name="company_matricule" class="o_address_state" placeholder="Numéro matricule"/>
                 </xpath>
                 <xpath expr="//field[@name='currency_id']" position="after">

@@ -6,7 +6,7 @@
     'sequence': 0,
     'description': """Gestion de paie Malagasy""",
     'website': 'https://www.ingenosya.mg',
-    'depends': ['hr_contract', 'hr_payroll', 'base', 'report', 'resource', 'hr_holidays', 'web'],
+    'depends': ['hr_contract', 'hr_payroll', 'base', 'report', 'resource', 'hr_holidays', 'web', 'l10n_mg_partner'],
     'data': ['security/ir.model.access.csv',
              'report/report_etat_payslip.xml',
 
