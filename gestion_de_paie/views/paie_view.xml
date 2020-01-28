@@ -16,6 +16,8 @@
                 <field name="working_hours" position="after">
                     <field name="horaire_hebdo" string="Horaire hebdomadaire"/>
                     <field name="payment_mode_id"/>
+                    <field name="custom_hour_bool"/>
+                    <field name="number_of_hours" attrs="{'invisible': [('custom_hour_bool', '=', False)]}"/>
                 </field>
                 <field name="working_hours" position="attributes">
                     <attribute name="required">1</attribute>

@@ -15,6 +15,8 @@ class hr_contract(models.Model):
     indice = fields.Integer('Indice', size=10)
     horaire_hebdo = fields.Float('Horaire hebdomadaire')
     payment_mode_id = fields.Many2one(string="Mode de paiement", comodel_name="hr.payment.mode")
+    custom_hour_bool = fields.Boolean(string="Heure personnalisée", default=True)
+    number_of_hours = fields.Float(string="Nombre d'heures", default=173.33)
 
 
 class res_company(models.Model):
@@ -618,6 +620,13 @@ class HrPayslip(models.Model):
             else:
                 activated_paid_preavis.write({'sequence': 102})
 
+    @api.model
+    def get_worked_day_lines(self, contract_ids, date_from, date_to):
+        res = super(HrPayslip, self).get_worked_day_lines(contract_ids, date_from, date_to)
+        if self.contract_id.custom_hour_bool:
+            for d in res:
+                d['number_of_hours'] = self.contract_id.number_of_hours
+        return res
     # quantité du congée
 
     # ===========================================================================
