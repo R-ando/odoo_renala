@@ -186,7 +186,7 @@
                                     <br/>
                                 </td>
                                 <td class="no_border gauche">
-                                    <span style="font-family:Calibri, Arial, sans-serif; font-style: bold;" t-field="o.employee_id.name"/>
+                                    <span style="font-family:Calibri, Arial, sans-serif; font-weight: bold;" t-field="o.employee_id.name"/>
                                     <br/>
                                     <span t-field="o.employee_id.num_emp"/>
                                     <br/>
