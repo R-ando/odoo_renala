@@ -4,6 +4,7 @@ from odoo import api, fields, models, tools, _
 from datetime import datetime, date
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.exceptions import UserError, ValidationError
+from dateutil.relativedelta import relativedelta
 import calendar
 
 
@@ -64,6 +65,7 @@ class HrPayslip(models.Model):
     additional_gross = fields.Float(string="SBR additionnel", store=True, delault=0.00)
     leave_paye = fields.Float(delault=0.00)
     rest_leave = fields.Float(string=u"Congé payé", store=True)
+    seniority = fields.Char("Ancienneté", compute='_compute_seniority')
 
     # first_name = fields.Char(related='employee_id.first_name')
 
@@ -627,6 +629,18 @@ class HrPayslip(models.Model):
             for d in res:
                 d['number_of_hours'] = self.contract_id.number_of_hours
         return res
+
+    @api.one
+    @api.depends("contract_id.date_start", "date_to")
+    def _compute_seniority(self):
+        """ Compute Seniority at Date Payslip """
+        date_start = fields.Date.from_string(self.contract_id.date_start)
+        date_end = fields.Date.from_string(self.date_to)
+        current = relativedelta(date_end, date_start)
+        print current
+        years = " 0 année(s)" if not current.years else str(current.years) + " année(s)"
+        months = "0 mois " if not current.months else str(current.months) + " mois "
+        self.seniority = months + years
     # quantité du congée
 
     # ===========================================================================
