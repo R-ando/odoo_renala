@@ -20,7 +20,7 @@ class ReportPayslipCnaps(models.Model):
     @api.model_cr
     def init(self):
         cotisation_cnaps_patr = \
-        self.env['res.company'].search([('write_uid', '=', self.env.uid)]).mapped('cotisation_cnaps_patr')[0]
+        self.env['res.company'].search([('write_uid', '=', self.env.uid)], limit=1).mapped('cotisation_cnaps_patr')
         if cotisation_cnaps_patr:
             tools.drop_view_if_exists(self._cr, 'etat_cnaps')
             self._cr.execute("""
