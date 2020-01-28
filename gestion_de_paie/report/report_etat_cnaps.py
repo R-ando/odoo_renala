@@ -46,6 +46,6 @@ class ReportPayslipCnaps(models.Model):
                 INNER JOIN hr_employee emp on emp.id = p.employee_id
                 WHERE p.state = 'done'
                 )
-            """.format(cotisation_cnaps_patr))
+            """.format(cotisation_cnaps_patr[0]))
         else:
             pass
