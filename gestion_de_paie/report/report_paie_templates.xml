@@ -163,12 +163,11 @@
                                 </strong>
                             </span>
                         </p>
-                        <strong style="font-family:Calibri; font-weight: bold; ">
-                            Nom:&#160;<span style="font-family:Calibri, Arial, sans-serif" t-field="o.employee_id.name"/>
-                        </strong>
                         <table class="tableau3">
                             <tr>
                                 <td class="no_border gauche" style="width:40%">
+                                    Nom :
+                                    <br/>
                                     Matricule :
                                     <br/>
                                     Num CNAPS :
@@ -187,6 +186,8 @@
                                     <br/>
                                 </td>
                                 <td class="no_border gauche">
+                                    <span style="font-family:Calibri, Arial, sans-serif; font-style: bold;" t-field="o.employee_id.name"/>
+                                    <br/>
                                     <span t-field="o.employee_id.num_emp"/>
                                     <br/>
                                     <span t-field="o.employee_id.num_cnaps_emp"/>

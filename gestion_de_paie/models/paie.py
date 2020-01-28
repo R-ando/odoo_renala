@@ -638,9 +638,10 @@ class HrPayslip(models.Model):
         date_end = fields.Date.from_string(self.date_to)
         current = relativedelta(date_end, date_start)
         print current
-        years = " 0 année(s)" if not current.years else str(current.years) + " année(s)"
-        months = "0 mois " if not current.months else str(current.months) + " mois "
-        self.seniority = months + years
+        years = "0 année(s)" if not current.years else str(current.years) + " année(s)"
+        months = "0 mois" if not current.months else str(current.months) + " mois"
+        days = " 0 Jour" if not current.days else str(current.days) + " jour(s)"
+        self.seniority = ("%s %s %s") % (years, months, days)
     # quantité du congée
 
     # ===========================================================================
