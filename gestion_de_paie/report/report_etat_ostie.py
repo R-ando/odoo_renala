@@ -22,7 +22,7 @@ class RepportPayslipOstie(models.Model):
 
     @api.model_cr
     def init(self):
-        cotisation_sante_patr = self.env['res.company'].search([('write_uid', '=', self.env.uid)]).mapped('cotisation_sante_patr')[:1]
+        cotisation_sante_patr = self.env['res.company'].search([('write_uid', '=', self.env.uid)], limit=1).mapped('cotisation_sante_patr')
 
         if cotisation_sante_patr:
             tools.drop_view_if_exists(self._cr, 'etat_ostie')
