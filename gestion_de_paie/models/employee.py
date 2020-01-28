@@ -8,7 +8,7 @@ class Employee(models.Model):
     _inherit = 'hr.employee'
     _name = 'hr.employee'
 
-    first_name = fields.Char(string="Prenom", size=128, required=True)
+    first_name = fields.Char(string="Prenom", size=128, required=False)
     num_cnaps_emp = fields.Char(string="N° CNAPS")
     num_cin = fields.Char(string="N° CIN", size=10)
     date_cin = fields.Date(string='Date CIN')
