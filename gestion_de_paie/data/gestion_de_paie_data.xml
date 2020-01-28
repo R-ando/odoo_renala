@@ -277,27 +277,12 @@ if payslip.priornotice &lt; 0 and payslip.stc:
         <field name="sequence">110</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">Salimposable = categories.GROSS - categories.CNAPS - categories.OMSI
-irsa_brut = (Salimposable - contract.employee_id.company_id.seuil_irsa) * (contract.employee_id.company_id.taux_irsa / 100.0)
-red_enfant = employee.children * 2000.0
-irsa_a_payer = irsa_brut - red_enfant
-taux_irsa = contract.employee_id.company_id.taux_irsa / 100.0
-no_taxes = 0
-if MHS1 > 20:
-    no_taxes += HS1 / MHS1 * (MHS1 - 20) * taux_irsa
-if MHS2 > 20:
-    no_taxes += HS2 / MHS2 * (MHS2 - 20) * taux_irsa
-if MHMNUIT > 20:
-    no_taxes += HMNUIT / MHMNUIT * (MHMNUIT - 20) * taux_irsa
-if MHMDIM > 20:
-    no_taxes += HMDIM / MHMDIM * (MHMDIM - 20) * taux_irsa
-if MHMJF > 20:
-    no_taxes += HMJF / MHMJF * (MHMJF - 20) * taux_irsa
-if irsa_a_payer - no_taxes  &lt; 2000.0:
-    result = 2000.0
+        <field name="amount_python_compute">
+if categories.INFO &lt;= employee.company_id.seuil_irsa:
+    result = employee.company_id.abat_irsa
 else:
-    result = irsa_a_payer - no_taxes</field>
-
+    result = (categories.INFO - employee.company_id.seuil_irsa) * employee.company_id.taux_irsa / 100
+        </field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">C'est la valeur de l'IRSA de chaque salarié , qui s'appuit sur la valeur du salaire "Imposable" calculé.</field>
     </record>
@@ -620,7 +605,7 @@ else : result = 0</field>
         <record id="hr_rule_info" model="hr.salary.rule">
             <field name="name">BASE IMPOSABLE</field>
             <field name="code">INFO</field>
-            <field name="sequence">200</field>
+            <field name="sequence">109</field>
             <field name="category_id" ref="gestion_de_paie.info"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>

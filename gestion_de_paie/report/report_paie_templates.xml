@@ -280,7 +280,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                        <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip).sorted(lambda k: k.sequence)" t-as="line">
                             <td class="gauche">
                                 <span t-field="line.name"/>
                             </td>
@@ -366,6 +366,7 @@
                                 <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES']">
                                     <span t-field="line.total"/>
                                 </t>
+                                <span t-if="line.code == 'INFO'" t-field="line.amount"/>
                             </td>
                             <td>
                                 <t t-if="line.code == 'CNAPS_EMP'">
@@ -457,9 +458,6 @@
                         </span>
                         <br/>
                         <br/>
-                        <span>
-                            <strong style="font-weight: normal; font-family:Calibri;">Conv. Coll.:</strong>
-                        </span>
                     </div>
                     <div class="col-xs-5">
                         <table class="tableau2">
