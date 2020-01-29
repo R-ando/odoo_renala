@@ -76,8 +76,8 @@ class report_paie(models.AbstractModel):
         date_to_fiche = fields.Datetime.from_string(date_to_fiche).date()
 
         for ho in holidays_obj:
-            date_from_holidays = fields.Datetime.from_string(ho.date_from).date()
-            date_to_holidays = fields.Datetime.from_string(ho.date_to).date()
+            date_from_holidays = fields.Datetime.from_string(ho.date_from).date() if ho.date_from else ''
+            date_to_holidays = fields.Datetime.from_string(ho.date_to).date() if ho.date_to else ''
 
             # don't compare datetime roughly
             if ho.type == 'remove':
