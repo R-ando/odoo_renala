@@ -500,6 +500,14 @@
                     VALOIR VOS DROITS, CONSERVEZ
                     CE BULLETIN DE PAIE SANS LIMITATION DE DUREE
                 </p>
+                <div class="row" style="margin-top: 10px;">
+                    <div align="center" class="col-xs-6">
+                        <b>L'employé</b>
+                    </div>
+                    <div align="center" class="col-xs-6">
+                        <b>L'employeur</b>
+                    </div>
+                </div>
             </div>
         </t>
     </template>
