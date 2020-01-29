@@ -72,13 +72,14 @@ class report_paie(models.AbstractModel):
     def _get_employee_request_leaves(self, employee_id, date_from_fiche, date_to_fiche, map=True):
         holidays_obj = self.env['hr.holidays'].search([('employee_id', '=', employee_id.id)])
         pris = 0
-        date_from_fiche = fields.Datetime.from_string(date_from_fiche)
-        date_to_fiche = fields.Datetime.from_string(date_to_fiche)
+        date_from_fiche = fields.Datetime.from_string(date_from_fiche).date()
+        date_to_fiche = fields.Datetime.from_string(date_to_fiche).date()
 
         for ho in holidays_obj:
-            date_from_holidays = fields.Datetime.from_string(ho.date_from)
-            date_to_holidays = fields.Datetime.from_string(ho.date_to)
+            date_from_holidays = fields.Datetime.from_string(ho.date_from).date()
+            date_to_holidays = fields.Datetime.from_string(ho.date_to).date()
 
+            # don't compare datetime roughly
             if ho.type == 'remove':
                 # Test if days of leaves is wholly in the current mouth
                 if date_from_fiche <= date_from_holidays and date_to_fiche >= date_to_holidays:
