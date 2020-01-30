@@ -294,9 +294,15 @@ else:
         <field name="category_id" ref="hr_payroll.BASIC2"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = contract.wage
+        <field name="amount_python_compute">
+result = contract.wage
 if payslip.half_salary:
-    result = (result / 2) / 30</field>
+    result = (result / 2) / 30
+else:
+    if worked_days.WORK100 and worked_days.WORK100.number_of_hours : hwork = worked_days.WORK100.number_of_hours
+    else : hwork=contract.horaire_hebdo*52/12
+    result = contract.wage * hwork / contract.number_of_hours
+        </field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="note">valeur de la salaire de base en fonction de la cochage de la demi-salaire</field>
     </record>
