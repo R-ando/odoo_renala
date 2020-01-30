@@ -165,44 +165,79 @@
                         </p>
                         <table class="tableau3">
                             <tr>
-                                <td class="no_border gauche" style="width:40%">
-                                    Nom :
-                                    <br/>
-                                    Matricule :
-                                    <br/>
-                                    Num CNAPS :
-                                    <br/>
-                                    Emploi :
-                                    <br/>
-                                    Catégorie :
-                                    <br/>
-                                    Echellon :
-                                    <br/>
-                                    Indice :
-                                    <br/>
-                                    Entrée :
-                                    <br/>
-                                    Ancienneté :
-                                    <br/>
-                                </td>
-                                <td class="no_border gauche">
-                                    <span style="font-family:Calibri, Arial, sans-serif; font-weight: bold;" t-field="o.employee_id.name"/>
-                                    <br/>
-                                    <span t-field="o.employee_id.num_emp"/>
-                                    <br/>
-                                    <span t-field="o.employee_id.num_cnaps_emp"/>
-                                    <br/>
-                                    <span t-field="o.contract_id.job_id.name"/>
-                                    <br/>
-                                    <span t-field="o.contract_id.categorie"/>
-                                    <br/>
-                                    <span t-field="o.contract_id.echellon"/>
-                                    <br/>
-                                    <span t-field="o.contract_id.indice"/>
-                                    <br/>
-                                    <span t-field="o.contract_id.date_start"/>
-                                    <br/>
-                                    <span t-field="o.seniority"/>
+                                <td style="text-align: left">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Nom :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span style="font-family:Calibri, Arial, sans-serif; font-weight: bold;" t-field="o.employee_id.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Matricule :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.employee_id.num_emp"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Num CNAPS :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.employee_id.num_cnaps_emp"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Emploi :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.contract_id.job_id.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Catégorie :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.contract_id.categorie"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Echellon :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.contract_id.echellon"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Indice :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.contract_id.indice"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Entrée :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.contract_id.date_start"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            Ancienneté :
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <span t-field="o.seniority"/>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
