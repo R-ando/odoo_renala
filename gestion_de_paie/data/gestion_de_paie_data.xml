@@ -279,9 +279,14 @@ if payslip.priornotice &lt; 0 and payslip.stc:
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 if categories.INFO &lt;= employee.company_id.seuil_irsa:
-    result = employee.company_id.abat_irsa
+    irsa = employee.percpt_minimum
 else:
-    result = (categories.INFO - employee.company_id.seuil_irsa) * employee.company_id.taux_irsa / 100
+    irsa = categories.INFO - employee.company_id.seuil_irsa * employee.company_id.taux_irsa / 100
+irsa_total = irsa - employee.company_id.abat_irsa * employee.nombre_enfant_cnaps
+if irsa_total &lt;= employee.percpt_minimum:
+    result = employee.percpt_minimum
+else:
+    result = irsa_total
         </field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">C'est la valeur de l'IRSA de chaque salarié , qui s'appuit sur la valeur du salaire "Imposable" calculé.</field>

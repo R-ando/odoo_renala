@@ -24,6 +24,7 @@ class Employee(models.Model):
     birthday = fields.Date('Date of Birth', groups='hr.group_hr_user',  required=True)
     department_id = fields.Many2one('hr.department', string='Department', required=True)
     job_id = fields.Many2one('hr.job', string='Job Title', required=True)
+    percpt_minimum = fields.Float(string='Perception minimum', default=2000)
 
     def if_exist(self, name):
         if not name:

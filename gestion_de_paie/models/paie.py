@@ -23,9 +23,9 @@ class hr_contract(models.Model):
 class res_company(models.Model):
     _inherit = 'res.company'
 
-    seuil_irsa = fields.Float('Seuil IRSA')
+    seuil_irsa = fields.Float('Seuil d’imposition')
     taux_irsa = fields.Float('Taux IRSA')
-    abat_irsa = fields.Float('Abattement IRSA')
+    abat_irsa = fields.Float('Abattement IRSA sur P.C', help="Abattement IRSA pour personne à charge")
     cotisation_cnaps_patr = fields.Float('Cotisation Patronale CNAPS')
     cotisation_cnaps_emp = fields.Float(u'Cotisation Employé CNAPS')
     plafond_cnaps = fields.Float('Plafond de la Securite Sociale')

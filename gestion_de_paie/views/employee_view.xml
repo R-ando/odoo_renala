@@ -59,6 +59,7 @@
                 <!-- Add a field nombre_enfant_cnaps -->
                 <xpath expr="//field[@name='children']" position="after">
                     <field name="nombre_enfant_cnaps"/>
+                    <field name="percpt_minimum"/>
                 </xpath>
             </field>
         </record>
