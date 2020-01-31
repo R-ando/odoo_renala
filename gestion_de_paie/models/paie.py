@@ -38,6 +38,7 @@ class res_company(models.Model):
     siret = fields.Char('SIRET', size=64)
     ape = fields.Char('APE', size=64)
     seuil_fmfp = fields.Float('FMFP', default=1)
+    percpt_minimum = fields.Float(string='Perception minimum', default=2000)
 
 
 class hr_employee(models.Model):

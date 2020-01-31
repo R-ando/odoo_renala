@@ -43,6 +43,7 @@
                                     <field name="taux_irsa"/>
                                     <field name="abat_irsa"/>
                                     <field name="amount_allocation"/>
+                                    <field name="percpt_minimum"/>
                                 </group>
                                 <group>
                                     <field name="num_cnaps_patr"/>
