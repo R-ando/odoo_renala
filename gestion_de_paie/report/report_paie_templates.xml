@@ -478,7 +478,8 @@
                             <td>
                                 Pris
                                 <br/>
-                                <span t-esc="get_employee_request_leaves(o.employee_id, o.date_from, o.date_to)"/>
+                                <t t-set="pris" t-value="o._get_taken_leave()"/>
+                                <span t-esc="pris"/>
                             </td>
                             <td>
                                 Nouv. Solde

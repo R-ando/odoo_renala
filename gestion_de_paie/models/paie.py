@@ -656,3 +656,7 @@ class HrPayslip(models.Model):
     #         self.pool.get('cnaps2').unlink(cr, uid, [data.cnaps_id.id], context=context)
     #     super(hr_payslip, self).unlink(cr, uid, ids, context=context)
 # ===========================================================================
+
+    def _get_taken_leave(self):
+        hr_holidays_ids = self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'remove'), ('date_from', '>=', self.date_from), ('date_to', '<=', self.date_to)])
+        return sum(hr_holidays_ids.mapped('number_of_days_temp'))
