@@ -345,7 +345,7 @@ else : result=contract.horaire_hebdo*52/12</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">percentage</field>
-        <field name="amount_percentage_base">contract.wage/HWORK</field>
+        <field name="amount_percentage_base">categories.BASIC2/HWORK</field>
         <field name="quantity">MHS1</field>
         <field name="amount_percentage">130</field>
         <field name="appears_on_payslip" eval="True"/>
@@ -371,7 +371,7 @@ else : result=0</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">percentage</field>
-        <field name="amount_percentage_base">contract.wage/HWORK</field>
+        <field name="amount_percentage_base">categories.BASIC2/HWORK</field>
         <field name="quantity">MHS2</field>
         <field name="amount_percentage">150</field>
         <field name="appears_on_payslip" eval="True"/>
@@ -397,7 +397,7 @@ else : result=0</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">percentage</field>
-        <field name="amount_percentage_base">contract.wage/HWORK</field>
+        <field name="amount_percentage_base">categories.BASIC2/HWORK</field>
         <field name="quantity">MHMNUIT</field>
         <field name="amount_percentage">200</field>
         <field name="appears_on_payslip" eval="True"/>
@@ -424,7 +424,7 @@ else : result=0
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">percentage</field>
-        <field name="amount_percentage_base">contract.wage/HWORK</field>
+        <field name="amount_percentage_base">categories.BASIC2/HWORK</field>
         <field name="quantity">MHMDIM</field>
         <field name="amount_percentage">200</field>
         <field name="appears_on_payslip" eval="True"/>
@@ -450,7 +450,7 @@ else : result=0</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">percentage</field>
-        <field name="amount_percentage_base">contract.wage/HWORK</field>
+        <field name="amount_percentage_base">categories.BASIC2/HWORK</field>
         <field name="quantity">MHMJF</field>
         <field name="amount_percentage">100</field>
         <field name="appears_on_payslip" eval="True"/>
