@@ -523,7 +523,7 @@
                                     </strong>
                                 </td>
                                 <td style="text-align:center" class="no_border_top t2_center">
-                                    <span t-esc="get_total_by_rule_category(o,'GROSS')+get_total_by_rule_category(o,'CHARGE_PAT')"
+                                    <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')+get_total_by_rule_category(o,'CHARGE_PAT')"
                                           t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                 </td>
                             </tr>
