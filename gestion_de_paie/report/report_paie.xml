@@ -13,7 +13,7 @@
             <field name="margin_right">7</field>
             <field name="header_line" eval="False" />
             <field name="header_spacing">20</field>
-            <field name="dpi">102</field>
+            <field name="dpi">115</field>
         </record>
         <report
             string="Fiche de Paie malgache"
