@@ -281,7 +281,7 @@ if payslip.priornotice &lt; 0 and payslip.stc:
 if categories.INFO &lt;= employee.company_id.seuil_irsa:
     irsa = employee.company_id.percpt_minimum
 else:
-    irsa = categories.INFO - employee.company_id.seuil_irsa * employee.company_id.taux_irsa / 100
+    irsa = (categories.INFO - employee.company_id.seuil_irsa) * employee.company_id.taux_irsa / 100
 irsa_total = irsa - employee.company_id.abat_irsa * employee.nombre_enfant_cnaps
 if irsa_total &lt;= employee.company_id.percpt_minimum:
     result = employee.company_id.percpt_minimum
