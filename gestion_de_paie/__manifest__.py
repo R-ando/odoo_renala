@@ -11,7 +11,7 @@
              'report/report_etat_payslip.xml',
 
              'views/paie_view.xml',
-             'views/etat_salaire_view.xml',
+             # 'views/etat_salaire_view.xml',
              'views/cnaps_view.xml',
              'views/ostie_view.xml',
              'views/irsa_view.xml',
@@ -42,6 +42,7 @@
              'wizard/ostie_wizard_view.xml',
              'wizard/irsa_wizard_view.xml',
              #'security/group_security_view.xml',
+
              ],
     'demo': [],
     'test': [],

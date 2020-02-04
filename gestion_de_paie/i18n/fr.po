@@ -478,6 +478,7 @@ msgstr "CNAPS"
 #: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_cnapsemp
 #: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_cnapsemp
 #: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_cnapsemp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_cnapsemp
 msgid "CNAPS Employeur"
 msgstr "CNAPS Employeur"
 
@@ -485,6 +486,7 @@ msgstr "CNAPS Employeur"
 #: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_cnaps
 #: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_cnapspat
 #: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_cnaps
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_cnaps
 msgid "CNAPS Travailleur"
 msgstr "CNAPS Travailleur"
 
@@ -750,7 +752,6 @@ msgid "Entrée :"
 msgstr "Entrée :"
 
 #. module: gestion_de_paie
-#: model:ir.ui.menu,name:gestion_de_paie.menu_payroll_etat_globale
 #: model:ir.ui.view,arch_db:gestion_de_paie.example_page
 msgid "Etat"
 msgstr "Etat"
@@ -854,6 +855,26 @@ msgstr "Février"
 #: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
 msgid "Group By..."
 msgstr "Regrouper par..."
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "Grouper par Mois"
+msgstr "Grouper par Mois"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "Grouper par Nom"
+msgstr "Grouper par Nom"
 
 #. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_custom_hour_bool
@@ -1274,6 +1295,11 @@ msgid "Perception minimum"
 msgstr "Perception minimum"
 
 #. module: gestion_de_paie
+#: model:ir.ui.menu,name:gestion_de_paie.menu_payroll_etat_globale
+msgid "Periodic reporting"
+msgstr "Déclaration Périodique"
+
+#. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_plafond_cnaps
 msgid "Plafond de la Securite Sociale"
 msgstr "Plafond de la Securite Sociale"
@@ -1565,16 +1591,6 @@ msgid "exporter"
 msgstr "exporter"
 
 #. module: gestion_de_paie
-#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
-msgid "filtre par mois"
-msgstr "filtre par mois"
-
-#. module: gestion_de_paie
 #: model:ir.model,name:gestion_de_paie.model_hr_payment_mode
 msgid "hr.payment.mode"
 msgstr "hr.payment.mode"
@@ -1594,16 +1610,6 @@ msgstr "irsa.reportexcel"
 #: model:ir.ui.view,arch_db:gestion_de_paie.paiememt
 msgid "mode Lines"
 msgstr "mode Lines"
-
-#. module: gestion_de_paie
-#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
-#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
-msgid "nom"
-msgstr "nom"
 
 #. module: gestion_de_paie
 #: model:ir.ui.view,arch_db:gestion_de_paie.custom_pop_message_wizard_view_form

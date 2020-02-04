@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-       <menuitem id="menu_payroll_etat_globale"
-    	name="Etat"
-        parent="hr_payroll.menu_hr_payroll_root"
-        sequence="17"/>
+        <menuitem id="gestion_de_paie.menu_payroll_etat_globale"
+                  name="Periodic reporting"
+                  parent="hr_payroll.menu_hr_payroll_root"
+                  sequence="17"/>
     </data>
 </odoo>

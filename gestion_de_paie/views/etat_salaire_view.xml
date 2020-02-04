@@ -39,10 +39,10 @@
         </field>
     </record!-->
 
-    <menuitem id="menu_payroll_etat_globale"
-    	name="Etat"
+    <!--<menuitem id="menu_payroll_etat_globale"
+    	name="Déclaration périodique"
         parent="hr_payroll.menu_hr_payroll_root"
         sequence="17"/>
 
-    </data>
+    </data>-->
 </odoo>
