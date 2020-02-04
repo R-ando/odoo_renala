@@ -1,0 +1,1643 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* gestion_de_paie
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-04 11:36+0000\n"
+"PO-Revision-Date: 2020-02-04 11:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid ", le"
+msgstr ", le"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2000"
+msgstr "2000"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2001"
+msgstr "2001"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2002"
+msgstr "2002"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2003"
+msgstr "2003"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2004"
+msgstr "2004"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2005"
+msgstr "2005"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2006"
+msgstr "2006"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2007"
+msgstr "2007"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2008"
+msgstr "2008"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2009"
+msgstr "2009"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2010"
+msgstr "2010"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2011"
+msgstr "2011"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2012"
+msgstr "2012"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2013"
+msgstr "2013"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2014"
+msgstr "2014"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2015"
+msgstr "2015"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2016"
+msgstr "2016"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2017"
+msgstr "2017"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2018"
+msgstr "2018"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2019"
+msgstr "2019"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2020"
+msgstr "2020"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2021"
+msgstr "2021"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2022"
+msgstr "2022"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2023"
+msgstr "2023"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2024"
+msgstr "2024"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2025"
+msgstr "2025"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2026"
+msgstr "2026"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2027"
+msgstr "2027"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2028"
+msgstr "2028"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2029"
+msgstr "2029"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,annees:0
+#: selection:irsa.reportexcel,annees:0
+#: selection:ostie.reportexcel,annees:0
+msgid "2030"
+msgstr "2030"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<b>L'employeur</b>"
+msgstr "<b>L'employeur</b>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<b>L'employé</b>"
+msgstr "<b>L'employé</b>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<br/>A déduire"
+msgstr "<br/>A déduire"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<br/>A payer"
+msgstr "<br/>A payer"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<br/>Base"
+msgstr "<br/>Base"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<br/>Designation"
+msgstr "<br/>Designation"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<br/>Quantité"
+msgstr "<br/>Quantité"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<br/>Taux"
+msgstr "<br/>Taux"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<span>\n"
+"                                Paie du\n"
+"                            </span>"
+msgstr "<span>\n"
+"                                Paie du\n"
+"                            </span>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<span>au</span>"
+msgstr "<span>au</span>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<strong style=\"font-weight: normal; font-family:Calibri;\">Mode de règlement:</strong>"
+msgstr "<strong style=\"font-weight: normal; font-family:Calibri;\">Mode de règlement:</strong>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<strong style=\"font-weight: normal;\">\n"
+"                                        <span>Total charges<br/>salaires\n"
+"                                        </span>\n"
+"                                    </strong>\n"
+"                                    <br/>"
+msgstr "<strong style=\"font-weight: normal;\">\n"
+"                                        <span>Total charges<br/>salaires\n"
+"                                        </span>\n"
+"                                    </strong>\n"
+"                                    <br/>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<strong>\n"
+"                                        <span style=\"font-weight: normal;\">Net à payer</span>\n"
+"                                        <br/>\n"
+"                                    </strong>"
+msgstr "<strong>\n"
+"                                        <span style=\"font-weight: normal;\">Net à payer</span>\n"
+"                                        <br/>\n"
+"                                    </strong>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<strong>Congé</strong>"
+msgstr "<strong>Congé</strong>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "<strong>TOTAL</strong>"
+msgstr "<strong>TOTAL</strong>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "ANNEE-MOIS"
+msgstr "ANNEE-MOIS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_ape
+msgid "APE"
+msgstr "APE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "AVANTAGE"
+msgstr "AVANTAGE"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,help:gestion_de_paie.field_res_company_abat_irsa
+msgid "Abattement IRSA pour personne à charge"
+msgstr "Abattement IRSA pour personne à charge"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_abat_irsa
+msgid "Abattement IRSA sur P.C"
+msgstr "Abattement IRSA sur P.C"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Acquis\n"
+"                                <br/>"
+msgstr "Acquis\n"
+"                                <br/>"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Anc. Solde\n"
+"                                <br/>"
+msgstr "Anc. Solde\n"
+"                                <br/>"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_seniority
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_seniority
+msgid "Ancienneté"
+msgstr "Ancienneté"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Ancienneté :"
+msgstr "Ancienneté :"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_annees
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_annees
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_annees
+msgid "Annees"
+msgstr "Annees"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_form
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_form
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_form
+msgid "Annuler"
+msgstr "Annuler"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_holidays_allocation_year
+msgid "Année d'attribution"
+msgstr "Année d'attribution"
+
+#. module: gestion_de_paie
+#: selection:irsa.reportexcel,mois:0
+msgid "Aout"
+msgstr "Aout"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+msgid "Août"
+msgstr "Août"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_avantage
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_avantage
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_avantage
+msgid "Avantage du mois"
+msgstr "Avantage du mois"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Avril"
+msgstr "Avril"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+msgid "BASE"
+msgstr "BASE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+msgid "BRUT"
+msgstr "BRUT"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "BULLETIN DE PAIE"
+msgstr "BULLETIN DE PAIE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "BULLETIN DE PAIE POUR SOLDE TOUS COMPTE"
+msgstr "BULLETIN DE PAIE POUR SOLDE TOUS COMPTE"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_base
+msgid "Base"
+msgstr "Base"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_payslip_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_payslip_id
+msgid "Bulletin"
+msgstr "Bulletin"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_num_cin
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_num_cin
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_num_cin
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "CIN"
+msgstr "CIN"
+
+#. module: gestion_de_paie
+#: model:ir.ui.menu,name:gestion_de_paie.etat_cnaps_menu
+#: model:ir.ui.menu,name:gestion_de_paie.menu_etat_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+msgid "CNAPS"
+msgstr "CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_cnapsemp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_cnapsemp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_cnapsemp
+msgid "CNAPS Employeur"
+msgstr "CNAPS Employeur"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_cnaps
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_cnapspat
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_cnaps
+msgid "CNAPS Travailleur"
+msgstr "CNAPS Travailleur"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "COTISATIONS"
+msgstr "COTISATIONS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_categorie
+msgid "Categorie Professionnel"
+msgstr "Categorie Professionnel"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Catégorie :"
+msgstr "Catégorie :"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Charges patronales"
+msgstr "Charges patronales"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.example_page
+msgid "Company detail page"
+msgstr "Company detail page"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.res_company_form_l10n_mg_paye
+msgid "Configuration RH"
+msgstr "Configuration RH"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_rest_leave
+msgid "Congé payé"
+msgstr "Congé payé"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_cotisation_cnaps_emp
+msgid "Cotisation Employé CNAPS"
+msgstr "Cotisation Employé CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_cotisation_sante_emp
+msgid "Cotisation Employé Santé"
+msgstr "Cotisation Employé Santé"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_cotisation_cnaps_patr
+msgid "Cotisation Patronale CNAPS"
+msgstr "Cotisation Patronale CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_cotisation_sante_patr
+msgid "Cotisation Patronale Santé"
+msgstr "Cotisation Patronale Santé"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_create_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_create_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.custom_pop_message_wizard_view_form
+msgid "Custom POP Message"
+msgstr "Custom POP Message"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "DANS VOTRE INTERET ET POUR VOUS AIDER A FAIRE\n"
+"                    VALOIR VOS DROITS, CONSERVEZ\n"
+"                    CE BULLETIN DE PAIE SANS LIMITATION DE DUREE"
+msgstr "DANS VOTRE INTERET ET POUR VOUS AIDER A FAIRE\n"
+"                    VALOIR VOS DROITS, CONSERVEZ\n"
+"                    CE BULLETIN DE PAIE SANS LIMITATION DE DUREE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "DATE"
+msgstr "DATE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "DEPART"
+msgstr "DEPART"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "DU MOIS"
+msgstr "DU MOIS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_date_cin
+msgid "Date CIN"
+msgstr "Date CIN"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_date_from
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_date_from
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_date_from
+msgid "Date from"
+msgstr "Date de début"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_date_to
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_date_to
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_date_to
+msgid "Date to"
+msgstr "Date de fin"
+
+#. module: gestion_de_paie
+#: selection:irsa.reportexcel,mois:0
+msgid "Decembre"
+msgstr "Decembre"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_half_salary
+msgid "Demi-salaire"
+msgstr "Demi-salaire"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,quarter:0
+#: selection:ostie.reportexcel,quarter:0
+msgid "Deuxième trimestre"
+msgstr "Deuxième trimestre"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_cnaps_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_irsa_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_ostie_display_name
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_paie_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+msgid "Décembre"
+msgstr "Décembre"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "EMPLOYEUR"
+msgstr "EMPLOYEUR"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "ENTREE"
+msgstr "ENTREE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+msgid "ETAT DE LA CNAPS"
+msgstr "ETAT DE LA CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.ui.menu,name:gestion_de_paie.menu_payroll_ostie
+msgid "ETAT OSTIE"
+msgstr "ETAT OSTIE"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_echellon
+msgid "Echellon"
+msgstr "Echellon"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Echellon :"
+msgstr "Echellon :"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Emploi :"
+msgstr "Emploi :"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_hr_employee
+msgid "Employee"
+msgstr "Employé"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_hr_contract
+msgid "Employee Contract"
+msgstr "Contrat de l'employé"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_employee_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_employee
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_employee
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_payslip_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_employee
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_employee_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_employee_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_payslip_id
+msgid "Employé"
+msgstr "Employé"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_date_to
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_date_to
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_date_to
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_date_to
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Entrée :"
+msgstr "Entrée :"
+
+#. module: gestion_de_paie
+#: model:ir.ui.menu,name:gestion_de_paie.menu_payroll_etat_globale
+#: model:ir.ui.view,arch_db:gestion_de_paie.example_page
+msgid "Etat"
+msgstr "Etat"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.action_menuwizard
+#: model:ir.actions.act_window,name:gestion_de_paie.open_payroll_cnaps
+#: model:ir.actions.report.xml,name:gestion_de_paie.action_report_cnaps
+#: model:ir.model,name:gestion_de_paie.model_cnaps
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_cnaps_id
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_form
+msgid "Etat CNAPS"
+msgstr "Etat CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.action_menuwizard_irsa
+#: model:ir.actions.act_window,name:gestion_de_paie.open_payroll_irsa
+#: model:ir.actions.report.xml,name:gestion_de_paie.action_report_irsa
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_irsa_id
+msgid "Etat IRSA"
+msgstr "Etat IRSA"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.open_payroll_ostie
+#: model:ir.actions.report.xml,name:gestion_de_paie.action_report_ostie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_ostie_id
+msgid "Etat OSTIE"
+msgstr "Etat OSTIE"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_etat_cnaps
+msgid "Etat cnaps"
+msgstr "Etat cnaps"
+
+#. module: gestion_de_paie
+#: model:ir.ui.menu,name:gestion_de_paie.etat_payslip_menu
+msgid "Etat de paie"
+msgstr "Etat de paie"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_etat_salaire
+msgid "Etat global des salaires"
+msgstr "Etat global des salaires"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_etat_irsa
+#: model:ir.model,name:gestion_de_paie.model_irsa
+msgid "Etat irsa"
+msgstr "Etat irsa"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_etat_ostie
+#: model:ir.model,name:gestion_de_paie.model_ostie
+msgid "Etat ostie"
+msgstr "Etat ostie"
+
+#. module: gestion_de_paie
+#: model:ir.actions.report.xml,name:gestion_de_paie.action_report_etat_salaire
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_etat_salaire_id
+msgid "Etat salaire"
+msgstr "Etat salaire"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.example_page
+msgid "Eto etat OSTIE"
+msgstr "Eto etat OSTIE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_form
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_form
+msgid "Exporter"
+msgstr "Exporter"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_seuil_fmfp
+msgid "FMFP"
+msgstr "FMFP"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Fait à"
+msgstr "Fait à"
+
+#. module: gestion_de_paie
+#: model:ir.actions.report.xml,name:gestion_de_paie.action_report_paie
+msgid "Fiche de Paie malgache"
+msgstr "Fiche de Paie malgache"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Février"
+msgstr "Février"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "Group By..."
+msgstr "Regrouper par..."
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_custom_hour_bool
+msgid "Heure personnalisée"
+msgstr "Heure personnalisée"
+
+#. module: gestion_de_paie
+#: model:hr.holidays.status,name:gestion_de_paie.holiday_status_heures_sup
+msgid "Heures Supplementaires"
+msgstr "Heures Supplementaires"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_horaire_hebdo
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_contract_view_form_l10n_mg_paye
+msgid "Horaire hebdomadaire"
+msgstr "Horaire hebdomadaire"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_cnaps_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_irsa_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_ostie_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_paie_id
+msgid "ID"
+msgstr "ID"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_irsa
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_irsa
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_irsa
+#: model:ir.ui.menu,name:gestion_de_paie.etat_irsa_menu
+#: model:ir.ui.menu,name:gestion_de_paie.menu_etat_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+msgid "IRSA"
+msgstr "IRSA"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.print_payslip_btn
+msgid "Imprimer"
+msgstr "Imprimer"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_indice
+msgid "Indice"
+msgstr "Indice"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Indice :"
+msgstr "Indice :"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Janvier"
+msgstr "Janvier"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_missed_days
+msgid "Jours Manqué"
+msgstr "Jours Manqué"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Juillet"
+msgstr "Juillet"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Juin"
+msgstr "Juin"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_cnaps___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_irsa___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_ostie___last_update
+#: model:ir.model.fields,field_description:gestion_de_paie.field_report_gestion_de_paie_report_paie___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_write_uid
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_write_date
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_hr_holidays
+msgid "Leave"
+msgstr "Congé"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_leave_paye
+msgid "Leave paye"
+msgstr "Leave paye"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_lieu_cin
+msgid "Lieu de délivrance CIN"
+msgstr "Lieu de délivrance CIN"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+msgid "MATRICULE"
+msgstr "MATRICULE"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Mai"
+msgstr "Mai"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Mars"
+msgstr "Mars"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_num_emp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_num_emp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_num_emp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_num_emp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_num_emp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_num_emp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_num_emp
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "Matricule"
+msgstr "Matricule"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Matricule :"
+msgstr "Matricule :"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_custom_pop_message_name
+msgid "Message"
+msgstr "Message"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.mode_paiement_action
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_payment_mode_id
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_paiement_mode_id
+#: model:ir.ui.menu,name:gestion_de_paie.configuration_menu
+msgid "Mode de paiement"
+msgstr "Mode de paiement"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payment_mode_name
+msgid "Mode de paiemet"
+msgstr "Mode de paiemet"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_reportexcel_mois
+msgid "Mois"
+msgstr "Mois"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_holidays_allocation_month
+msgid "Mois d'attribution"
+msgstr "Mois d'attribution"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Montant"
+msgstr "Montant"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_amount_allocation
+msgid "Montant Allocation Familiale"
+msgstr "Montant Allocation Familiale"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+msgid "NET"
+msgstr "NET"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "NIF :"
+msgstr "NIF :"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "NON PLAFONNE"
+msgstr "NON PLAFONNE"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_name_related
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_name_related
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_name_related
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_name_related
+msgid "Nom"
+msgstr "Nom"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Nom :"
+msgstr "Nom :"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.lastname_employee
+msgid "Nom de l'employer"
+msgstr "Nom de l'employer"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_nombre_enfant_cnaps
+msgid "Nombre d'enfant allouée CNaPS"
+msgstr "Nombre d'enfant allouée CNaPS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_number_of_hours
+msgid "Nombre d'heures"
+msgstr "Nombre d'heures"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_conge_mens
+msgid "Nombre de jour congé  mensuel"
+msgstr "Nombre de jour congé  mensuel"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_number_days_worked
+msgid "Nombre de jours travaillé"
+msgstr "Nombre de jours travaillé"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Nouv. Solde\n"
+"                                <br/>"
+msgstr "Nouv. Solde\n"
+"                                <br/>"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Novembre"
+msgstr "Novembre"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Num CNAPS :"
+msgstr "Num CNAPS :"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_num_cnaps_patr
+msgid "Numéro CNAPS"
+msgstr "Numéro CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_company_matricule
+msgid "Numéro Matricule"
+msgstr "Numéro Matricule"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.company_matricule
+msgid "Numéro matricule"
+msgstr "Numéro matricule"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_num_cin
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_employee_form_l10n_mg_paye
+msgid "N° CIN"
+msgstr "N° CIN"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "N° CIN /<br/>N° PASSEPORT"
+msgstr "N° CIN /<br/>N° PASSEPORT"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_num_cnaps_emp
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_employee_form_l10n_mg_paye
+msgid "N° CNAPS"
+msgstr "N° CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_num_emp
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_employee_form_l10n_mg_paye
+msgid "N° Matricule"
+msgstr "N° Matricule"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "N° de CNaPS"
+msgstr "N° de CNaPS"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+msgid "OMSI"
+msgstr "OMSI"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_omsiemp
+msgid "OMSI Employeur"
+msgstr "OMSI Employeur"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_omsi
+msgid "OMSI Travailleur"
+msgstr "OMSI Travailleur"
+
+#. module: gestion_de_paie
+#: model:ir.ui.menu,name:gestion_de_paie.menu_etat_ostie
+#: model:ir.ui.menu,name:gestion_de_paie.session_menu
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "OSTIE"
+msgstr "OSTIE"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_omsiemp
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_omsiemp
+msgid "OSTIE Employeur"
+msgstr "OSTIE Employeur"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_omsi
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_omsi
+msgid "OSTIE Travailleur"
+msgstr "OSTIE Travailleur"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Octobre"
+msgstr "Octobre"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_org_sante
+msgid "Organisme sanitaire"
+msgstr "Organisme sanitaire"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree
+msgid "Ostie"
+msgstr "Ostie"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "PLAFONNE"
+msgstr "PLAFONNE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.res_company_form_l10n_mg_paye
+msgid "Paie"
+msgstr "Paie"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Feuille de paie"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_percpt_minimum
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_percpt_minimum
+msgid "Perception minimum"
+msgstr "Perception minimum"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_plafond_cnaps
+msgid "Plafond de la Securite Sociale"
+msgstr "Plafond de la Securite Sociale"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_preavis
+msgid "Preavis"
+msgstr "Preavis"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,quarter:0
+#: selection:ostie.reportexcel,quarter:0
+msgid "Premier trimestre"
+msgstr "Premier trimestre"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_first_name
+msgid "Prenom"
+msgstr "Prenom"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.lastname_employee
+msgid "Prenom de l' employé"
+msgstr "Prenom de l' employé"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Pris\n"
+"                                <br/>"
+msgstr "Pris\n"
+"                                <br/>"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_priornotice
+msgid "Préavis"
+msgstr "Préavis"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_form
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_form
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_form
+msgid "Période"
+msgstr "Période"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,quarter:0
+#: selection:ostie.reportexcel,quarter:0
+msgid "Quatrième trimestre"
+msgstr "Quatrième trimestre"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "RCS :"
+msgstr "RCS :"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "Recherche"
+msgstr "Recherche"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_resource_calendar
+msgid "Resource Calendar"
+msgstr "Calendrier de la ressource"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_ref_employeur
+msgid "Réf. Employeur"
+msgstr "Réf. Employeur"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "Réf<br/>Employeur"
+msgstr "Réf<br/>Employeur"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "SALAIRE"
+msgstr "SALAIRE"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_average_gross
+msgid "SBR Moyen"
+msgstr "SBR Moyen"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_additional_gross
+msgid "SBR additionnel"
+msgstr "SBR additionnel"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_average_gross_notice
+msgid "SBR moyen préavis"
+msgstr "SBR moyen préavis"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_sme
+msgid "SME"
+msgstr "SME"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_stat
+msgid "STAT"
+msgstr "STAT"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "STAT :"
+msgstr "STAT :"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_stc
+msgid "STC"
+msgstr "STC"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_brut
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_brut
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_brut
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_brut
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_brut
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_brut
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_brut
+msgid "Salaire Brut"
+msgstr "Salaire Brut"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_net
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_net
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_net
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_net
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_net
+msgid "Salaire Net"
+msgstr "Salaire Net"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_basic
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_cnaps_basic
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_ostie_basic
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_basic
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_basic
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_basic
+msgid "Salaire de base"
+msgstr "Salaire de base"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.company_matricule
+msgid "Salaire minimal d'embauche"
+msgstr "Salaire minimal d'embauche"
+
+#. module: gestion_de_paie
+#: selection:hr.holidays,allocation_month:0
+#: selection:irsa.reportexcel,mois:0
+msgid "Septembre"
+msgstr "Septembre"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_seuil_irsa
+msgid "Seuil d’imposition"
+msgstr "Seuil d’imposition"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_date_from
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_date_from
+#: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_date_from
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_date_from
+msgid "Start Date"
+msgstr "Date de début"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "TEMPS<br/>PRESENCE"
+msgstr "TEMPS<br/>PRESENCE"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_totalcnaps
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_totalcnaps
+msgid "TOTAL CNAPS"
+msgstr "TOTAL CNAPS"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_totalomsi
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_totalomsi
+msgid "TOTAL OMSI"
+msgstr "TOTAL OMSI"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "TRAVAILLEUR"
+msgstr "TRAVAILLEUR"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_irsa
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_ostie
+msgid "TRAVAILLEURS<br/>NOMS et PRENOMS"
+msgstr "TRAVAILLEURS<br/>NOMS et PRENOMS"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
+msgid "Taux"
+msgstr "Taux"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_res_company_taux_irsa
+msgid "Taux IRSA"
+msgstr "Taux IRSA"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_temps_presence
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_temps_presence
+msgid "Temps presence"
+msgstr "Temps presence"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_reportexcel_quarter
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_reportexcel_quarter
+msgid "Trimèstre"
+msgstr "Trimèstre"
+
+#. module: gestion_de_paie
+#: selection:cnaps.reportexcel,quarter:0
+#: selection:ostie.reportexcel,quarter:0
+msgid "Troisième trimestre"
+msgstr "Troisième trimestre"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree
+msgid "cnaps"
+msgstr "cnaps"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_cnaps_reportexcel
+msgid "cnaps.reportexcel"
+msgstr "cnaps.reportexcel"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_custom_pop_message
+msgid "custom.pop.message"
+msgstr "custom.pop.message"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.action_menuwizard_ostie
+msgid "etat ostie"
+msgstr "etat ostie"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.show_etat_cnaps
+msgid "etatcnaps"
+msgstr "etatcnaps"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.show_etat_irsa
+msgid "etatirsa"
+msgstr "etatirsa"
+
+#. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.show_etat_ostie
+msgid "etatostie"
+msgstr "etatostie"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_form
+msgid "exporter"
+msgstr "exporter"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "filtre par mois"
+msgstr "filtre par mois"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_hr_payment_mode
+msgid "hr.payment.mode"
+msgstr "hr.payment.mode"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_form
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree
+msgid "irsa"
+msgstr "irsa"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_irsa_reportexcel
+msgid "irsa.reportexcel"
+msgstr "irsa.reportexcel"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.paiememt
+msgid "mode Lines"
+msgstr "mode Lines"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_cnaps_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_irsa_tree_filter
+#: model:ir.ui.view,arch_db:gestion_de_paie.hr_payroll_ostie_tree_filter
+msgid "nom"
+msgstr "nom"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.custom_pop_message_wizard_view_form
+msgid "ok"
+msgstr "ok"
+
+#. module: gestion_de_paie
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_form
+#: model:ir.ui.view,arch_db:gestion_de_paie.etat_ostie_tree
+msgid "ostie"
+msgstr "ostie"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_ostie_reportexcel
+msgid "ostie.reportexcel"
+msgstr "ostie.reportexcel"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_report_gestion_de_paie_report_cnaps
+msgid "report.gestion_de_paie.report_cnaps"
+msgstr "report.gestion_de_paie.report_cnaps"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_report_gestion_de_paie_report_irsa
+msgid "report.gestion_de_paie.report_irsa"
+msgstr "report.gestion_de_paie.report_irsa"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_report_gestion_de_paie_report_ostie
+msgid "report.gestion_de_paie.report_ostie"
+msgstr "report.gestion_de_paie.report_ostie"
+
+#. module: gestion_de_paie
+#: model:ir.model,name:gestion_de_paie.model_report_gestion_de_paie_report_paie
+msgid "report.gestion_de_paie.report_paie"
+msgstr "report.gestion_de_paie.report_paie"
+
