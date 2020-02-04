@@ -4,6 +4,8 @@
         <menuitem id="etat_payslip_menu"
                   name="Etat de paie"
                   parent="hr_payroll.menu_hr_payroll_root"
-                  sequence="19"/>
+                  sequence="19"
+                  groups="base.group_erp_manager"
+        />
     </data>
 </odoo>
