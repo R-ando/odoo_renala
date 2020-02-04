@@ -14,6 +14,8 @@ class ostie(models.Model):
     basic = fields.Float('Salaire de base')
     omsi = fields.Float('OSTIE Travailleur')
     omsiemp = fields.Float('OSTIE Employeur')
+    cnaps = fields.Float("CNAPS Travailleur")
+    cnapsemp = fields.Float("CNAPS Employeur")
     brut = fields.Float('Salaire Brut')
     net = fields.Float('Salaire Net')
     date_from = fields.Date('Start Date')
