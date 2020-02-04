@@ -69,7 +69,7 @@
 					    <tr align="center" t-foreach="docs" t-as="line">
 					      <td><span t-esc="get_annee_mois(line.date_from)"/></td>
 					      <td><span t-field="line.name_related"/></td>
-					      <td><span t-field="line.employee_id.num_cnaps_emp"/></td>
+					      <td><span t-field="line.payslip_id.employee_id.num_cnaps_emp"/></td>
 					      <td><span t-field="line.num_emp"/></td>
 					      <td><span t-field="line.date_from"/></td>
 					      <td><span t-field="line.date_to"/></td>
@@ -77,7 +77,7 @@
 					      <td><span t-field="line.avantage"/></td>
 					      <td><span t-field="line.temps_presence"/></td>
 					      <td><span t-field="line.brut"/></td>
-					      <td><span t-field="line.employee_id.company_id.plafond_cnaps"/></td>
+					      <td><span t-field="line.payslip_id.employee_id.company_id.plafond_cnaps"/></td>
 					      <td><span t-field="line.omsiemp"/></td>
 					      <td><span t-field="line.omsi"/></td>
 					      <td><span t-esc="line.omsi + line.omsiemp"/></td>
