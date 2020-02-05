@@ -339,7 +339,7 @@ else : result=contract.horaire_hebdo*52/12</field>
         <field name="note">C'est l'horaire de travail mensuel.</field>
     </record>
     <record id="hr_rule_basic_HS1" model="hr.salary.rule">
-        <field name="name">Heure sup 1</field>
+        <field name="name">Heures supplémentaires 130%</field>
         <field name="code">HS1</field>
         <field name="sequence">11</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -349,7 +349,7 @@ else : result=contract.horaire_hebdo*52/12</field>
         <field name="quantity">MHS1</field>
         <field name="amount_percentage">130</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="note">Heure supplémentaire 1.</field>
+        <field name="note">Heures supplémentaires 130%</field>
     </record>
     <record id="hr_rule_basic_MHS1" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -362,10 +362,10 @@ else : result=contract.horaire_hebdo*52/12</field>
         <field name="amount_python_compute">if worked_days.HS1 and worked_days.HS1.number_of_hours : result = worked_days.HS1.number_of_hours
 else : result=0</field>
         <field name="appears_on_payslip" eval="False"/>
-        <field name="note">C'est le nombre d'heure sup 1.</field>
+        <field name="note">C'est le nombre d'heure sup à 130%</field>
     </record>
     <record id="hr_rule_basic_HS2" model="hr.salary.rule">
-        <field name="name">Heure sup 2</field>
+        <field name="name">Heures supplémentaires 150%</field>
         <field name="code">HS2</field>
         <field name="sequence">13</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -375,7 +375,7 @@ else : result=0</field>
         <field name="quantity">MHS2</field>
         <field name="amount_percentage">150</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="note">Heure supplémentaire 1.</field>
+        <field name="note">Heures supplémentaires 150%</field>
     </record>
     <record id="hr_rule_basic_MHS2" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -388,10 +388,10 @@ else : result=0</field>
         <field name="amount_python_compute">if worked_days.HS2 and worked_days.HS2.number_of_hours : result = worked_days.HS2.number_of_hours
 else : result=0</field>
         <field name="appears_on_payslip" eval="False"/>
-        <field name="note">C'est le nombre d'heure sup 2.</field>
+        <field name="note">C'est le nombre d'heure sup à 150%</field>
     </record>
     <record id="hr_rule_basic_HMNUIT" model="hr.salary.rule">
-        <field name="name">Heure majoré nuit</field>
+        <field name="name">Heures majorées nuit</field>
         <field name="code">HMNUIT</field>
         <field name="sequence">14</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -401,7 +401,7 @@ else : result=0</field>
         <field name="quantity">MHMNUIT</field>
         <field name="amount_percentage">200</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="note">C'est le montant de l'heure majoré nuit.</field>
+        <field name="note">C'est le montant des heures majorées nuit.</field>
     </record>
     <record id="hr_rule_basic_MHMNUIT" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -418,7 +418,7 @@ else : result=0
         <field name="note">C'est le nombre d'heure travaillé nuit.</field>
     </record>
     <record id="hr_rule_basic_HMDIM" model="hr.salary.rule">
-        <field name="name">Heure majoré dimanche</field>
+        <field name="name">Heures majorées dimanche</field>
         <field name="code">HMDIM</field>
         <field name="sequence">15</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -428,7 +428,7 @@ else : result=0
         <field name="quantity">MHMDIM</field>
         <field name="amount_percentage">200</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="note">C'est le montant de l'heure majoré dimanche.</field>
+        <field name="note">C'est le montant des Heures majorées dimanche.</field>
     </record>
     <record id="hr_rule_basic_MHMDIM" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -444,7 +444,7 @@ else : result=0</field>
         <field name="note">C'est le nombre d'heure travaillé en dimanche.</field>
     </record>
     <record id="hr_rule_basic_HMJF" model="hr.salary.rule">
-        <field name="name">Heure majoré jour férié</field>
+        <field name="name">Heures majorées jour férié</field>
         <field name="code">HMJF</field>
         <field name="sequence">16</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -454,7 +454,7 @@ else : result=0</field>
         <field name="quantity">MHMJF</field>
         <field name="amount_percentage">100</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="note">C'est le montant de l'heure majoré jour férié.</field>
+        <field name="note">C'est le montant des heures majorées jour férié</field>
     </record>
     <record id="hr_rule_basic_MHMJF" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.BASIC"/>
@@ -471,19 +471,19 @@ else : result=0</field>
     </record>
     <record id="hr_rule_basic_AVANCE15" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.DED"/>
-        <field name="name">Avance quinzaine</field>
+        <field name="name">Avance sur salaire</field>
         <field name="code">AVANCE15</field>
         <field name="sequence">117</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result=MAVANCE15</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="note">C'est le Montant avance quinzaine.</field>
+        <field name="note">C'est le Montant des avances sur salaire.</field>
     </record>
     <record id="hr_rule_basic_MAVANCE15" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.NET"/>
         <field name="parent_rule_id" ref="hr_rule_basic_AVANCE15"/>
-        <field name="name">Montant avance quinzaine</field>
+        <field name="name">Montant avance sur salaire</field>
         <field name="code">MAVANCE15</field>
         <field name="sequence">116</field>
         <field name="condition_select">none</field>
@@ -492,7 +492,7 @@ else : result=0</field>
 else : result = 0
             </field>
         <field name="appears_on_payslip" eval="False"/>
-        <field name="note">C'est le Montant avance quinzaine.</field>
+        <field name="note">C'est le Montant des avances sur salaire.</field>
     </record>
     <record id="hr_rule_basic_AVANCESP" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.DED"/>

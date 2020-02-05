@@ -264,11 +264,11 @@ class HrPayslip(models.Model):
             return
 
         worked_days_data_list = [
-            {'code': 'HS1', 'contract_id': self.contract_id.id, 'name': u'Heure supplémentaire 1'},
-            {'code': 'HS2', 'contract_id': self.contract_id.id, 'name': u'Heure supplémentaire 2'},
-            {'code': 'HMNUIT', 'contract_id': self.contract_id.id, 'name': u'Heure majoré nuit'},
-            {'code': 'HMDIM', 'contract_id': self.contract_id.id, 'name': u'Heure majoré dimanche'},
-            {'code': 'HMJF', 'contract_id': self.contract_id.id, 'name': u'Heure majoré jour férié'}
+            {'code': 'HS1', 'contract_id': self.contract_id.id, 'name': u'Heures supplémentaires 130%'},
+            {'code': 'HS2', 'contract_id': self.contract_id.id, 'name': u'Heures supplémentaires 150%'},
+            {'code': 'HMNUIT', 'contract_id': self.contract_id.id, 'name': u'Heures majorées nuit'},
+            {'code': 'HMDIM', 'contract_id': self.contract_id.id, 'name': u'Heures majorées dimanche'},
+            {'code': 'HMJF', 'contract_id': self.contract_id.id, 'name': u'Heures majorées jour férié'}
         ]
 
         worked_days_lines = self.worked_days_line_ids.browse([])
@@ -278,7 +278,7 @@ class HrPayslip(models.Model):
         date_from = datetime.strptime(self.date_from, DEFAULT_SERVER_DATE_FORMAT).month
         input_data_list = [
             # {'code': 'AVANCE15', 'contract_id': self.contract_id.id, 'amount': self.get_avance_salaire(), 'name': 'Avance quinzaine'},
-            {'code': 'AVANCE15', 'contract_id': self.contract_id.id, 'name': 'Avance quinzaine'},
+            {'code': 'AVANCE15', 'contract_id': self.contract_id.id, 'name': 'Avance sur salaire'},
             {'code': 'AVANCESP', 'contract_id': self.contract_id.id, 'name': u'Avance spécial'},
             {'code': 'PRM', 'contract_id': self.contract_id.id, 'name': 'Prime'},
             {'code': 'AUTRES', 'contract_id': self.contract_id.id, 'name': 'Autres retenues'},
