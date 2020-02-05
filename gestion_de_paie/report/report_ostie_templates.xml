@@ -2,6 +2,7 @@
 <odoo>
 
 	<template id="report_ostie">
+		<t t-set="o" t-value="docs[:1]"/>
 	    <t t-call="report.html_container">
 	    	<t t-call="report.external_layout">
 			<!-- Debut du rapport -->
