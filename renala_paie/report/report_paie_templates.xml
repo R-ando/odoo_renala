@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="renala_custom_paie_template" inherit_id="gestion_de_paie.report_paie_document">
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[2]/t[4]/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'GROSS')" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[2]/t[5]/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o, 'GROSS')
+                            	        -get_total_by_rule_category(o,'CNAPS')
+                            	        -get_total_by_rule_category(o,'OMSI')
+                            	        -o.employee_id.company_id.abat_irsa*o.employee_id.children" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[1]/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'CNAPS_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[2]/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'OMSI_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[3]/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'FMFP_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[2]/td[5]/strong/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'GROSS')" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[2]/td[6]/strong/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'TOTAL_DED')" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[2]/td[8]/strong/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'CHARGE_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau2')]/tr[2]/td[1]/strong/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')"
+                  t-options='{"widget": "float", "precision": 0}'/>&#160;<t t-esc="o.company_id.currency_id.symbol"/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau2')]/tr[2]/td[2]/span" position="replace">
+            <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')+get_total_by_rule_category(o,'CHARGE_PAT')"
+                  t-options='{"widget": "float", "precision": 0}'/>&#160;<t t-esc="o.company_id.currency_id.symbol"/>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[3]" position="replace">
+            <td>
+                <t t-if="line.amount_select == 'percentage'">
+                    <span t-field="line.rate"/>
+                </t>
+                <t t-if="line.amount_select &lt;&gt; 'percentage'"/>
+                <t t-if="line.code == 'CNAPS_EMP'">
+                    <span t-field="o.employee_id.company_id.cotisation_cnaps_emp" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+                <t t-if="line.code == 'OMSI_EMP'">
+                    <span t-field="o.employee_id.company_id.cotisation_sante_emp" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+                <t t-if="line.code == 'IRSA'">
+                    <span t-field="o.employee_id.company_id.taux_irsa" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+            </td>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[7]" position="replace">
+            <td>
+                <t t-if="line.code == 'CNAPS_EMP'">
+                    <span t-esc="o.employee_id.company_id.cotisation_cnaps_patr" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+                <t t-if="line.code == 'OMSI_EMP'">
+                    <span t-esc="o.employee_id.company_id.cotisation_sante_patr" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+                <t t-if="line.code == 'FMFP_PAT' and line.amount!=0">
+                    <span t-esc="o.employee_id.company_id.seuil_fmfp" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+            </td>
+        </xpath>
+
+    </template>
+</odoo>

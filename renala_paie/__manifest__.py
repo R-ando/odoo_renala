@@ -20,6 +20,9 @@
     'data': [
         # data
         "data/renala_paie_data.xml",
+
+        # report
+        "report/report_paie_templates.xml",
     ],
 
     'sequence': 1,
