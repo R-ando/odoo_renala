@@ -465,23 +465,23 @@
                             <td>
                                 <strong>Congé</strong>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 Anc. Solde
                                 <br/>
                                 <span t-esc="o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from) + get_employee_request_leaves(o.employee_id, o.date_from, o.date_to, False)"/>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 Acquis
                                 <br/>
                                 <span t-esc="get_employee_allocation_leaves(o.employee_id, o.date_from)"/>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 Pris
                                 <br/>
                                 <t t-set="pris" t-value="o._get_taken_leave()"/>
                                 <span t-esc="pris"/>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 Nouv. Solde
                                 <br/>
                                 <span t-field="o.employee_id.remaining_leaves"/>
