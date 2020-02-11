@@ -278,24 +278,17 @@
                                     <span t-field="o.employee_id.company_id.rcs"/>
                                 </t>
                             </div>
+                            <br/>
+                            <div>
+                                <span>
+                                    <strong style="font-weight: normal; font-family:Calibri;">Mode de règlement:</strong>
+                                    <span t-field="o.contract_id.payment_mode_id"/>
+                                </span>
+                            </div>
                         </div>
                         <br/>
                         <br/>
                         <br/>
-                        <br/>
-
-                        <table style="border:none" class="tableau6">
-                            <tr>
-                                <td style="text-align: left;border: white; width:15%" class="no_border_bottom">
-                                    <span>
-                                        <strong style="font-weight: normal; font-family:Calibri;">Mode de règlement:</strong>
-                                        <span t-field="o.contract_id.payment_mode_id"/>
-                                    </span>
-                                </td>
-                                <!--<td style="text-align: left;border: white;" class="no_border_top">
-                                </td>-->
-                            </tr>
-                        </table>
                     </div>
 
                 </div>
