@@ -18,6 +18,8 @@
     'depends': ['base', 'gestion_de_paie'],
 
     'data': [
+        # data
+        "data/renala_paie_data.xml",
     ],
 
     'sequence': 1,
