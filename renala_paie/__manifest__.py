@@ -3,10 +3,10 @@
     'name': "renala_paie",
 
     'summary': """
-        Personnalisation Paie pour RENALA""",
+        Personnalisation RH & Paie pour RENALA""",
 
     'description': """
-        Personnalisation Paie pour RENALA
+        Personnalisation RH & Paie pour RENALA
     """,
 
     'author': "Rado - Ingenosya",
