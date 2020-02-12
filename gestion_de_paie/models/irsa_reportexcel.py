@@ -36,7 +36,7 @@ class Irsareport(models.TransientModel):
 
     def generateIrsa_excel(self):
         month = dict(self._fields['mois'].selection).get(self.mois)
-        years = dict(self._fields['annees'].selection).get(self.annees)
+        years = self._fields['annees'].selection
         actions = {
             'type': 'ir.actions.act_url',
             'target': 'current',
@@ -64,6 +64,7 @@ class Irsareport(models.TransientModel):
         return years + "-" + month_rank
 
     def company_information(self, month, years):
+        # krrrrrrrrrrrrrrrrrrrrr
         partner = self.env['res.partner'].search([("id", "=", 1)])
         conpany = partner.mapped('company_id')
         return {
