@@ -170,6 +170,8 @@ class ExportReportIrsaController(http.Controller):
     def line_irsa2(self, workbook, worksheet, row, col, fieldlist, field1, field2, align):
         i = 0
         for val in fieldlist:
+            if field1 not in val.keys():
+                continue
             worksheet.write(row, col, fieldlist[i][field1] if fieldlist[i][field1] else '' + ' ' + fieldlist[i][field2] if fieldlist[i][field2] else '', self.style(workbook, align, 8, False, 1))
             row += 1
             i += 1
