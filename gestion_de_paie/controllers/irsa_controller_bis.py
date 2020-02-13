@@ -1,11 +1,10 @@
 # -*- coding: UTF-8 -*-
 # by Rado - Ingenosya
 
+import datetime
 import io
 
 import xlsxwriter
-
-import datetime
 
 from odoo import http
 from odoo.http import request
@@ -41,7 +40,9 @@ class ExportReportIrsaController(http.Controller):
         # create date with data
         date = datetime.datetime.strptime("%s %s" % (year, month), "%Y %m")
         worksheet.write(6, 7, 'ANNEE : %s' % date.strftime("%Y"))
-        worksheet.write(8, 7, 'AU TITRE DU MOIS : %s' % date.strftime("%B").upper())
+        # fuck unicode in python 2
+        n = unicode(date.strftime("%B").upper(), 'utf-8', 'replace')
+        worksheet.write(8, 7, u'AU TITRE DU MOIS : {0}'.format(n))
         worksheet.write(10, 7, 'SEMESTRE : %s' % 'PREMIER' if date.strftime("%m") <= '06' else 'SECOND')
 
         if company_id is None:
