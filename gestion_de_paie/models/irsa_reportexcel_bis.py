@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# by Rado - Ingenosya
 
 from odoo import models, fields
 
