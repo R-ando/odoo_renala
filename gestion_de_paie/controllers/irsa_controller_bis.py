@@ -116,7 +116,7 @@ class ExportReportIrsaController(http.Controller):
         # use something else sum()
         basic2 = payslip.contract_id.wage
         prm = sum(payslip.line_ids.filtered(lambda x: x.code == 'PRM').mapped('total'))
-        hs = sum(payslip.line_ids.filtered(lambda x: x.code in ['HS1', 'HS2']).mapped('quantity'))
+        hs = sum(payslip.line_ids.filtered(lambda x: x.code in ('HS1', 'HS2', 'HMNUIT', 'HMDIM', 'HMDIM', 'HMJF')).mapped('quantity'))
         preavis = payslip.preavis if payslip.stc else 0
         gross = sum(payslip.line_ids.filtered(lambda x: x.code == 'GROSS').mapped('total'))
         cnaps_emp = sum(payslip.line_ids.filtered(lambda x: x.code == 'CNAPS_EMP').mapped('total'))
