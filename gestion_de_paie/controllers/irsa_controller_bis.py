@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # by Rado - Ingenosya
+#TODO: change this as object oriented we don't need to pass variable in every function
 
 import datetime
 import io
@@ -163,7 +164,7 @@ class ExportReportIrsaController(http.Controller):
         worksheet.write_number(row, col + 15, enfant, border_black)
         worksheet.write_number(row, col + 16, impnet, border_black)
 
-    def body(self, workbook, worksheet, payslips, total):
+    def body(self, workbook, worksheet, payslips, total, total_net_cumul):
         # styles
         border_black = workbook.add_format({"border_color": "black", 'border': 1})
         border_black_center = workbook.add_format({"border_color": "black", 'border': 1, 'valign': 'vcenter', 'text_wrap': True, 'align': 'center'})
@@ -210,8 +211,14 @@ class ExportReportIrsaController(http.Controller):
         worksheet.write_number(row + 1, col + 11, total['enfant'], border_black)
         worksheet.write_number(row + 1, col + 12, total['impnet'], border_black)
 
+        # head
+        total_net_period = total['net'] - total['impnet']
+        worksheet.write_number('D8', total_net_cumul + total['net'], workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
+        worksheet.write_number('D11', total_net_period, workbook.add_format({'right': 1, "bg_color": "red"}))
+        worksheet.write_number('D13', total_net_cumul + total_net_period, workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
+
     # main function
-    def fulfill(self, workbook, worksheet, payslips, year, month, company_id=None):
+    def fulfill(self, workbook, worksheet, payslips, year, month, total_net_cumul, company_id=None):
         total = {
             'prm': 0, 'gross': 0, 'hs': 0,
             'conge': 0, 'preavis': 0, 'basic2': 0,
@@ -220,7 +227,7 @@ class ExportReportIrsaController(http.Controller):
         }
         self.setColumnWidth(worksheet)
         self.head(workbook, worksheet, year, month, company_id)
-        self.body(workbook, worksheet, payslips, total)
+        self.body(workbook, worksheet, payslips, total, total_net_cumul)
 
     @http.route('/web/binary/download_report_irsa_file', type='http', auth="public")
     def generateIrsa_excel(self, year, month):
@@ -233,8 +240,11 @@ class ExportReportIrsaController(http.Controller):
         # take periodic payslip
         payslips = request.env['hr.payslip'].search([('date_from', 'like', "%s-%s%s" % (year, month, '%'))])
         company_id = payslips[:1].company_id
+        # take payslip from the begining of the year
+        old_payslips = request.env['hr.payslip'].search([('date_from', '>=', "%s-%s-%s" % (year, '01', '01')), ('date_from', '<', "%s-%s-%s" % (year, month, 01))])
+        total_net_cumul = sum(old_payslips.mapped('line_ids').filtered(lambda x: x.code == 'NET').mapped('total')) if old_payslips else 0
 
-        self.fulfill(workbook, worksheet, payslips, year, month, company_id)
+        self.fulfill(workbook, worksheet, payslips, year, month, total_net_cumul, company_id)
 
         workbook.close()
         output.seek(0)
