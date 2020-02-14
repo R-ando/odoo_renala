@@ -219,7 +219,6 @@ class ExportReportIrsaController(http.Controller):
             'conge': 0, 'preavis': 0, 'basic2': 0,
             'cnaps_emp': 0, 'ostie_emp': 0, 'net': 0,
             'mimpo': 0, 'enfant': 0, 'irsa': 0, 'impnet': 0,
-            'enfant': 0,
         }
         self.setColumnWidth(worksheet)
         self.head(workbook, worksheet, year, month, company_id)
