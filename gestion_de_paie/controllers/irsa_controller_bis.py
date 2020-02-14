@@ -12,29 +12,76 @@ from odoo.http import request
 
 class ExportReportIrsaController(http.Controller):
 
-    def setColumnWidth(self, worksheet, workbook):
-        pass
+    def add_to_format(self, existing_format, dict_of_properties, workbook):
+        """Give a format you want to extend and a dict of the properties you want to
+        extend it with, and you get them returned in a single format"""
+        new_dict = {}
+        for key, value in existing_format.__dict__.iteritems():
+            if (value != 0) and (value != {}) and (value != None):
+                new_dict[key] = value
+        del new_dict['escapes']
+
+        return (workbook.add_format(dict(new_dict.items() + dict_of_properties.items())))
+
+    def box(self, workbook, sheet_name, row_start, col_start, row_stop, col_stop):
+        """Makes an RxC box. Use integers, not the 'A1' format"""
+
+        rows = row_stop - row_start + 1
+        cols = col_stop - col_start + 1
+
+        for x in xrange((rows) * (cols)):  # Total number of cells in the rectangle
+
+            box_form = workbook.add_format()  # The format resets each loop
+            row = row_start + (x // cols)
+            column = col_start + (x % cols)
+
+            if x < (cols):  # If it's on the top row
+                box_form = self.add_to_format(box_form, {'top': 1}, workbook)
+            if x >= ((rows * cols) - cols):  # If it's on the bottom row
+                box_form = self.add_to_format(box_form, {'bottom': 1}, workbook)
+            if x % cols == 0:  # If it's on the left column
+                box_form = self.add_to_format(box_form, {'left': 1}, workbook)
+            if x % cols == (cols - 1):  # If it's on the right column
+                box_form = self.add_to_format(box_form, {'right': 1}, workbook)
+
+            sheet_name.write(row, column, "", box_form)
+
+    def setColumnWidth(self, worksheet):
+        worksheet.set_column('C:C', 20)
+        worksheet.set_column('E:E', 5)
+        worksheet.set_column('G:G', 5)
+        worksheet.set_column('I:I', 5)
+        worksheet.set_column('J:J', 5)
 
     def head(self, workbook, worksheet, year, month, company_id=None):
         # styles
         middle = workbook.add_format({'align': "center", "valign": "vcenter"})
         bold_middle = workbook.add_format({'bold': True, 'align': "center", "valign": "vcenter"})
+        border_black = workbook.add_format({"border_color": "black", 'border': 1})
+        border_left = workbook.add_format({"border_color": "black", 'left': 1})
+        border_left_top = workbook.add_format({"border_color": "black", 'left': 1, 'top': 1})
+
+        # cells with border
+        self.box(workbook, worksheet, 2, 14, 4, 17)
+        self.box(workbook, worksheet, 7, 14, 12, 17)
+        self.box(workbook, worksheet, 3, 1, 5, 3)
+        self.box(workbook, worksheet, 7, 1, 13, 3)
 
         # statics data
-        worksheet.merge_range('B1:C1', u'Nom ou raison sociale de l\'organisme payeur')
-        worksheet.write(0, 3, 'profession')
+        worksheet.merge_range('B1:C1', u'Nom ou raison sociale de l\'organisme payeur', border_black)
+        worksheet.write(0, 3, 'profession', border_black)
         worksheet.merge_range('E1:N1', u'REPOBLIKAN\' I MADAGASIKARA', middle)
-        worksheet.merge_range('O2:R2', u'Etat à envoyer à l\'adresse suivante')
+        worksheet.merge_range('O2:R2', u'Etat à envoyer à l\'adresse suivante', border_black)
         worksheet.merge_range('G3:L3', u'SERVICES DES CONTRIBUTIONS DIRECTES', bold_middle)
-        worksheet.merge_range('B8:C8', u'Montant des salaires et assimilés payés')
-        worksheet.merge_range('B9:C9', u'depuis le début de l\'année')
-        worksheet.merge_range('B10:C10', u'Montant des salaires et assimilés payés')
-        worksheet.merge_range('B11:C11', u'au titre de la période considérée')
-        worksheet.merge_range('B13:C13', u'Montant cumulés')
+        worksheet.merge_range('B8:C8', u'Montant des salaires et assimilés payés', border_left_top)
+        worksheet.merge_range('B9:C9', u'depuis le début de l\'année', border_left)
+        worksheet.merge_range('B10:C10', u'Montant des salaires et assimilés payés', border_left)
+        worksheet.merge_range('B11:C11', u'au titre de la période considérée', border_left)
+        worksheet.merge_range('B13:C13', u'Montant cumulés', border_left)
         worksheet.write(12, 7, u'N° dossier :')
-        worksheet.merge_range('O7:R7', u'Cadre réservé au service des contribut°')
-        worksheet.write(9, 14, u'N° ordre :')
-        worksheet.write(11, 14, u'Etat reçu le :')
+        worksheet.merge_range('O7:R7', u'Cadre réservé au service des contribut°', border_black)
+        worksheet.write(9, 14, u'N° ordre :', border_left)
+        worksheet.write(11, 14, u'Etat reçu le :', border_left)
 
         # dynamic data
         # create date with data
@@ -53,15 +100,18 @@ class ExportReportIrsaController(http.Controller):
         worksheet.write(1, 3, 'achat-vente')
         worksheet.merge_range('B4:C4', u'Adresse : %s %s' % (
             company_id.street if company_id.street else '',
-            company_id.city if company_id.city else ''))
+            company_id.city if company_id.city else ''), border_left_top)
         worksheet.merge_range('B5:C5', u'N° statistique : %s' % (
             company_id.nstat if company_id.nstat else ''
-        ))
+        ), border_left)
         worksheet.write(13, 7, u'NI.F.: %s' % (company_id.nif if company_id.nif else ''))
 
         return None
 
     def writePayslip(self, workbook, worksheet, row, col, payslip, total):
+        # styles
+        border_black = workbook.add_format({"border_color": "black", 'border': 1})
+
         # init variable
         # use something else sum()
         basic2 = payslip.contract_id.wage
@@ -73,6 +123,8 @@ class ExportReportIrsaController(http.Controller):
         ostie_emp = sum(payslip.line_ids.filtered(lambda x: x.code == 'OMSI_EMP').mapped('total'))
         net = sum(payslip.line_ids.filtered(lambda x: x.code == 'NET').mapped('total'))
         irsa = sum(payslip.line_ids.filtered(lambda x: x.code == 'IRSA').mapped('total'))
+        enfant = payslip.employee_id.children * payslip.company_id.abat_irsa
+        impnet = irsa - enfant
 
         # compute sum
         total['basic2'] += basic2
@@ -84,41 +136,49 @@ class ExportReportIrsaController(http.Controller):
         total['ostie_emp'] += ostie_emp
         total['net'] += net
         total['irsa'] += irsa
+        total['mimpo'] += 1 # à revoir
+        total['conge'] += payslip.employee_id.remaining_leaves
+        total['enfant'] += enfant
+        total['impnet'] += impnet
 
-        worksheet.merge_range(row, col, row, col + 1, '%s' % (payslip.employee_id.name))
-        worksheet.write(row, col + 2, '%s' % (payslip.employee_id.num_cnaps_emp if payslip.employee_id.num_cnaps_emp else ''))
-        worksheet.write_number(row, col + 3, payslip.contract_id.number_of_hours)
-        worksheet.write_number(row, col + 4, basic2)
-        worksheet.write_number(row, col + 5, prm)
-        worksheet.write_number(row, col + 6, hs)
-        worksheet.write_number(row, col + 7, 21)
-        worksheet.write_number(row, col + 8, preavis)
-        worksheet.write_number(row, col + 9, gross)
-        worksheet.write_number(row, col + 10, cnaps_emp)
-        worksheet.write_number(row, col + 11, ostie_emp)
-        worksheet.write_number(row, col + 12, net)
-        worksheet.write_number(row, col + 13, 9999)
-        worksheet.write_number(row, col + 14, irsa)
-        worksheet.write_number(row, col + 15, 5000)
+        worksheet.merge_range(row, col, row, col + 1, '%s' % (payslip.employee_id.name), border_black)
+        worksheet.write(row, col + 2, '%s' % (payslip.employee_id.num_cnaps_emp if payslip.employee_id.num_cnaps_emp else ''), border_black)
+        worksheet.write_number(row, col + 3, payslip.contract_id.number_of_hours, border_black)
+        worksheet.write_number(row, col + 4, basic2, border_black)
+        worksheet.write_number(row, col + 5, prm, border_black)
+        worksheet.write_number(row, col + 6, hs, border_black)
+        worksheet.write_number(row, col + 7, payslip.employee_id.remaining_leaves, border_black)
+        worksheet.write_number(row, col + 8, preavis, border_black)
+        worksheet.write_number(row, col + 9, gross, border_black)
+        worksheet.write_number(row, col + 10, cnaps_emp, border_black)
+        worksheet.write_number(row, col + 11, ostie_emp, border_black)
+        worksheet.write_number(row, col + 12, net, border_black)
+        worksheet.write_number(row, col + 13, 9999, border_black)
+        worksheet.write_number(row, col + 14, irsa, border_black)
+        worksheet.write_number(row, col + 15, enfant, border_black)
+        worksheet.write_number(row, col + 16, impnet, border_black)
 
     def body(self, workbook, worksheet, payslips, total):
-        worksheet.merge_range('B16:C17', u"Noms & Prénoms")
-        worksheet.merge_range('D16:D17', u'N° CNaPS')
-        worksheet.merge_range('E16:E17', u'Tps de travail')
-        worksheet.merge_range('F16:F17', u'Salaire de base')
-        worksheet.merge_range('G16:G17', u'Primes & gratification')
-        worksheet.merge_range('H16:H17', u'Heures supplémentaire')
-        worksheet.merge_range('I16:I17', u'Congés')
-        worksheet.merge_range('J16:J17', u'Préavis')
-        worksheet.merge_range('K16:K17', u'Salaire brut')
-        worksheet.merge_range('L16:M16', u'Cotisations')
-        worksheet.write(16, 11, u'CNaPS')
-        worksheet.write(16, 12, u'OSTIE')
-        worksheet.merge_range('N16:N17', u'Salaire Net')
-        worksheet.merge_range('O16:O17', u'Montant imposable')
-        worksheet.merge_range('P16:P17', u'Impôts corresp.')
-        worksheet.merge_range('Q16:Q17', u'Déduction enfant')
-        worksheet.merge_range('R16:R17', u'Impôts nets')
+        # styles
+        border_black = workbook.add_format({"border_color": "black", 'border': 1})
+
+        worksheet.merge_range('B16:C17', u"Noms & Prénoms", border_black)
+        worksheet.merge_range('D16:D17', u'N° CNaPS', border_black)
+        worksheet.merge_range('E16:E17', u'Tps de travail', border_black)
+        worksheet.merge_range('F16:F17', u'Salaire de base', border_black)
+        worksheet.merge_range('G16:G17', u'Primes & gratification', border_black)
+        worksheet.merge_range('H16:H17', u'Heures supplémentaire', border_black)
+        worksheet.merge_range('I16:I17', u'Congés', border_black)
+        worksheet.merge_range('J16:J17', u'Préavis', border_black)
+        worksheet.merge_range('K16:K17', u'Salaire brut', border_black)
+        worksheet.merge_range('L16:M16', u'Cotisations', border_black)
+        worksheet.write(16, 11, u'CNaPS', border_black)
+        worksheet.write(16, 12, u'OSTIE', border_black)
+        worksheet.merge_range('N16:N17', u'Salaire Net', border_black)
+        worksheet.merge_range('O16:O17', u'Montant imposable', border_black)
+        worksheet.merge_range('P16:P17', u'Impôts corresp.', border_black)
+        worksheet.merge_range('Q16:Q17', u'Déduction enfant', border_black)
+        worksheet.merge_range('R16:R17', u'Impôts nets', border_black)
 
         for row, payslip in enumerate(payslips):
             self.writePayslip(workbook, worksheet, row + 17, 1, payslip, total)
@@ -126,19 +186,23 @@ class ExportReportIrsaController(http.Controller):
         # define row col
         row = 16 + len(payslips)
         col = 5
-        worksheet.write_number(row + 1, col, total['basic2'])
-        worksheet.write_number(row + 1, col + 1, total['prm'])
-        worksheet.write_number(row + 1, col + 2, total['hs'])
-        worksheet.write_number(row + 1, col + 3, total['conge'])
-        worksheet.write_number(row + 1, col + 4, total['preavis'])
-        worksheet.write_number(row + 1, col + 5, total['gross'])
-        worksheet.write_number(row + 1, col + 6, total['cnaps_emp'])
-        worksheet.write_number(row + 1, col + 7, total['ostie_emp'])
-        worksheet.write_number(row + 1, col + 8, total['net'])
-        worksheet.write_number(row + 1, col + 9, total['mimpo'])
-        worksheet.write_number(row + 1, col + 10, total['irsa'])
-        worksheet.write_number(row + 1, col + 11, total['enfant'])
-        worksheet.write_number(row + 1, col + 12, total['impnet'])
+        worksheet.write(row + 1, col - 4, "", border_black)
+        worksheet.write(row + 1, col - 3, "", border_black)
+        worksheet.write(row + 1, col - 2, "", border_black)
+        worksheet.write(row + 1, col - 1, "", border_black)
+        worksheet.write_number(row + 1, col, total['basic2'], border_black)
+        worksheet.write_number(row + 1, col + 1, total['prm'], border_black)
+        worksheet.write_number(row + 1, col + 2, total['hs'], border_black)
+        worksheet.write_number(row + 1, col + 3, total['conge'], border_black)
+        worksheet.write_number(row + 1, col + 4, total['preavis'], border_black)
+        worksheet.write_number(row + 1, col + 5, total['gross'], border_black)
+        worksheet.write_number(row + 1, col + 6, total['cnaps_emp'], border_black)
+        worksheet.write_number(row + 1, col + 7, total['ostie_emp'], border_black)
+        worksheet.write_number(row + 1, col + 8, total['net'], border_black)
+        worksheet.write_number(row + 1, col + 9, total['mimpo'], border_black)
+        worksheet.write_number(row + 1, col + 10, total['irsa'], border_black)
+        worksheet.write_number(row + 1, col + 11, total['enfant'], border_black)
+        worksheet.write_number(row + 1, col + 12, total['impnet'], border_black)
 
     # main function
     def fulfill(self, workbook, worksheet, payslips, year, month, company_id=None):
@@ -146,8 +210,10 @@ class ExportReportIrsaController(http.Controller):
             'prm': 0, 'gross': 0, 'hs': 0,
             'conge': 0, 'preavis': 0, 'basic2': 0,
             'cnaps_emp': 0, 'ostie_emp': 0, 'net': 0,
-            'mimpo': 0, 'enfant': 0, 'irsa': 0, 'impnet': 0
+            'mimpo': 0, 'enfant': 0, 'irsa': 0, 'impnet': 0,
+            'enfant': 0,
         }
+        self.setColumnWidth(worksheet)
         self.head(workbook, worksheet, year, month, company_id)
         self.body(workbook, worksheet, payslips, total)
 
