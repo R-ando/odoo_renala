@@ -356,7 +356,7 @@ class HrPayslip(models.Model):
             # 'name_related': data.employee_id.name,
             'date_from': data.date_from,
             'date_to': data.date_to,
-
+            'hs': 0.0,
         }
         for line in data.line_ids:
             if line.code == 'BASIC':
@@ -377,6 +377,19 @@ class HrPayslip(models.Model):
                 vals['cnapsemp'] = line.total
             if line.code == 'NET':
                 vals['net'] = line.total
+            # just use the logic of the code
+            if line.code == 'PRM':
+                vals['prm'] = line.total
+            if line.code in set(['HS1', 'HS2', 'HMNUIT', 'HMDIM', 'HMDIM', 'HMJF']):
+                vals['hs'] += line.total
+            # TODO ask Eric
+            # if line.code == '':
+            #     vals['retenus'] = line.total
+            if line.code == 'AF':
+                vals['af'] = line.total
+            if line.code == 'CHARGE_PAT':
+                vals['charge_pat'] = line.total
+
 
         vals['totalomsi'] = vals.get('omsi', 0.0) + vals.get('omsiemp', 0.0)
         vals['totalcnaps'] = vals.get('cnaps', 0.0) + vals.get('cnapsemp', 0.0)
@@ -384,9 +397,10 @@ class HrPayslip(models.Model):
         etat = self.env['etat.salaire'].browse(data.etat_salaire_id.id)
         etat.write(vals)
 
-        # ostie
+        # ostie object
         vals_ostie = vals.copy()
-        not_in_ostie = ['cnaps', 'cnapsemp', 'totalcnaps', 'irsa']
+        not_in_ostie = ['totalcnaps']
+        not_in_ostie = set(not_in_ostie)
         for cle in not_in_ostie:
             if cle in vals_ostie:
                 del vals_ostie[cle]
@@ -396,7 +410,7 @@ class HrPayslip(models.Model):
 
         # irsa
         vals_irsa = vals.copy()
-        not_in_irsa = ['cnaps', 'cnapsemp', 'totalcnaps', 'omsi', 'omsiemp', 'totalomsi']
+        not_in_irsa = ['cnaps', 'cnapsemp', 'totalcnaps', 'omsi', 'omsiemp', 'totalomsi', 'prm', 'hs', 'retenus', 'af', 'CHARGE_PAT']
         for cle in not_in_irsa:
             if cle in vals_irsa:
                 del vals_irsa[cle]
@@ -405,7 +419,7 @@ class HrPayslip(models.Model):
 
         # cnaps
         vals_cnaps = vals.copy()
-        not_in_cnaps = ['irsa', 'omsi', 'omsiemp', 'totalomsi']
+        not_in_cnaps = ['irsa', 'omsi', 'omsiemp', 'totalomsi', 'prm', 'hs', 'retenus', 'af', 'CHARGE_PAT']
         for cle in not_in_cnaps:
             if cle in vals_cnaps:
                 del vals_cnaps[cle]

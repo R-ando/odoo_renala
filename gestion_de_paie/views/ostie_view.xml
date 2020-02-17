@@ -25,11 +25,21 @@
                     <field name="name_related"/>
                     <field name="num_cin"/>
                     <field name="basic"/>
+                    <field name="prm"/>
+                    <field name="hs"/>
+                    <field name="retenus"/>
                     <field name="brut"/>
                     <field name="omsi"/>
                     <field name="omsiemp"/>
                     <field name="totalomsi"/>
+                    <field name="num_cnaps_emp"/>
+                    <field name="af"/>
+                    <field name="cnaps"/>
+                    <field name="cnapsemp"/>
+                    <field name="total_cnaps"/>
+                    <field name="irsa"/>
                     <field name="net"/>
+                    <field name="charge_pat"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
                 </tree>
