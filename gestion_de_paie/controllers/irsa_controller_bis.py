@@ -219,7 +219,7 @@ class ExportReportIrsaController(http.Controller):
         total_net_period = total['net'] - total['impnet']
         worksheet.write_number('D8', total_net_cumul + total['net'], workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
         worksheet.write_number('D11', total_net_period, workbook.add_format({'right': 1, "bg_color": "red"}))
-        worksheet.write_number('D13', total_net_cumul + total_net_period, workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
+        worksheet.write_number('D13', total_net_cumul + total_net_period + total['net'], workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
 
     # main function
     def fulfill(self, workbook, worksheet, payslips, year, month, total_net_cumul, company_id=None):
