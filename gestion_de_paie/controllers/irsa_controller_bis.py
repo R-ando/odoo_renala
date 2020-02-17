@@ -107,6 +107,7 @@ class ExportReportIrsaController(http.Controller):
             company_id.nstat if company_id.nstat else ''
         ), border_left)
         worksheet.write(13, 7, u'NI.F.: %s' % (company_id.nif if company_id.nif else ''))
+        worksheet.write('O3', u'%s' % company_id.email, border_left_top)
 
         return None
 
