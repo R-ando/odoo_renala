@@ -128,6 +128,8 @@ class ExportReportIrsaController(http.Controller):
         irsa = sum(payslip.line_ids.filtered(lambda x: x.code == 'IRSA').mapped('total'))
         enfant = payslip.employee_id.children * payslip.company_id.abat_irsa
         impnet = irsa - enfant
+        # force to zero if minus
+        impnet = impnet if impnet >= 0 else 0
 
         # compute sum
         total['basic2'] += basic2
@@ -169,7 +171,7 @@ class ExportReportIrsaController(http.Controller):
         border_black = workbook.add_format({"border_color": "black", 'border': 1})
         border_black_center = workbook.add_format({"border_color": "black", 'border': 1, 'valign': 'vcenter', 'text_wrap': True, 'align': 'center'})
 
-        worksheet.merge_range('B16:C17', u"Noms & Prénoms", border_black)
+        worksheet.merge_range('B16:C17', u"Noms & Prénoms, Profession, Adresse", border_black)
         worksheet.merge_range('D16:D17', u'N° CNaPS', border_black)
         worksheet.merge_range('E16:E17', u'Tps de travail', border_black)
         worksheet.merge_range('F16:F17', u'Salaire de base', border_black)
