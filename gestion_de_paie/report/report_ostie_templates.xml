@@ -70,49 +70,73 @@
                         <tbody>
                             <tr align="center" t-foreach="docs" t-as="line">
                                 <td>
-                                    <span t-esc="get_annee_mois(line.date_from)"/>
+                                    <span t-field="docs.employee_id.num_emp"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.name_related"/>
+                                    <span t-field="docs.employee_id.name"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.payslip_id.employee_id.num_cnaps_emp"/>
+                                    <span t-field="docs.basic"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.num_emp"/>
+                                    <span t-field="docs.prm"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.date_from"/>
+                                    <span t-field="docs.hs"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.date_to"/>
+                                    <span t-field="docs.retenus"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.net"/>
+                                    <span t-field="docs.brut"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.avantage"/>
+                                    <span t-field="docs.brut"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.temps_presence"/>
+                                    brut plaf
                                 </td>
                                 <td>
-                                    <span t-field="line.brut"/>
+                                    <span t-field="docs.omsi"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.payslip_id.employee_id.company_id.plafond_cnaps"/>
+                                    <span t-field="docs.omsiemp"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.omsiemp"/>
+                                    <span t-field="docs.totalomsi"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.omsi"/>
+                                    <span t-field="docs.num_cnaps_emp"/>
                                 </td>
                                 <td>
-                                    <span t-esc="line.omsi + line.omsiemp"/>
+                                    <span t-field="docs.num_cnaps_emp"/>
                                 </td>
                                 <td>
-                                    <span t-esc="get_passport_or_cin(line)"/>
+                                    <span t-field="docs.af"/>
+                                </td>
+                                <td>
+                                    Nbre de charge
+                                </td>
+                                <td>
+                                    Nbre de charge
+                                </td>
+                                <td>
+                                    <span t-field="docs.cnaps"/>
+                                </td>
+                                <td>
+                                    <span t-field="docs.cnapsemp"/>
+                                </td>
+                                <td>
+                                    Total cnaps
+                                </td>
+                                <td>
+                                    <span t-field="docs.irsa"/>
+                                </td>
+                                <td>
+                                    <span t-field="docs.net"/>
+                                </td>
+                                <td>
+                                    <span t-field="docs.date_from"/> - <span t-field="docs.date_to"/>
                                 </td>
                             </tr>
                         </tbody>
