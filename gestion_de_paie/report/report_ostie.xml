@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-		<record id="ostie_paysage" model="report.paperformat">
-		    <field name="name">format paysage</field>
-		    <field name="default" eval="True"/>
-		    <field name="format">A3</field>
-		    <field name="orientation">Landscape</field>
-		</record>
-        <report 
+    <record id="ostie_paysage" model="report.paperformat">
+        <field name="name">format paysage</field>
+        <field name="default" eval="True"/>
+        <field name="format">A3</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+    </record>
+
+    <report
             string="Etat général"
-            id="action_report_ostie" 
-            model="ostie" 
+            id="action_report_ostie"
+            model="ostie"
             report_type="qweb-pdf"
-            name="gestion_de_paie.report_ostie" 
+            name="gestion_de_paie.report_ostie"
             file="gestion_de_paie.report_ostie"
             paperformat="gestion_de_paie.ostie_paysage"
-        />
+    />
 </odoo>
