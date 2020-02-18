@@ -34,7 +34,7 @@ class ExportGeneralState(http.Controller):
         worksheet = workbook.add_worksheet("New Product")
 
         # Add a format for cells.
-        titre_format = workbook.add_format({'align': "center", "bg_color": "#ffa500", "font_color": "white", "border": 1})
+        titre_format = workbook.add_format({'align': "center", "font_color": "black", "border": 1})
         money_format = workbook.add_format({'num_format': '# ### ##0 [$MGA]'})
         date_format = workbook.add_format({'num_format': 'dd/mm/yyyy'})
         border_format = workbook.add_format({'border': 1})

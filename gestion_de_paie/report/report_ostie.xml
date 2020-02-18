@@ -20,5 +20,6 @@
             name="gestion_de_paie.report_ostie"
             file="gestion_de_paie.report_ostie"
             paperformat="gestion_de_paie.ostie_paysage"
+            menu="False"
     />
 </odoo>
