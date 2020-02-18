@@ -24,7 +24,7 @@
                     text-align:center;
                     font-size: xx-small;
                     }
-                    td,th {padding-top:1%;padding-bottom:1%;padding-right:1%;padding-left:1%;border:1px solid;}
+                    td,th {padding-top:1px;padding-bottom:1px;padding-right:1px;padding-left:1px;border:1px solid;}
                     table {margin-left:1%;margin-right:1%;border:1px solid;align:center;font-family: Arial, "Arial Black",Arial, Verdana, sans-serif;}
                     th {text-align:center;font-weight:bold;}
                     .tableau{width: 98%;}
@@ -34,11 +34,6 @@
                 <div class="oe_structure"/>
                 <!-- -->
                 <div class="row">
-                    <div>
-                        <div class="col-xs-6">
-                            <h2 class="cadre1">OSTIE</h2>
-                        </div>
-                    </div>
 
                     <table width="98%" border="1">
                         <thead>
@@ -76,6 +71,9 @@
                                     <span t-field="docs.employee_id.name"/>
                                 </td>
                                 <td>
+                                    <span t-field="docs.num_cin"/>
+                                </td>
+                                <td>
                                     <span t-field="docs.basic"/>
                                 </td>
                                 <td>
@@ -91,10 +89,7 @@
                                     <span t-field="docs.brut"/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.brut"/>
-                                </td>
-                                <td>
-                                    brut plaf
+                                    <span t-field="docs.brut_plafon"/>
                                 </td>
                                 <td>
                                     <span t-field="docs.omsi"/>
@@ -109,16 +104,10 @@
                                     <span t-field="docs.num_cnaps_emp"/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.num_cnaps_emp"/>
-                                </td>
-                                <td>
                                     <span t-field="docs.af"/>
                                 </td>
                                 <td>
-                                    Nbre de charge
-                                </td>
-                                <td>
-                                    Nbre de charge
+                                    <span t-field="docs.nbr_charge"/>
                                 </td>
                                 <td>
                                     <span t-field="docs.cnaps"/>
@@ -127,7 +116,7 @@
                                     <span t-field="docs.cnapsemp"/>
                                 </td>
                                 <td>
-                                    Total cnaps
+                                    <span t-field="docs.total_cnaps"/>
                                 </td>
                                 <td>
                                     <span t-field="docs.irsa"/>
@@ -136,7 +125,12 @@
                                     <span t-field="docs.net"/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.date_from"/> - <span t-field="docs.date_to"/>
+                                    <span t-field="docs.charge_pat"/>
+                                </td>
+                                <td>
+                                    <span style="display: block;" t-field="docs.date_from"/>
+                                    <span style="display: block;">-</span>
+                                    <span style="display: block;" t-field="docs.date_to"/>
                                 </td>
                             </tr>
                         </tbody>

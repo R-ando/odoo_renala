@@ -27,7 +27,7 @@ class ostie(models.Model):
     avantage = fields.Float('Avantage du mois')
     temps_presence = fields.Float('Temps presence')
     # new fields
-    total_cnaps = fields.Float('TOTAL CNaPS')
+    total_cnaps = fields.Float('TOTAL CNaPS', compute="_total_cnaps")
     prm = fields.Float(string='Prime')
     hs = fields.Float(string='Heures supp')
     retenus = fields.Float(string='Retenues')
@@ -36,6 +36,8 @@ class ostie(models.Model):
     num_cnaps_emp = fields.Char(string=u'N° CNaPS', related='employee_id.num_cnaps_emp', size=64)
     af = fields.Float(string="Allocation F.")
     charge_pat = fields.Float(string="Charge employeur")
+    brut_plafon = fields.Float(string=u"Brut plafonné", related="employee_id.company_id.plafond_cnaps")
+    nbr_charge = fields.Integer(string=u"Nbre de charge", related="employee_id.nombre_enfant_cnaps")
 
     @api.multi
     def generate_report(self):
@@ -49,6 +51,11 @@ class ostie(models.Model):
             }
             return actions
 
+    @api.multi
+    @api.depends('cnaps', 'cnapsemp')
+    def _total_cnaps(self):
+        for ostie in self:
+            ostie.total_cnaps = ostie.cnaps + ostie.cnapsemp
     # ===========================================================================
     # def unlink(self, cr, uid, ids, context=None):
     #     context = context or {}

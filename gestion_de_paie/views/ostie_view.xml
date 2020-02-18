@@ -29,11 +29,13 @@
                     <field name="hs"/>
                     <field name="retenus"/>
                     <field name="brut"/>
+                    <field name="brut_plafon"/>
                     <field name="omsi"/>
                     <field name="omsiemp"/>
                     <field name="totalomsi"/>
                     <field name="num_cnaps_emp"/>
                     <field name="af"/>
+                    <field name="nbr_charge"/>
                     <field name="cnaps"/>
                     <field name="cnapsemp"/>
                     <field name="total_cnaps"/>
