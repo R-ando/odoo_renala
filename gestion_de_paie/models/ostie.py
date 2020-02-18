@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+import datetime
+
+from odoo import fields, models, api
 from odoo.exceptions import ValidationError
+from odoo.http import request
 
 class ostie(models.Model):
     _name = "ostie"
@@ -34,15 +37,36 @@ class ostie(models.Model):
     af = fields.Float(string="Allocation F.")
     charge_pat = fields.Float(string="Charge employeur")
 
+    # krrrrrrrrrr
+    def _get_annee_mois(self, ddd):
+        strpdate = datetime.datetime.strptime(ddd, "%Y-%m-%d")
+        return str(strpdate.year) + "-" + str(strpdate.month)
 
+    def _get_passport_or_cin(self, obj):
+        if obj.employee_id.num_cin:
+            return obj.employee_id.num_cin
+        elif obj.employee_id.passport_id:
+            return obj.employee_id.passport_id
+        else:
+            return "-"
 
+    @api.multi
+    def generate_report(self):
+        if len(self.ids) == 1:
+            return self.env["report"].with_context(active_ids=self.ids, active_model='ostie').get_action([], 'gestion_de_paie.report_ostie')
+        else:
+            actions = {
+                'type': 'ir.actions.act_url',
+                'target': 'current',
+                'url': '/web/binary/',
+            }
+            return actions
 
-
-    #===========================================================================
+    # ===========================================================================
     # def unlink(self, cr, uid, ids, context=None):
     #     context = context or {}
     #     if not context.get('forcer_suppresion'):
     #         raise ValidationError( 'Supprimer le bulletin de paie lié pour une suppression')
     #
     #     super(ostie, self).unlink(cr, uid, ids, context=context)
-    #===========================================================================
+    # ===========================================================================

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="gestion_de_paie.report_etat_gnrl" model="ir.actions.server">
+        <field name="name">Générer le(s) document(s)</field>
+        <field name="model_id" ref="model_ostie"/>
+        <field name="state">code</field>
+        <field name="code">action = records.generate_report()</field>
+    </record>
+
+    <function model="ir.actions.server" name="create_action" eval="[ref('gestion_de_paie.report_etat_gnrl')]"/>
+</odoo>

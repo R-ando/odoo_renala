@@ -22,6 +22,8 @@
              'views/etat_payslip_view.xml',
              'views/resources.xml',
              'views/message_pop_view.xml',
+             'views/base_action.xml',
+
              'data/gestion_de_paie_data.xml',
 
              'report/report_paie_templates.xml',
