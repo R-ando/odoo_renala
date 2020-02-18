@@ -367,6 +367,11 @@ msgstr "Acquis\n"
 "                                <br/>"
 
 #. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_af
+msgid "Allocation F."
+msgstr "Allocation F."
+
+#. module: gestion_de_paie
 #: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
 msgid "Anc. Solde\n"
 "                                <br/>"
@@ -506,6 +511,11 @@ msgstr "Categorie Professionnel"
 #: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
 msgid "Catégorie :"
 msgstr "Catégorie :"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_charge_pat
+msgid "Charge employeur"
+msgstr "Charge employeur"
 
 #. module: gestion_de_paie
 #: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
@@ -697,11 +707,6 @@ msgid "ETAT DE LA CNAPS"
 msgstr "ETAT DE LA CNAPS"
 
 #. module: gestion_de_paie
-#: model:ir.ui.menu,name:gestion_de_paie.menu_payroll_ostie
-msgid "ETAT OSTIE"
-msgstr "ETAT OSTIE"
-
-#. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_echellon
 msgid "Echellon"
 msgstr "Echellon"
@@ -725,6 +730,11 @@ msgstr "Employé"
 #: model:ir.model,name:gestion_de_paie.model_hr_contract
 msgid "Employee Contract"
 msgstr "Contrat de l'employé"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_employee_id
+msgid "Employee id"
+msgstr "Employee id"
 
 #. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_employee_id
@@ -775,8 +785,6 @@ msgid "Etat IRSA"
 msgstr "Etat IRSA"
 
 #. module: gestion_de_paie
-#: model:ir.actions.act_window,name:gestion_de_paie.open_payroll_ostie
-#: model:ir.actions.report.xml,name:gestion_de_paie.action_report_ostie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_hr_payslip_ostie_id
 msgid "Etat OSTIE"
 msgstr "Etat OSTIE"
@@ -797,6 +805,14 @@ msgid "Etat global des salaires"
 msgstr "Etat global des salaires"
 
 #. module: gestion_de_paie
+#: model:ir.actions.act_window,name:gestion_de_paie.open_payroll_ostie
+#: model:ir.actions.report.xml,name:gestion_de_paie.action_report_ostie
+#: model:ir.model,name:gestion_de_paie.model_ostie
+#: model:ir.ui.menu,name:gestion_de_paie.menu_payroll_ostie
+msgid "Etat général"
+msgstr "Etat général"
+
+#. module: gestion_de_paie
 #: model:ir.model,name:gestion_de_paie.model_etat_irsa
 #: model:ir.model,name:gestion_de_paie.model_irsa
 msgid "Etat irsa"
@@ -804,7 +820,6 @@ msgstr "Etat irsa"
 
 #. module: gestion_de_paie
 #: model:ir.model,name:gestion_de_paie.model_etat_ostie
-#: model:ir.model,name:gestion_de_paie.model_ostie
 msgid "Etat ostie"
 msgstr "Etat ostie"
 
@@ -887,6 +902,11 @@ msgid "Heures Supplementaires"
 msgstr "Heures Supplementaires"
 
 #. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_hs
+msgid "Heures supp"
+msgstr "Heures supp"
+
+#. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_hr_contract_horaire_hebdo
 #: model:ir.ui.view,arch_db:gestion_de_paie.hr_contract_view_form_l10n_mg_paye
 msgid "Horaire hebdomadaire"
@@ -916,6 +936,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:gestion_de_paie.field_etat_irsa_irsa
 #: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_irsa
 #: model:ir.model.fields,field_description:gestion_de_paie.field_irsa_irsa
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_irsa
 #: model:ir.ui.menu,name:gestion_de_paie.etat_irsa_menu
 #: model:ir.ui.menu,name:gestion_de_paie.menu_etat_irsa
 #: model:ir.ui.view,arch_db:gestion_de_paie.report_etat_salaire
@@ -1208,6 +1229,11 @@ msgid "N° CNAPS"
 msgstr "N° CNAPS"
 
 #. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_num_cnaps_emp
+msgid "N° CNaPS"
+msgstr "N° CNaPS"
+
+#. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_hr_employee_num_emp
 #: model:ir.ui.view,arch_db:gestion_de_paie.hr_employee_form_l10n_mg_paye
 msgid "N° Matricule"
@@ -1326,6 +1352,11 @@ msgid "Prenom de l' employé"
 msgstr "Prenom de l' employé"
 
 #. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_prm
+msgid "Prime"
+msgstr "Prime"
+
+#. module: gestion_de_paie
 #: model:ir.ui.view,arch_db:gestion_de_paie.report_paie_document
 msgid "Pris\n"
 "                                <br/>"
@@ -1369,6 +1400,11 @@ msgstr "Recherche"
 #: model:ir.model,name:gestion_de_paie.model_resource_calendar
 msgid "Resource Calendar"
 msgstr "Calendrier de la ressource"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_retenus
+msgid "Retenues"
+msgstr "Retenues"
 
 #. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_cnaps_ref_employeur
@@ -1501,10 +1537,19 @@ msgid "TOTAL CNAPS"
 msgstr "TOTAL CNAPS"
 
 #. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_total_cnaps
+msgid "TOTAL CNaPS"
+msgstr "TOTAL CNaPS"
+
+#. module: gestion_de_paie
 #: model:ir.model.fields,field_description:gestion_de_paie.field_etat_salaire_totalomsi
-#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_totalomsi
 msgid "TOTAL OMSI"
 msgstr "TOTAL OMSI"
+
+#. module: gestion_de_paie
+#: model:ir.model.fields,field_description:gestion_de_paie.field_ostie_totalomsi
+msgid "TOTAL OSTIE"
+msgstr "TOTAL OSTIE"
 
 #. module: gestion_de_paie
 #: model:ir.ui.view,arch_db:gestion_de_paie.report_cnaps

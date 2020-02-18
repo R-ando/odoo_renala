@@ -70,7 +70,7 @@
         </record>
 
 		<record id="open_payroll_ostie" model="ir.actions.act_window">
-            <field name="name">Etat OSTIE</field>
+            <field name="name">Etat général</field>
             <field name="res_model">ostie</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -78,7 +78,7 @@
         </record>
         <!-- MENUS -->
         <menuitem id="menu_payroll_ostie"
-            name="ETAT OSTIE"
+            name="Etat général"
             action="open_payroll_ostie"
             parent="etat_payslip_menu"
             sequence="19"/>

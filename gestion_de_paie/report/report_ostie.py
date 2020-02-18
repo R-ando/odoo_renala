@@ -11,10 +11,10 @@ class report_ostie(models.AbstractModel):
         return str(strpdate.year) + "-" + str(strpdate.month)
 
     def _get_passport_or_cin(self, obj):
-        if obj.payslip_id.employee_id.num_cin:
-            return obj.payslip_id.employee_id.num_cin
-        elif obj.payslip_id.employee_id.passport_id:
-            return obj.payslip_id.employee_id.passport_id
+        if obj.employee_id.num_cin:
+            return obj.employee_id.num_cin
+        elif obj.employee_id.passport_id:
+            return obj.employee_id.passport_id
         else:
             return "-"
 

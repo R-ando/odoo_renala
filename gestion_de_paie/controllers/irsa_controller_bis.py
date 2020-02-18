@@ -75,7 +75,7 @@ class ExportReportIrsaController(http.Controller):
         worksheet.merge_range('E1:N1', u'REPOBLIKAN\' I MADAGASIKARA', middle)
         worksheet.merge_range('O2:R2', u'Etat à envoyer à l\'adresse suivante', border_black)
         worksheet.merge_range('G3:L3', u'SERVICES DES CONTRIBUTIONS DIRECTES', bold_middle)
-        worksheet.merge_range('G4:L4', u'ETAT NOMINATIF DES TRAITEMENTS SALAIRES ET ASIMILES PAYES', bold_middle)
+        worksheet.merge_range('F4:M4', u'ETAT NOMINATIF DES TRAITEMENTS SALAIRES ET ASIMILES PAYES', bold_middle)
         worksheet.merge_range('B8:C8', u'Montant des salaires et assimilés payés', border_left_top)
         worksheet.merge_range('B9:C9', u'depuis le début de l\'année', border_left)
         worksheet.merge_range('B10:C10', u'Montant des salaires et assimilés payés', border_left)

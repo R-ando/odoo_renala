@@ -7,7 +7,7 @@
 		    <field name="orientation">Landscape</field>
 		</record>
         <report 
-            string="Etat OSTIE" 
+            string="Etat général"
             id="action_report_ostie" 
             model="ostie" 
             report_type="qweb-pdf"
