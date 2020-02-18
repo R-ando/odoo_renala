@@ -33,10 +33,11 @@ class ExportGeneralState(http.Controller):
         workbook = xlsxwriter.Workbook(output)
         worksheet = workbook.add_worksheet("New Product")
 
-        # Add a numbformat for cells with money.
-        titre_format = workbook.add_format({'align': "center", "bg_color": "#ffa500", "font_color": "white"})
+        # Add a format for cells.
+        titre_format = workbook.add_format({'align': "center", "bg_color": "#ffa500", "font_color": "white", "border": 1})
         money_format = workbook.add_format({'num_format': '# ### ##0 [$MGA]'})
         date_format = workbook.add_format({'num_format': 'dd/mm/yyyy'})
+        border_format = workbook.add_format({'border': 1})
 
         row = 0
         worksheet.write(row, 0, u"Matricule", titre_format)
@@ -67,30 +68,32 @@ class ExportGeneralState(http.Controller):
         logger.debug("Ostie: {}".format(ostie))
 
         for o in ostie:
-            worksheet.write(row, 0, o.employee_id.num_emp)
-            worksheet.write(row, 1, o.employee_id.name)
-            worksheet.write(row, 2, o.num_cin)
-            worksheet.write(row, 3, o.basic)
-            worksheet.write(row, 4, o.prm)
-            worksheet.write(row, 5, o.hs)
-            worksheet.write(row, 6, o.retenus)
-            worksheet.write(row, 7, o.brut)
-            worksheet.write(row, 8, o.brut_plafon)
-            worksheet.write(row, 9, o.omsi, money_format)
-            worksheet.write(row, 10, o.omsiemp)
-            worksheet.write(row, 11, o.totalomsi)
-            worksheet.write(row, 12, o.num_cnaps_emp)
-            worksheet.write(row, 13, o.af)
-            worksheet.write(row, 14, o.nbr_charge)
-            worksheet.write(row, 15, o.cnaps)
-            worksheet.write(row, 16, o.cnapsemp)
-            worksheet.write(row, 17, o.total_cnaps)
-            worksheet.write(row, 18, o.irsa)
-            worksheet.write(row, 19, o.net)
-            worksheet.write(row, 20, o.charge_pat)
+            worksheet.write(row, 0, o.employee_id.num_emp, border_format)
+            worksheet.write(row, 1, o.employee_id.name, border_format)
+            worksheet.write(row, 2, o.num_cin, border_format)
+            worksheet.write(row, 3, o.basic, border_format)
+            worksheet.write(row, 4, o.prm, border_format)
+            worksheet.write(row, 5, o.hs, border_format)
+            worksheet.write(row, 6, o.retenus, border_format)
+            worksheet.write(row, 7, o.brut, border_format)
+            worksheet.write(row, 8, o.brut_plafon, border_format)
+            worksheet.write(row, 9, o.omsi, border_format)
+            worksheet.write(row, 10, o.omsiemp, border_format)
+            worksheet.write(row, 11, o.totalomsi, border_format)
+            worksheet.write(row, 12, o.num_cnaps_emp, border_format)
+            worksheet.write(row, 13, o.af, border_format)
+            worksheet.write(row, 14, o.nbr_charge, border_format)
+            worksheet.write(row, 15, o.cnaps, border_format)
+            worksheet.write(row, 16, o.cnapsemp, border_format)
+            worksheet.write(row, 17, o.total_cnaps, border_format)
+            worksheet.write(row, 18, o.irsa, border_format)
+            worksheet.write(row, 19, o.net, border_format)
+            worksheet.write(row, 20, o.charge_pat, border_format)
 
-            date = o.date_from + " " + o.date_to
-            worksheet.write(row, 21, date)
+            date_from = datetime.strptime(o.date_from, "%Y-%m-%d").strftime("%d-%m-%Y")
+            date_to = datetime.strptime(o.date_to, "%Y-%m-%d").strftime("%d-%m-%Y")
+            date = date_from + " - " + date_to
+            worksheet.write(row, 21, date, border_format)
             row += 1
 
         workbook.close()
