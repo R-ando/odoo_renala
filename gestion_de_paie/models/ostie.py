@@ -48,7 +48,7 @@ class ostie(models.Model):
             actions = {
                 'type': 'ir.actions.act_url',
                 'target': 'current',
-                'url': '/web/binary/general_state?active_ids={}'.format(ctx.get('active_ids'))
+                'url': '/web/binary/general_state?context={}'.format(ctx.get('active_ids'))
             }
             return actions
 
