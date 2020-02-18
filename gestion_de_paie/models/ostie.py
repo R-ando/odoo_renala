@@ -42,10 +42,11 @@ class ostie(models.Model):
         if len(self.ids) == 1:
             return self.env["report"].with_context(active_ids=self.ids, active_model='ostie').get_action([], 'gestion_de_paie.report_ostie')
         else:
+            ctx = self._context
             actions = {
-                # 'type': 'ir.actions.act_url',
-                # 'target': 'current',
-                # 'url': '/web/binary/',
+                'type': 'ir.actions.act_url',
+                'target': 'current',
+                'url': '/web/binary/general_state?active_ids={}'.format(ctx.get('active_ids'))
             }
             return actions
 
