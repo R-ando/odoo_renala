@@ -90,10 +90,7 @@ class ExportGeneralState(http.Controller):
             worksheet.write(row, 19, o.net, border_format)
             worksheet.write(row, 20, o.charge_pat, border_format)
 
-            date_from = datetime.strptime(o.date_from, "%Y-%m-%d").strftime("%d-%m-%Y")
-            date_to = datetime.strptime(o.date_to, "%Y-%m-%d").strftime("%d-%m-%Y")
-            date = date_from + " - " + date_to
-            worksheet.write(row, 21, date, border_format)
+            worksheet.write(row, 21, o.period, border_format)
             row += 1
 
         workbook.close()

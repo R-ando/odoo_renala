@@ -128,9 +128,7 @@
                                     <span t-field="docs.charge_pat"/>
                                 </td>
                                 <td>
-                                    <span style="display: block;" t-field="docs.date_from"/>
-                                    <span style="display: block;">-</span>
-                                    <span style="display: block;" t-field="docs.date_to"/>
+                                    <span t-field="docs.period"/>
                                 </td>
                             </tr>
                         </tbody>

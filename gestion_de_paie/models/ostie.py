@@ -38,6 +38,7 @@ class ostie(models.Model):
     charge_pat = fields.Float(string="Charge employeur")
     brut_plafon = fields.Float(string=u"Brut plafonné", related="employee_id.company_id.plafond_cnaps")
     nbr_charge = fields.Integer(string=u"Nbre de charge", related="employee_id.nombre_enfant_cnaps")
+    period = fields.Char(string=u"Période", compute="_get_month", size=15)
 
     @api.multi
     def generate_report(self):
@@ -57,6 +58,12 @@ class ostie(models.Model):
     def _total_cnaps(self):
         for ostie in self:
             ostie.total_cnaps = ostie.cnaps + ostie.cnapsemp
+
+    @api.multi
+    @api.depends('date_from')
+    def _get_month(self):
+        for ostie in self:
+            ostie.period = datetime.datetime.strptime(ostie.date_from, "%Y-%m-%d").strftime("%B").upper()
     # ===========================================================================
     # def unlink(self, cr, uid, ids, context=None):
     #     context = context or {}

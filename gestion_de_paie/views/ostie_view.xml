@@ -42,8 +42,9 @@
                     <field name="irsa"/>
                     <field name="net"/>
                     <field name="charge_pat"/>
-                    <field name="date_from"/>
-                    <field name="date_to"/>
+                    <field name="date_from" invisible="1"/>
+                    <field name="date_to" invisible="1"/>
+                    <field name="period"/>
                 </tree>
             </field>
         </record>
