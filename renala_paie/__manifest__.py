@@ -18,6 +18,9 @@
     'depends': ['base', 'gestion_de_paie'],
 
     'data': [
+        # view
+        "views/hr_holidays_views.xml",
+
         # data
         "data/renala_paie_data.xml",
 
