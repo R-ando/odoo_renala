@@ -21,9 +21,6 @@
         # view
         "views/hr_holidays_views.xml",
 
-        # data
-        "data/renala_paie_data.xml",
-
         # report
         "report/report_paie_templates.xml",
     ],
