@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from odoo import models, fields
-from odoo.addons import decimal_precision as dp
+from odoo import models
 
 
 class HrPayslipLine(models.Model):
