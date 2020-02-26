@@ -7,6 +7,10 @@ from odoo.addons import decimal_precision as dp
 class HrPayslipLine(models.Model):
     _inherit = 'hr.payslip.line'
 
-    rate = fields.Float(digits=dp.get_precision('Renala Paie'))
-    amount = fields.Float(digits=dp.get_precision('Renala Paie'))
-    total = fields.Float(compute='_compute_total', string='Total', digits=dp.get_precision('Renala Paie'), store=True)
+    def _compute_total(self):
+        for line in self:
+            total = float(line.quantity) * line.amount * line.rate / 100
+            if line.code != "HWORK":
+                line.total = round(total)
+            else:
+                line.total = total
