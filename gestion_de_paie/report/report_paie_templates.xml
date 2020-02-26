@@ -402,7 +402,8 @@
                                 <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES']">
                                     <span t-field="line.total"/>
                                 </t>
-                                <span t-if="line.code == 'INFO'" t-field="line.amount"/>
+                                <!-- changed line.amount -> line.total -->
+                                <span t-if="line.code == 'INFO'" t-field="line.total"/>
                             </td>
                             <td>
                                 <t t-if="line.code == 'CNAPS_EMP'">
