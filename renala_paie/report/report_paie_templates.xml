@@ -50,7 +50,7 @@
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[3]" position="replace">
             <td>
                 <t t-if="line.amount_select == 'percentage'">
-                    <span t-field="line.rate"/>
+                    <span t-field="line.rate" t-options='{"widget": "float", "precision": 0}'/>
                 </t>
                 <t t-if="line.amount_select &lt;&gt; 'percentage'"/>
                 <t t-if="line.code == 'CNAPS_EMP'">
@@ -76,6 +76,26 @@
                 <t t-if="line.code == 'FMFP_PAT' and line.amount!=0">
                     <span t-esc="o.employee_id.company_id.seuil_fmfp" t-options='{"widget": "float", "precision": 0}'/>
                 </t>
+            </td>
+        </xpath>
+
+        <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[6]" position="replace">
+            <td>
+                <t t-if="o.stc and o.priornotice!=0">
+                    <t t-if="line.code in ['PR']">
+                        <t t-if="o.priornotice &lt; 0  ">
+                            <span t-esc="absolute_value(line.total).replace('-','')"/>
+                        </t>
+                    </t>
+                </t>
+                <t t-if=" line.code in ['MOINS'] and line.total != 0 ">
+                    <span t-field="line.total" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+                <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP','IRSA', 'AVANCE15','AVANCESP','AUTRES']">
+                    <span t-field="line.total" t-options='{"widget": "float", "precision": 0}'/>
+                </t>
+                <!-- changed line.amount -> line.total -->
+                <span t-if="line.code == 'INFO'" t-field="line.total" t-options='{"widget": "float", "precision": 0}'/>
             </td>
         </xpath>
 
