@@ -331,7 +331,7 @@
                                     <span></span>
                                 </t>
                                 <t t-if="line.code in ['CNAPS_EMP','OMSI_EMP']">
-                                    <span t-esc="get_format(get_total_by_rule_category(o,'GROSS'))"/>
+                                    <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total"/>
                                 </t>
                                 <t t-if="line.code == 'IRSA'">
                                     <span t-esc="get_format(get_total_by_rule_category(o, 'GROSS')
