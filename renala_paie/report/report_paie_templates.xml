@@ -7,43 +7,43 @@
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[2]/t[5]/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o, 'GROSS')
-                            	        -get_total_by_rule_category(o,'CNAPS')
-                            	        -get_total_by_rule_category(o,'OMSI')
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total
+                            	        -o.line_ids.filtered(lambda x: x.code == 'CNAPS').total
+                            	        -o.line_ids.filtered(lambda x: x.code == 'OMSI').total
                             	        -o.employee_id.company_id.abat_irsa*o.employee_id.children" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[1]/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'CNAPS_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'CNAPS_PAT').total" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[2]/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'OMSI_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'OMSI_PAT').total" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[3]/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'FMFP_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'FMFP_PAT').total" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[2]/td[5]/strong/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'GROSS')" t-options='{"widget": "float", "precision": 0}'/>
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[2]/td[6]/strong/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'TOTAL_DED')" t-options='{"widget": "float", "precision": 0}'/>
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'TOTAL_DED').total" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[2]/td[8]/strong/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'CHARGE_PAT')" t-options='{"widget": "float", "precision": 0}'/>
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'CHARGE_PAT').total" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau2')]/tr[2]/td[1]/strong/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')"
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total - o.line_ids.filtered(lambda x: x.code == 'TOTAL_DED').total"
                   t-options='{"widget": "float", "precision": 0}'/>&#160;<t t-esc="o.company_id.currency_id.symbol"/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau2')]/tr[2]/td[2]/span" position="replace">
-            <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')+get_total_by_rule_category(o,'CHARGE_PAT')"
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total - o.line_ids.filtered(lambda x: x.code == 'TOTAL_DED').total + o.line_ids.filtered(lambda x: x.code == 'CHARGE_PAT').total"
                   t-options='{"widget": "float", "precision": 0}'/>&#160;<t t-esc="o.company_id.currency_id.symbol"/>
         </xpath>
 
