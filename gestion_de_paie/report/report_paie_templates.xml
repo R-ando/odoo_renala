@@ -364,7 +364,7 @@
                             </td>
                             <td>
                                 <t t-if="line.code not in ['CNAPS_EMP','OMSI_EMP','IRSA','AVANCE15','AVANCESP','PRM'] and get_employe_line(o,line)">
-                                    <span t-esc="get_format(get_employe_line(o,line).total)"/>
+                                    <span t-field="line.quantity"/>
                                 </t>
                                 <t t-if="o.stc and o.rest_leave!=0">
                                     <t t-if="line.code in ['CP']">
@@ -471,6 +471,7 @@
                             <td style="text-align: center;">
                                 Acquis
                                 <br/>
+                                <!-- TODO: optmize this function get_employee_allocation_leaves -->
                                 <span t-esc="get_format(get_employee_allocation_leaves(o.employee_id, o.date_from))"/>
                             </td>
                             <td style="text-align: center;">
