@@ -465,7 +465,8 @@
                             <td style="text-align: center;">
                                 Anc. Solde
                                 <br/>
-                                <span t-esc="get_format(o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from) + get_employee_request_leaves(o.employee_id, o.date_from, o.date_to, False))"/>
+<!--                                <span t-esc="get_format(o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from) + get_employee_request_leaves(o.employee_id, o.date_from, o.date_to, False))"/>-->
+                                <span t-esc="get_format(o.employee_id.leaves_count - get_employee_allocation_leaves(o.employee_id, o.date_from) + o._get_taken_leave())"/>
                             </td>
                             <td style="text-align: center;">
                                 Acquis
@@ -481,7 +482,7 @@
                             <td style="text-align: center;">
                                 Nouv. Solde
                                 <br/>
-                                <span t-esc="get_format(o.employee_id.remaining_leaves)"/>
+                                <span t-esc="get_format(o.employee_id.leaves_count)"/>
                             </td>
                         </tr>
                     </tbody>
