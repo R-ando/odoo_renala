@@ -23,6 +23,7 @@
              'views/resources.xml',
              'views/message_pop_view.xml',
              'views/base_action.xml',
+             'views/hr_payroll_report.xml',
 
              'data/gestion_de_paie_data.xml',
 
