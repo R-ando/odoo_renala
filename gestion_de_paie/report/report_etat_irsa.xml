@@ -24,11 +24,11 @@
                 <tree string="irsa" edit="false" create="false">
                     <field name="num_emp"/>
                     <field name="employee"/>
-                    <field name="date_from"/>
-                    <field name="date_to"/>
                     <field name="brut"/>
                     <field name="net"/>
                     <field name="irsa"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
                 </tree>
             </field>
         </record>
