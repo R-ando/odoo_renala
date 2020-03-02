@@ -153,7 +153,7 @@ class ExportReportIrsaController(http.Controller):
                                payslip.employee_id.job_id.name if payslip.employee_id.job_id.name else '',
                                payslip.employee_id.address_home_id.street if payslip.employee_id.address_home_id.street else ''), border_black)
         worksheet.write(row, col + 2, '%s' % (payslip.employee_id.num_cnaps_emp if payslip.employee_id.num_cnaps_emp else ''), border_black)
-        worksheet.write_number(row, col + 3, payslip.contract_id.number_of_hours, border_black)
+        worksheet.write_number(row, col + 3, payslip.line_ids.filtered(lambda x: x.code == 'BASIC').quantity, border_black)
         worksheet.write_number(row, col + 4, basic2, border_black)
         worksheet.write_number(row, col + 5, prm, border_black)
         worksheet.write_number(row, col + 6, hs, border_black)
