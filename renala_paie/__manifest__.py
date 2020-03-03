@@ -23,6 +23,9 @@
 
         # report
         "report/report_paie_templates.xml",
+
+        # data
+        "data/hr_payroll_data.xml",
     ],
 
     'sequence': 1,
