@@ -462,28 +462,27 @@
                             <td>
                                 <strong>Congé</strong>
                             </td>
+                            <t t-set="leaves" t-value="o._get_leaves()"/>
                             <td style="text-align: center;">
                                 Anc. Solde
                                 <br/>
-<!--                                <span t-esc="get_format(o.employee_id.remaining_leaves - get_employee_allocation_leaves(o.employee_id, o.date_from) + get_employee_request_leaves(o.employee_id, o.date_from, o.date_to, False))"/>-->
-                                <span t-esc="get_format(o.employee_id.leaves_count - get_employee_allocation_leaves(o.employee_id, o.date_from) + o._get_taken_leave())"/>
+                                <span t-esc="get_format(leaves['anc'])"/>
                             </td>
                             <td style="text-align: center;">
                                 Acquis
                                 <br/>
                                 <!-- TODO: optmize this function get_employee_allocation_leaves -->
-                                <span t-esc="get_format(get_employee_allocation_leaves(o.employee_id, o.date_from))"/>
+                                <span t-esc="get_format(leaves['acquis'])"/>
                             </td>
                             <td style="text-align: center;">
                                 Pris
                                 <br/>
-                                <t t-set="pris" t-value="o._get_taken_leave()"/>
-                                <span t-esc="get_format(pris)"/>
+                                <span t-esc="get_format(leaves['pris'])"/>
                             </td>
                             <td style="text-align: center;">
                                 Nouv. Solde
                                 <br/>
-                                <span t-esc="get_format(o.employee_id.leaves_count)"/>
+                                <span t-esc="get_format(leaves['solde'])"/>
                             </td>
                         </tr>
                     </tbody>
@@ -493,7 +492,7 @@
                     <div class="col-xs-7">
                         <br/>
                         <span>
-                            <strong style="font-weight: normal; font-family:Calibri;">Fait à <t t-esc="o.company_id.city"/>, le <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/></strong>
+                            <strong style="font-weight: normal; font-family:Calibri;">Fait à <t t-esc="o.company_id.city"/>, </strong>
                         </span>
                         <br/>
                         <br/>
