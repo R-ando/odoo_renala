@@ -690,11 +690,11 @@ class HrPayslip(models.Model):
         month = int(last_month_date.strftime("%m"))
         begin_last_month_day = 1
         end_last_month_day = calendar.monthrange(year, month)[1]
-        begin_last_month_date = datetime.strptime('%s-%s-%s' % (year, month, begin_last_month_day), '%Y-%m-%d')
+        begin_last_month_date = datetime.strptime('%s-%s-%s' % (year, 1, begin_last_month_day), '%Y-%m-%d')
         end_last_month_date = datetime.strptime('%s-%s-%s' % (year, month, end_last_month_day), '%Y-%m-%d')
         domain_alloc_anc_leaves = [
             ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
-            ('allocation_month', '=', month),
+            ('allocation_month', 'in', [x+1 for x in range(month)]),
             ('allocation_year', '=', year)
         ]
         domain_taken_anc_leaves = [
