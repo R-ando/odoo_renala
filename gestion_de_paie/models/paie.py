@@ -671,6 +671,48 @@ class HrPayslip(models.Model):
     #     super(hr_payslip, self).unlink(cr, uid, ids, context=context)
 # ===========================================================================
 
-    def _get_taken_leave(self):
-        hr_holidays_ids = self.env['hr.holidays'].search([('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'remove'), ('date_from', '>=', self.date_from), ('date_to', '<=', self.date_to)])
-        return sum(hr_holidays_ids.mapped('number_of_days_temp'))
+    # new method for computing leaves
+    # date and datetime format have string representation in Odoo Object. This is not the case in Odoo upper version
+    def _get_leaves(self):
+        # import that is used only iny this
+        domain_taken_leaves = [
+            ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
+            ('type', '=', 'remove'), ('date_from', '>=', self.date_from),
+            ('date_to', '<=', self.date_to)
+        ]
+        domain_alloc_leaves = [
+            ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
+            ('allocation_month', '=', fields.Datetime.from_string(self.date_from).month),
+            ('allocation_year', '=', fields.Datetime.from_string(self.date_from).year)
+        ]
+        last_month_date = datetime.strptime(self.date_from, '%Y-%m-%d') + relativedelta(months=-1)
+        year = int(last_month_date.strftime("%Y"))
+        month = int(last_month_date.strftime("%m"))
+        begin_last_month_day = 1
+        end_last_month_day = calendar.monthrange(year, month)[1]
+        begin_last_month_date = datetime.strptime('%s-%s-%s' % (year, month, begin_last_month_day), '%Y-%m-%d')
+        end_last_month_date = datetime.strptime('%s-%s-%s' % (year, month, end_last_month_day), '%Y-%m-%d')
+        domain_alloc_anc_leaves = [
+            ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
+            ('allocation_month', '=', month),
+            ('allocation_year', '=', year)
+        ]
+        domain_taken_anc_leaves = [
+            ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
+            ('type', '=', 'remove'), ('date_from', '>=', begin_last_month_date.strftime("%Y-%m-%d")),
+            ('date_to', '<=', end_last_month_date.strftime("%Y-%m-%d"))
+        ]
+        acquis = sum(self.env['hr.holidays'].search(domain_alloc_leaves).mapped('number_of_days_temp'))
+        pris = sum(self.env['hr.holidays'].search(domain_taken_leaves).mapped('number_of_days_temp'))
+        anc = sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves).mapped('number_of_days_temp')) - sum(self.env['hr.holidays'].search(domain_taken_anc_leaves).mapped('number_of_days_temp'))
+        solde = acquis - pris + anc
+
+        # or send immutable object
+        leaves = {
+            'anc': anc,
+            'acquis': acquis,
+            'pris': pris,
+            'solde': solde,
+        }
+
+        return leaves
