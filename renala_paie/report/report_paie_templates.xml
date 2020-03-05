@@ -38,7 +38,7 @@
         </xpath>
 
         <xpath expr="//table[hasclass('tableau2')]/tr[2]/td[1]/strong/span" position="replace">
-            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total - o.line_ids.filtered(lambda x: x.code == 'TOTAL_DED').total"
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'NET').total"
                   t-options='{"widget": "float", "precision": 0}'/>&#160;<t t-esc="o.company_id.currency_id.symbol"/>
         </xpath>
 

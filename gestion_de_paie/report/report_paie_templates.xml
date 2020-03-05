@@ -517,7 +517,7 @@
                             <tr>
                                 <td style="text-align:center" class="no_border_top t2_center">
                                     <strong>
-                                        <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total - o.line_ids.filtered(lambda x: x.code == 'TOTAL_DED').total"
+                                        <span t-esc="o.line_ids.filtered(lambda x: x.code == 'NET').total"
                                               t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                     </strong>
                                 </td>
