@@ -728,20 +728,38 @@ class HrPayslip(models.Model):
         end_last_month_day = calendar.monthrange(year, month)[1]
         begin_last_month_date = datetime.strptime('%s-%s-%s' % (year, 1, begin_last_month_day), '%Y-%m-%d')
         end_last_month_date = datetime.strptime('%s-%s-%s' % (year, month, end_last_month_day), '%Y-%m-%d')
-        # TODO : make all, not month minus one
-        domain_alloc_anc_leaves = [
-            ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
-            ('allocation_month', 'in', [x+1 for x in range(month)]),
-            ('allocation_year', '=', year)
-        ]
+        # new implementation, 3 years cumul leaves
+        contract_date_start = fields.Date.from_string(self.contract_id.date_start)
+        date_from = fields.Date.from_string(self.date_from)
+        current = relativedelta(date_from, contract_date_start)
+        date_begin_x = contract_date_start
+        # TODO : alloc leave can be optimize
+        if current.year >= 3:
+            date_begin_x = contract_date_start + relativedelta(year=current.year)
+        if year == date_from.year:
+            domain_alloc_anc_leaves = [
+                ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
+                ('allocation_month', 'in', [x+1 for x in range(12)]), ('allocation_year', 'in', [x for x in range(date_begin_x.year, date_from.year)])
+            ]
+            domain_alloc_anc_leaves_1 = [
+                ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
+                ('allocation_month', 'in', [x + 1 for x in range(month)]), ('allocation_year', '=', year),
+            ]
+            alloc_anc_leaves = sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves).mapped('number_of_days_temp')) + sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves_1).mapped('number_of_days_temp'))
+        else:
+            domain_alloc_anc_leaves = [
+                ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
+                ('allocation_month', 'in', [x + 1 for x in range(12)]), ('allocation_year', 'in', [x for x in range(date_begin_x.year, date_from.year)])
+            ]
+            alloc_anc_leaves = sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves).mapped('number_of_days_temp'))
         domain_taken_anc_leaves = [
             ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
-            ('type', '=', 'remove'), ('date_from', '>=', begin_last_month_date.strftime("%Y-%m-%d")),
+            ('type', '=', 'remove'), ('date_from', '>=', date_begin_x.strftime("%Y-%m-%d")),
             ('date_to', '<=', end_last_month_date.strftime("%Y-%m-%d"))
         ]
         acquis = sum(self.env['hr.holidays'].search(domain_alloc_leaves).mapped('number_of_days_temp'))
         pris = sum(self.env['hr.holidays'].search(domain_taken_leaves).mapped('number_of_days_temp'))
-        anc = sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves).mapped('number_of_days_temp')) - sum(self.env['hr.holidays'].search(domain_taken_anc_leaves).mapped('number_of_days_temp'))
+        anc = alloc_anc_leaves - sum(self.env['hr.holidays'].search(domain_taken_anc_leaves).mapped('number_of_days_temp'))
         solde = acquis - pris + anc
 
         # or send immutable object
