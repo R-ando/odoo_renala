@@ -56,16 +56,16 @@ class HrPayslip(models.Model):
 
     paiement_mode_id = fields.Many2one(related='contract_id.payment_mode_id')
     stc = fields.Boolean(string='STC')
-    half_salary = fields.Boolean(string='Demi-salaire')
-    priornotice = fields.Float(string=u"Préavis", store=True)
-    base = fields.Float(string="Base", store=True, default='30')
+    half_salary = fields.Boolean(string='Demi-salaire', copy=False)
+    priornotice = fields.Float(string=u"Préavis", store=True, copy=False)
+    base = fields.Float(string="Base", store=True, default='30', copy=False)
     number_days_worked = fields.Float(string="Nombre de jours travaillé", compute='get_number_days_worked')
     missed_days = fields.Float(string="Jours Manqué", store=True)
-    average_gross_notice = fields.Float(string=u"SBR moyen préavis", store=True, compute='compute_sheet')
+    average_gross_notice = fields.Float(string=u"SBR moyen préavis", store=True, compute='_compute_average_gross_prv')
     average_gross = fields.Float(string="SBR Moyen", store=True, compute='_compute_average_gross')
-    preavis = fields.Float(compute='compute_sheet', store=True)
-    additional_gross = fields.Float(string="SBR additionnel", delault=0.00)
-    leave_paye = fields.Float(delault=0.00)
+    preavis = fields.Float(string="Préavis", default=0.0, copy=False)
+    additional_gross = fields.Float(string="SBR additionnel", delault=0.00, copy=False)
+    leave_paye = fields.Float(delault=0.00, copy=False)
     rest_leave = fields.Float(string=u"Congé payé", store=True, default=lambda self: self.employee_id.leaves_count)
     seniority = fields.Char("Ancienneté", compute='_compute_seniority')
 
@@ -603,6 +603,22 @@ class HrPayslip(models.Model):
             sum_sbr = sum(self.search(domain, order='create_date desc', limit=limit).mapped('line_ids').filtered(lambda x: x.code == 'GROSS').mapped('amount'))
             # sum_average_gross = sum(self.search(domain, order='create_date desc', limit=limit).mapped('average_gross'))
             self.average_gross = round((sum_sbr + self.additional_gross) / base_seniority, 2)
+
+    @api.one
+    @api.depends('stc', 'preavis')
+    def _compute_average_gross_prv(self):
+        self.ensure_one()
+        if self.stc and self.priornotice:
+            match_seniority = self.seniority.split()
+            total_seniority = int(match_seniority[0]) * 12 + int(match_seniority[2])
+            base_seniority = total_seniority if total_seniority else 1  # avoid dividing by 0
+            limit = 2
+            if not isinstance(self.id, models.NewId):
+                domain = [('employee_id', '=', self.employee_id.id), ('date_from', '<=', self.date_from), ('id', '!=', self.id)]
+            else:
+                domain = [('employee_id', '=', self.employee_id.id), ('date_from', '<=', self.date_from)]
+            sum_sbr = sum(self.search(domain, order='create_date desc', limit=limit).mapped('line_ids').filtered(lambda x: x.code == 'GROSS').mapped('amount'))
+            self.average_gross_notice = round((sum_sbr + self.additional_gross) / base_seniority, 2)
 
     @api.multi
     def compute_sheet(self):
