@@ -62,9 +62,9 @@ class HrPayslip(models.Model):
     number_days_worked = fields.Float(string="Nombre de jours travaillé", compute='get_number_days_worked')
     missed_days = fields.Float(string="Jours Manqué", store=True)
     average_gross_notice = fields.Float(string=u"SBR moyen préavis", store=True, compute='compute_sheet')
-    average_gross = fields.Float(string="SBR Moyen", store=True, compute='compute_sheet')
+    average_gross = fields.Float(string="SBR Moyen", store=True, compute='_compute_average_gross')
     preavis = fields.Float(compute='compute_sheet', store=True)
-    additional_gross = fields.Float(string="SBR additionnel", store=True, delault=0.00)
+    additional_gross = fields.Float(string="SBR additionnel", delault=0.00)
     leave_paye = fields.Float(delault=0.00)
     rest_leave = fields.Float(string=u"Congé payé", store=True, default=lambda self: self.employee_id.leaves_count)
     seniority = fields.Char("Ancienneté", compute='_compute_seniority')
@@ -581,6 +581,28 @@ class HrPayslip(models.Model):
                     blacklist += [id for id, seq in rule._recursive_search_of_rules()]
 
         return [value for code, value in result_dict.items()]
+
+    @api.one
+    @api.depends('stc')
+    def _compute_average_gross(self):
+        self.ensure_one()
+        if self.stc:
+            base_seniority = 12
+            match_seniority = self.seniority.split()
+            # ilay année n atao * 12
+            total_seniority = int(match_seniority[0]) * 12 + int(match_seniority[2])
+            limit = 12
+            if total_seniority < 12:
+                base_seniority = total_seniority if total_seniority else 1  # avoid dividing by 0
+            # if the hr.payslip is already in db
+            if not isinstance(self.id, models.NewId):
+                domain = [('employee_id', '=', self.employee_id.id), ('date_from', '<=', self.date_from), ('id', '!=', self.id)]
+            else:
+                domain = [('employee_id', '=', self.employee_id.id), ('date_from', '<=', self.date_from)]
+            # could be self.env.cr.execute() but ...
+            sum_sbr = sum(self.search(domain, order='create_date desc', limit=limit).mapped('line_ids').filtered(lambda x: x.code == 'GROSS').mapped('amount'))
+            # sum_average_gross = sum(self.search(domain, order='create_date desc', limit=limit).mapped('average_gross'))
+            self.average_gross = round((sum_sbr + self.additional_gross) / base_seniority, 2)
 
     @api.multi
     def compute_sheet(self):
