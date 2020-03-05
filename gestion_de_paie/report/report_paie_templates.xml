@@ -517,15 +517,11 @@
                             <tr>
                                 <td style="text-align:center" class="no_border_top t2_center">
                                     <strong>
-<!--                                        <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')"-->
-<!--                                              t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>-->
                                         <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total - o.line_ids.filtered(lambda x: x.code == 'TOTAL_DED').total"
                                               t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                     </strong>
                                 </td>
                                 <td style="text-align:center" class="no_border_top t2_center">
-<!--                                    <span t-esc="get_total_by_rule_category(o,'GROSS')-get_total_by_rule_category(o,'TOTAL_DED')+get_total_by_rule_category(o,'CHARGE_PAT')"-->
-<!--                                          t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>-->
                                     <span t-esc="o.line_ids.filtered(lambda x: x.code == 'GROSS').total - o.line_ids.filtered(lambda x: x.code == 'TOTAL_DED').total + o.line_ids.filtered(lambda x: x.code == 'CHARGE_PAT').total"
                                           t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                 </td>
