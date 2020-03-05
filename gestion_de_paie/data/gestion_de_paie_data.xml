@@ -571,11 +571,12 @@ else : result = 0
         <field name="category_id" ref="hr_payroll.PLUS"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">if inputs.PLUS and inputs.PLUS.amount : result = inputs.PLUS.amount
+        <field name="amount_python_compute">if inputs.ASUPP and inputs.ASUPP.amount : result = inputs.ASUPP.amount
 else : result = 0</field>
         <field name="appears_on_payslip" eval="True"/>
         <field name="note">Montant ajouter automatiquement avec le salaire net.</field>
     </record>
+
     <record id="hr_rule_basic_MOINS" model="hr.salary.rule">
         <field name="name">Autres déduction</field>
         <field name="sequence" eval="100"/>
@@ -628,5 +629,12 @@ else : result = 0</field>
             <field name="appears_on_payslip" eval="True"/>
             <field name="note">BASE IMPOSABLE</field>
         </record>
-       </data>
+
+        <!-- hr.salary.input -->
+        <record id="input_ASUPP" model="hr.rule.input">
+            <field name="name">Autres supplements</field>
+            <field name="code">ASUPP</field>
+            <field name="input_id" ref="hr_rule_basic_PLUS"/>
+        </record>
+    </data>
 </odoo>
