@@ -66,7 +66,7 @@ class HrPayslip(models.Model):
     preavis = fields.Float(compute='compute_sheet', store=True)
     additional_gross = fields.Float(string="SBR additionnel", store=True, delault=0.00)
     leave_paye = fields.Float(delault=0.00)
-    rest_leave = fields.Float(string=u"Congé payé", store=True)
+    rest_leave = fields.Float(string=u"Congé payé", store=True, default=lambda self: self.employee_id.leaves_count)
     seniority = fields.Char("Ancienneté", compute='_compute_seniority')
 
     # first_name = fields.Char(related='employee_id.first_name')
@@ -598,9 +598,7 @@ class HrPayslip(models.Model):
             payslip.average_gross = payslip.get_average_gross_funct()
             payslip.average_gross_notice = payslip.get_average_gross_notice_funct()
             payslip.preavis = payslip.get_preavis()
-
-
-        return True
+        # return True
 
     @api.multi
     def appears_on_calcul(self):
@@ -692,6 +690,7 @@ class HrPayslip(models.Model):
         end_last_month_day = calendar.monthrange(year, month)[1]
         begin_last_month_date = datetime.strptime('%s-%s-%s' % (year, 1, begin_last_month_day), '%Y-%m-%d')
         end_last_month_date = datetime.strptime('%s-%s-%s' % (year, month, end_last_month_day), '%Y-%m-%d')
+        # TODO : make all, not month minus one
         domain_alloc_anc_leaves = [
             ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
             ('allocation_month', 'in', [x+1 for x in range(month)]),
