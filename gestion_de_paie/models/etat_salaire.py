@@ -13,8 +13,8 @@ class etat_salaire(models.Model):
     num_cin = fields.Char('CIN', size=128, readonly=True)
     name_related = fields.Char('Nom', size=128, readonly=True)
     basic = fields.Float('Salaire de base', readonly=True)
-    omsi = fields.Float('OMSI Travailleur', readonly=True)
-    omsiemp = fields.Float('OMSI Employeur', readonly=True)
+    omsi = fields.Float('OSTIE Travailleur', readonly=True)
+    omsiemp = fields.Float('OSTIE Employeur', readonly=True)
     cnaps = fields.Float('CNAPS Travailleur', readonly=True)
     cnapsemp = fields.Float('CNAPS Employeur', readonly=True)
     brut = fields.Float('Salaire Brut', readonly=True)
@@ -23,7 +23,7 @@ class etat_salaire(models.Model):
     date_from = fields.Date('Start Date', readonly=True)
     date_to = fields.Date('End Date', readonly=True)
     totalcnaps = fields.Float('TOTAL CNAPS', readonly=True)
-    totalomsi = fields.Float('TOTAL OMSI', readonly=True)
+    totalomsi = fields.Float('TOTAL OSTIE', readonly=True)
 
     #===========================================================================
     # def unlink(self, cr, uid, ids, context=None):
