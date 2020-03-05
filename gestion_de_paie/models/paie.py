@@ -371,7 +371,7 @@ class HrPayslip(models.Model):
                 vals['irsa'] = line.total
 
             # for line in data.details_by_salary_rule_category:
-            if line.code == 'OMSI_PAT':
+            if line.code == 'OSTIE_PAT':
                 vals['omsiemp'] = line.total
             if line.code == 'CNAPS_PAT':
                 vals['cnapsemp'] = line.total

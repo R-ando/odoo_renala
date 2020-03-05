@@ -67,8 +67,8 @@
         <field name="code">OMSI</field>
     </record>
     <record id="OMSI_PAT" model="hr.salary.rule.category">
-        <field name="name">OMSI_PAT</field>
-        <field name="code">OMSI_PAT</field>
+        <field name="name">OSTIE_PAT</field>
+        <field name="code">OSTIE_PAT</field>
     </record>
     <record id="CHARGE_PAT" model="hr.salary.rule.category">
         <field name="name">CHARGE_PAT</field>
@@ -221,8 +221,8 @@ else: result = contract.employee_id.company_id.plafond_cnaps/100</field>
     </record>
     <record id="hr_payroll_rules_OMSI_PAT" model="hr.salary.rule">
         <field name="category_id" ref="OMSI_PAT"/>
-        <field name="name">OMSI_PAT</field>
-        <field name="code">OMSI_PAT</field>
+        <field name="name">OSTIE_PAT</field>
+        <field name="code">OSTIE_PAT</field>
         <field name="sequence" eval="106"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
@@ -252,7 +252,7 @@ else:
         <field name="sequence" eval="107"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result=CNAPS_PAT+OMSI_PAT+FMFP_PAT</field>
+        <field name="amount_python_compute">result=CNAPS_PAT+OSTIE_PAT+FMFP_PAT</field>
         <field name="appears_on_payslip" eval="False"/>
         <field name="note">C'est le total des cotisations de l'employeur .</field>
     </record>

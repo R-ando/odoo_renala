@@ -18,7 +18,7 @@
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[2]/span" position="replace">
-            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'OMSI_PAT').total" t-options='{"widget": "float", "precision": 0}'/>
+            <span t-esc="o.line_ids.filtered(lambda x: x.code == 'OSTIE_PAT').total" t-options='{"widget": "float", "precision": 0}'/>
         </xpath>
 
         <xpath expr="//table[hasclass('tableau1')]/tbody/tr[1]/td[8]/t[3]/span" position="replace">

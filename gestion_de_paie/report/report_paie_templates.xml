@@ -422,7 +422,7 @@
                                     <span t-esc="get_format(o.line_ids.filtered(lambda x: x.code == 'CNAPS_PAT').total)"/>
                                 </t>
                                 <t t-if="line.code == 'OMSI_EMP'">
-                                    <span t-esc="get_format(o.line_ids.filtered(lambda x: x.code == 'OMSI_PAT').total)"/>
+                                    <span t-esc="get_format(o.line_ids.filtered(lambda x: x.code == 'OSTIE_PAT').total)"/>
                                 </t>
                                 <t t-if="line.code == 'FMFP_PAT' and line.amount!=0">
                                     <span t-esc="get_format(o.line_ids.filtered(lambda x: x.code == 'FMFP_PAT').total)"/>
