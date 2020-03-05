@@ -126,7 +126,7 @@
             <field name="amount_select">code</field>
 <!--            <field name="amount_python_compute">result = contract.wage</field>-->
         <field name="amount_python_compute">if payslip.half_salary:
-    result = payslip.missed_days * (categories.BASIC/2) / 30
+    result = payslip.missed_days * (contract.wage/2) / payslip.base
 else:
     result = contract.wage</field>
         </record>
@@ -145,10 +145,7 @@ else:
             <field name="sequence" eval="101"/>
             <field name="code">CP</field>
             <field name="category_id" ref="hr_payroll.GROSS"/>
-            <field name="condition_select">python</field>
-            <field name="condition_python">
-result = payslip.stc
-            </field>
+            <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.base</field>
             <field name="appears_on_payslip" eval="False"/>
@@ -305,7 +302,7 @@ else:
         <field name="amount_python_compute">
 result = contract.wage
 if payslip.half_salary:
-    result = (result / 2) / 30
+    result = payslip.missed_days * (contract.wage/2) / payslip.base
 else:
     if worked_days.WORK100 and worked_days.WORK100.number_of_hours : hwork = worked_days.WORK100.number_of_hours
     else : hwork=contract.horaire_hebdo*52/12
