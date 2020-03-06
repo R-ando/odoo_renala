@@ -109,7 +109,7 @@ class ExportReportCnapsController(http.Controller):
         worksheet_emp.write('B28', u'Année et periode', self.bold(workbook, 'left', 10, 0, False))
         worksheet_emp.write('C28', periode_et_annee, full_border)
         worksheet_emp.write('B29', u'Taux Employeur', self.bold(workbook, 'left', 10, 0, False))
-        worksheet_emp.write('C29', str(plf['emp']) + '%', full_border)
+        worksheet_emp.write('C29', str(plf['patr']) + '%', full_border)
 
         worksheet_emp.write('A31', u'RECAPITULATION', self.bold(workbook, 'left', 10, 0, True))
         worksheet_emp.write('B33', u'MOIS CONCERNE', self.bold(workbook, 'left', 10, 1, False))
