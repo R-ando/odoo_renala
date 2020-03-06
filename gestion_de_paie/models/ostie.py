@@ -6,6 +6,8 @@ from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
+# TODO make related field instead
+
 class ostie(models.Model):
     _name = "ostie"
     _description = u"Etat général"

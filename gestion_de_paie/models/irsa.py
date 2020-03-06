@@ -3,6 +3,8 @@
 from odoo import fields, models
 from odoo.exceptions import ValidationError
 
+# TODO make related field instead
+
 class ostie(models.Model):
     _name = "irsa"
     _description = "Etat irsa"

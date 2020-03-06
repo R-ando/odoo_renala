@@ -216,8 +216,8 @@ class OstieReport(models.TransientModel):
             'address': self.str2(conpany.street) + ' ' + self.str2(conpany.street2),
             'tel': self.str2(partner.phone),
             'email': self.str2(partner.email),
-            'employer_rate': self.str2(self.plafond()['emp']) + '%',
-            'worker_rate': self.str2(self.plafond()['patr']) + '%'
+            'employer_rate': self.str2(self.plafond()['patr']) + '%',
+            'worker_rate': self.str2(self.plafond()['emp']) + '%'
         }
 
     def str2(self, val):

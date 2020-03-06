@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from dateutil import relativedelta
 from openerp import api, models, fields, tools
 
+# TODO make related field instead
 
 class RepportPayslipOstie(models.Model):
     _name = "etat.ostie"
