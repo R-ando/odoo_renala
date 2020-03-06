@@ -193,6 +193,7 @@ class ExportReportCnapsController(http.Controller):
             'font_size': 9
         })
 
+        # we right dynamic data hera
         month = literal_eval(data_month)
         cl = len(month)
         self.cnaps_cell(worksheet_mth, 2, 0, month, 'period', left)
@@ -202,13 +203,16 @@ class ExportReportCnapsController(http.Controller):
         self.cnaps_cell(worksheet_mth, 2, 5, month, 'embauche', left)
         self.cnaps_cell(worksheet_mth, 2, 6, month, 'debauche', left)
         self.cnaps_cell(worksheet_mth, 2, 7, month, 'salary', rigth)
+        self.cnaps_cell(worksheet_mth, 2, 12, month, 'cnaps_emp', rigth)
+        self.cnaps_cell(worksheet_mth, 2, 13, month, 'cnaps_pat', rigth)
         self.cnaps_cell(worksheet_mth, 2, 15, month, 'num_cin', left)
 
         self.non_plafond(worksheet_mth, 2, 10, cl, rigth)
         self.plafond(worksheet_mth, literal_eval(plf), 2, 11, cl, rigth)
 
-        self.part(worksheet_mth, 2, 12, literal_eval(plf)['patr'], cl, rigth)
-        self.part(worksheet_mth, 2, 13, literal_eval(plf)['emp'], cl, rigth)
+        # cnaps emp and patr
+        # self.part(worksheet_mth, 2, 12, literal_eval(plf)['patr'], cl, rigth)
+        # self.part(worksheet_mth, 2, 13, literal_eval(plf)['emp'], cl, rigth)
 
         # self.position_val(worksheet_mth, 2, 15, month_code['emp_cins')
 

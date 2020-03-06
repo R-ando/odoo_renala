@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# TODO need badly an optimisation
 
 from odoo import fields, models, api
 
@@ -208,8 +209,14 @@ class CnapsReport(models.TransientModel):
         }
         return mount
 
+    def _get_amount_by_code(self, id, date_from, code):
+        payslip_id = self.env['hr.payslip'].search([('employee_id', '=', id), ('date_from', '=', '%s-%s' % (date_from, '01'))], limit=1)
+        if payslip_id:
+            return  payslip_id.line_ids.filtered(lambda x:x.code == code).amount
+
     def employee_paysslip_list(self, period, period_n, id):
-        emp = self.env["hr.employee"].search([("id", "=", id)])
+        # use related field
+        emp = self.env["hr.employee"].browse(id)
         contract = self.env["hr.contract"].search([("employee_id", "=", id)])
         job = contract.mapped("job_id")
         return {
@@ -223,7 +230,9 @@ class CnapsReport(models.TransientModel):
             'num_cnaps': emp.num_cnaps_emp or u'',
             'num_emp': emp.num_emp or u'',
             'num_cin': emp.num_cin or u'',
-
+            'cnaps_emp': self._get_amount_by_code(id, period[period_n], 'CNAPS_EMP'),
+            'cnaps_pat': self._get_amount_by_code(id, period[period_n], 'CNAPS_PAT'),
+            'gross': self._get_amount_by_code(id, period[period_n], 'GROSS'),
         }
 
     def sal(self, salr):
