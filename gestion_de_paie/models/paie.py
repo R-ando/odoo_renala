@@ -726,7 +726,6 @@ class HrPayslip(models.Model):
         month = int(last_month_date.strftime("%m"))
         begin_last_month_day = 1
         end_last_month_day = calendar.monthrange(year, month)[1]
-        begin_last_month_date = datetime.strptime('%s-%s-%s' % (year, 1, begin_last_month_day), '%Y-%m-%d')
         end_last_month_date = datetime.strptime('%s-%s-%s' % (year, month, end_last_month_day), '%Y-%m-%d')
         # new implementation, 3 years cumul leaves
         contract_date_start = fields.Date.from_string(self.contract_id.date_start)
@@ -734,12 +733,13 @@ class HrPayslip(models.Model):
         current = relativedelta(date_from, contract_date_start)
         date_begin_x = contract_date_start
         # TODO : alloc leave can be optimize
+        # TODO : take to account day and month in 3 years algo
         if current.year >= 3:
             date_begin_x = contract_date_start + relativedelta(year=current.year)
         if year == date_from.year:
             domain_alloc_anc_leaves = [
                 ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
-                ('allocation_month', 'in', [x+1 for x in range(12)]), ('allocation_year', 'in', [x for x in range(date_begin_x.year, date_from.year)])
+                ('allocation_month', 'in', [x + 1 for x in range(12)]), ('allocation_year', 'in', [x for x in range(date_begin_x.year, date_from.year)])
             ]
             domain_alloc_anc_leaves_1 = [
                 ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
