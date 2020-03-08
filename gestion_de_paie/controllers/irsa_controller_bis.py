@@ -133,6 +133,7 @@ class ExportReportIrsaController(http.Controller):
         # force to zero if minus
         impnet = impnet if impnet >= 0 else 0
 
+        # TODO use method write_formula
         # compute sum
         total['basic2'] += basic2
         total['prm'] += prm
@@ -242,7 +243,7 @@ class ExportReportIrsaController(http.Controller):
         worksheet = workbook.add_worksheet("IRSA")
 
         # take periodic payslip
-        payslips = request.env['hr.payslip'].search([('date_from', 'like', "%s-%s%s" % (year, month, '%'))])
+        payslips = request.env['hr.payslip'].search([('date_from', 'like', "%s-%s%s" % (year, month, '%')), ('state', '=', 'done')])
         company_id = payslips[:1].company_id
         # take payslip from the begining of the year
         old_payslips = request.env['hr.payslip'].search([('date_from', '>=', "%s-%s-%s" % (year, '01', '01')), ('date_from', '<', "%s-%s-%s" % (year, month, 01))])
