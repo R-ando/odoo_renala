@@ -6,7 +6,8 @@ from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from odoo.http import request
 
-# TODO make related field instead
+# TODO make related field and compute field instead
+# TODO rename model
 
 class ostie(models.Model):
     _name = "ostie"
@@ -40,7 +41,7 @@ class ostie(models.Model):
     charge_pat = fields.Float(string="Charge employeur", compute="_compute_pat")
     brut_plafon = fields.Float(string=u"Brut plafonné", related="employee_id.company_id.plafond_cnaps")
     nbr_charge = fields.Integer(string=u"Nbre de charge", related="employee_id.nombre_enfant_cnaps")
-    period = fields.Char(string=u"Période", compute="_get_month", size=15)
+    period = fields.Char(string=u"Période", compute="_get_month", size=15, store=True)
 
     @api.multi
     def generate_report(self):
@@ -85,7 +86,7 @@ class ostie(models.Model):
     @api.multi
     def _compute_omsiemp(self):
         for ostie in self:
-            ostie.omsiemp = sum(ostie.payslip_id.line_ids.filtered(lambda x: x.code == 'OSTIE_PAT').mapped('total'))
+            ostie.omsiemp = sum(ostie.payslip_id.line_ids.filtered(lambda x: x.code == 'OMSI_PAT').mapped('total'))
 
     @api.multi
     def _compute_cnaps(self):

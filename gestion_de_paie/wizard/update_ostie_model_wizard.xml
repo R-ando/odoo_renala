@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="update_ostie_form" model="ir.ui.view">
+            <field name="name">update.ostie</field>
+            <field name="model">update.ostie</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div style="color: red">
+                        Cette fonctionnalité permet de mettre à jour l'état général par rapport aux bulletins de paie
+                        <br/>
+                        <br/>
+                        ** Fonctionnalité temporaire
+                    </div>
+                     <footer>
+                       <button name="update_ostie" type="object" string="Mettre à jour" class="btn-primary"/>
+                        <button string="Annuler" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_menuwizard_update_ostie" name="Mise à jour E.G." res_model="update.ostie" view_mode="form"
+                    target="new"/>
+
+        <menuitem id="menu_update_ostie"
+                  action="action_menuwizard_update_ostie"
+                  name="Mise à jour E.G."
+                  parent="etat_payslip_menu"
+                  sequence="20"/>
+</odoo>

@@ -44,6 +44,7 @@
              'wizard/cnaps_wizard_view.xml',
              'wizard/ostie_wizard_view.xml',
              'wizard/irsa_wizard_view.xml',
+             'wizard/update_ostie_model_wizard.xml',
              #'security/group_security_view.xml',
 
              ],
