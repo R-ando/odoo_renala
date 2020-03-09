@@ -331,13 +331,13 @@ class HrPayslip(models.Model):
         }
 
         etat_id = self.env['etat.salaire'].create(vals).id
-        ostie_id = self.env['ostie'].create(vals).id
+        # ostie_id = self.env['ostie'].create(vals).id
         irsa_id = self.env['irsa'].create(vals).id
         cnaps_id = self.env['cnaps'].create(vals).id
 
         payslip_obj.browse(payslip_id.id).write({
             'etat_salaire_id': etat_id,
-            'ostie_id': ostie_id,
+            # 'ostie_id': ostie_id,
             'irsa_id': irsa_id,
             'cnaps_id': cnaps_id
         })
@@ -347,7 +347,7 @@ class HrPayslip(models.Model):
     def write(self, values):
         result = super(HrPayslip, self).write(values)
         data = self.browse(self.id)
-        if not (data.etat_salaire_id and data.ostie_id and data.cnaps_id and data.irsa_id):
+        if not (data.etat_salaire_id and data.cnaps_id and data.irsa_id):
             return result
         vals = {
             'employee_id': data.employee_id.id,
@@ -397,16 +397,17 @@ class HrPayslip(models.Model):
         etat = self.env['etat.salaire'].browse(data.etat_salaire_id.id)
         etat.write(vals)
 
+        # Todo : change field to computed one
         # ostie object
-        vals_ostie = vals.copy()
-        not_in_ostie = ['totalcnaps']
-        not_in_ostie = set(not_in_ostie)
-        for cle in not_in_ostie:
-            if cle in vals_ostie:
-                del vals_ostie[cle]
-
-        ostie = self.env['ostie'].browse(data.ostie_id.id)
-        ostie.write(vals_ostie)
+        # vals_ostie = vals.copy()
+        # not_in_ostie = ['totalcnaps']
+        # not_in_ostie = set(not_in_ostie)
+        # for cle in not_in_ostie:
+        #     if cle in vals_ostie:
+        #         del vals_ostie[cle]
+        #
+        # ostie = self.env['ostie'].browse(data.ostie_id.id)
+        # ostie.write(vals_ostie)
 
         # irsa
         vals_irsa = vals.copy()
@@ -620,6 +621,7 @@ class HrPayslip(models.Model):
             sum_sbr = sum(self.search(domain, order='create_date desc', limit=limit).mapped('line_ids').filtered(lambda x: x.code == 'GROSS').mapped('amount'))
             self.average_gross_notice = round((sum_sbr + self.additional_gross) / base_seniority, 2)
 
+    # TODO make call with supper in begining
     @api.multi
     def compute_sheet(self):
         for payslip in self:
@@ -636,6 +638,9 @@ class HrPayslip(models.Model):
             payslip.average_gross = payslip.get_average_gross_funct()
             payslip.average_gross_notice = payslip.get_average_gross_notice_funct()
             payslip.preavis = payslip.get_preavis()
+            # TODO make ORM friendly not those two instruction
+            ostie_id = payslip.env['ostie'].create({'payslip_id': payslip.id})
+            payslip.ostie_id = ostie_id.id
         # return True
 
     @api.multi
