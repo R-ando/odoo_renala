@@ -129,6 +129,7 @@ class ExportReportIrsaController(http.Controller):
         mimpo = sum(payslip.line_ids.filtered(lambda x: x.code == 'INFO').mapped('total'))
         irsa = sum(payslip.line_ids.filtered(lambda x: x.code == 'IRSA').mapped('total'))
         enfant = payslip.employee_id.children * payslip.company_id.abat_irsa
+        leaves = payslip._get_leaves()['solde']
         impnet = irsa - enfant
         # force to zero if minus
         impnet = impnet if impnet >= 0 else 0
@@ -145,7 +146,7 @@ class ExportReportIrsaController(http.Controller):
         total['net'] += net
         total['irsa'] += irsa
         total['mimpo'] += mimpo
-        total['conge'] += payslip.employee_id.remaining_leaves
+        total['conge'] += leaves
         total['enfant'] += enfant
         total['impnet'] += impnet
 
@@ -158,7 +159,7 @@ class ExportReportIrsaController(http.Controller):
         worksheet.write_number(row, col + 4, basic2, border_black)
         worksheet.write_number(row, col + 5, prm, border_black)
         worksheet.write_number(row, col + 6, hs, border_black)
-        worksheet.write_number(row, col + 7, payslip.employee_id.remaining_leaves, border_black)
+        worksheet.write_number(row, col + 7, leaves, border_black)
         worksheet.write_number(row, col + 8, preavis, border_black)
         worksheet.write_number(row, col + 9, gross, border_black)
         worksheet.write_number(row, col + 10, cnaps_emp, border_black)
