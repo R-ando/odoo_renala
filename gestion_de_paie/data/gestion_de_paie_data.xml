@@ -601,40 +601,86 @@ else : result = 0</field>
     </record>
         <!--thirteenth month-->
     <record id="hr_rule_basic_TM" model="hr.salary.rule">
-        <field name="name"> Treizième mois </field>
+        <field name="name">Treizième mois</field>
         <field name="code">TM</field>
         <field name="sequence" >21</field>
         <field name="category_id" ref="hr_payroll.BASIC"/>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
-        <field name="amount_python_compute">result = inputs.TM.amount</field>
-        <field name="appears_on_payslip" eval="False"/>
+        <field name="amount_python_compute">if inputs.TM and inputs.TM.amount : result = inputs.TM.amount
+else : result = 0</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="active" eval="True"/>
         <field name="note">prime prévue par la convention collective ou le contrat de travail.</field>
     </record>
 
-        <record id="info" model="hr.salary.rule.category">
-            <field name="name">INFO</field>
-            <field name="code">INFO</field>
-        </record>
+    <record id="hr_rule_basic_IRP" model="hr.salary.rule">
+        <field name="name">Indemnités de repas</field>
+        <field name="code">IRP</field>
+        <field name="sequence" >23</field>
+        <field name="category_id" ref="hr_payroll.BASIC"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">if inputs.IRP and inputs.IRP.amount : result = inputs.IRP.amount
+else : result = 0</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Indemnités de repas</field>
+    </record>
 
-        <record id="hr_rule_info" model="hr.salary.rule">
-            <field name="name">BASE IMPOSABLE</field>
-            <field name="code">INFO</field>
-            <field name="sequence">109</field>
-            <field name="category_id" ref="gestion_de_paie.info"/>
-            <field name="condition_select">none</field>
-            <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = categories.GROSS - categories.CNAPS - categories.OMSI
-            </field>
-            <field name="appears_on_payslip" eval="True"/>
-            <field name="note">BASE IMPOSABLE</field>
-        </record>
+    <record id="hr_rule_basic_ITRT" model="hr.salary.rule">
+        <field name="name">Indemnités de transport</field>
+        <field name="code">ITRT</field>
+        <field name="sequence" >22</field>
+        <field name="category_id" ref="hr_payroll.BASIC"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">if inputs.ITRT and inputs.ITRT.amount : result = inputs.ITRT.amount
+else : result = 0</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">Indemnités de transport</field>
+    </record>
 
-        <!-- hr.salary.input -->
-        <record id="input_ASUPP" model="hr.rule.input">
-            <field name="name">Autres suppléments</field>
-            <field name="code">ASUPP</field>
-            <field name="input_id" ref="hr_rule_basic_PLUS"/>
-        </record>
+    <record id="info" model="hr.salary.rule.category">
+        <field name="name">INFO</field>
+        <field name="code">INFO</field>
+    </record>
+
+    <record id="hr_rule_info" model="hr.salary.rule">
+        <field name="name">BASE IMPOSABLE</field>
+        <field name="code">INFO</field>
+        <field name="sequence">109</field>
+        <field name="category_id" ref="gestion_de_paie.info"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = categories.GROSS - categories.CNAPS - categories.OMSI
+        </field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="note">BASE IMPOSABLE</field>
+    </record>
+
+    <!-- hr.salary.input -->
+    <record id="input_ASUPP" model="hr.rule.input">
+        <field name="name">Autres suppléments</field>
+        <field name="code">ASUPP</field>
+        <field name="input_id" ref="hr_rule_basic_PLUS"/>
+    </record>
+
+    <record id="input_TM" model="hr.rule.input">
+        <field name="name">13 mois</field>
+        <field name="code">TM</field>
+        <field name="input_id" ref="hr_rule_basic_TM"/>
+    </record>
+
+    <record id="input_IRP" model="hr.rule.input">
+        <field name="name">Indemnités de repas</field>
+        <field name="code">IRP</field>
+        <field name="input_id" ref="hr_rule_basic_IRP"/>
+    </record>
+
+    <record id="input_ITRT" model="hr.rule.input">
+        <field name="name">Indemnités de transport</field>
+        <field name="code">ITRT</field>
+        <field name="input_id" ref="hr_rule_basic_ITRT"/>
+    </record>
     </data>
 </odoo>
