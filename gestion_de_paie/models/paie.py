@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from odoo import api, fields, models, tools, _
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.exceptions import UserError, ValidationError
 from dateutil.relativedelta import relativedelta
@@ -737,6 +737,8 @@ class HrPayslip(models.Model):
         date_from = fields.Date.from_string(self.date_from)
         current = relativedelta(date_from, contract_date_start)
         date_begin_x = contract_date_start
+
+
         # TODO : alloc leave can be optimize, use SQL
         # TODO : take to account day and month in 3 years algo
         if current.year >= 3:
@@ -759,21 +761,54 @@ class HrPayslip(models.Model):
                 ('allocation_month', 'in', [x + 1 for x in range(12)]), ('allocation_year', 'in', [x for x in range(date_begin_x.year, date_from.year)])
             ]
             alloc_anc_leaves = sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves).mapped('number_of_days_temp'))
+
+        domain_taken_entre_mois = [
+            ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
+            ('type', '=', 'remove'), ('date_from', '>=', date_begin_x.strftime("%Y-%m-%d")),
+            ('date_to', '<=', self.date_to)
+        ]
+
         domain_taken_anc_leaves = [
             ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
             ('type', '=', 'remove'), ('date_from', '>=', date_begin_x.strftime("%Y-%m-%d")),
             ('date_to', '<=', end_last_month_date.strftime("%Y-%m-%d"))
         ]
+        taken_anc_leaves = self.env['hr.holidays'].search(domain_taken_anc_leaves)
+        taken_entre_mois = self.env['hr.holidays'].search(domain_taken_entre_mois)
+        pris = self.env['hr.holidays'].search(domain_taken_leaves)
+        taken_entre_mois = list(set(taken_entre_mois).difference(taken_anc_leaves))
+        taken_entre_mois = list(set(taken_entre_mois).difference(pris))
+
+        # calculate taken entre mois
+        # this doesn't take account sunday and saturday
+        # this is fucking linear O(n) n number of day
+        # Can be optimise, try dichotomic style
+        taken_current_month = 0
+        taken_anc_month = 0
+        for t in taken_entre_mois:
+            temp_date_begin = fields.Date.from_string(t.date_from)
+            temp_date_ending = fields.Date.from_string(t.date_to)
+            while temp_date_begin < date_from:
+                temp_date_begin = temp_date_begin + timedelta(days=1)
+                if temp_date_begin.strftime("%w") == '0' or temp_date_begin.strftime("%w") == '1':
+                    continue
+                taken_anc_month += 1
+            while temp_date_ending > date_from:
+                temp_date_ending = temp_date_ending - timedelta(days=1)
+                if temp_date_ending.strftime("%w") == '0' or temp_date_ending.strftime("%w") == '1':
+                    continue
+                taken_current_month += 1
+
         acquis = sum(self.env['hr.holidays'].search(domain_alloc_leaves).mapped('number_of_days_temp'))
-        pris = sum(self.env['hr.holidays'].search(domain_taken_leaves).mapped('number_of_days_temp'))
-        anc = alloc_anc_leaves - sum(self.env['hr.holidays'].search(domain_taken_anc_leaves).mapped('number_of_days_temp'))
-        solde = acquis - pris + anc
+        sum_pris = sum(pris.mapped('number_of_days_temp')) + taken_current_month
+        anc = alloc_anc_leaves - sum(taken_anc_leaves.mapped('number_of_days_temp')) - taken_anc_month
+        solde = acquis - sum_pris + anc
 
         # or send immutable object
         leaves = {
             'anc': anc,
             'acquis': acquis,
-            'pris': pris,
+            'pris': sum_pris,
             'solde': solde,
         }
 
