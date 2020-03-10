@@ -584,7 +584,7 @@ class HrPayslip(models.Model):
         return [value for code, value in result_dict.items()]
 
     @api.one
-    @api.depends('stc')
+    @api.depends('stc', 'additional_gross')
     def _compute_average_gross(self):
         self.ensure_one()
         if self.stc:
