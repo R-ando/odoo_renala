@@ -752,7 +752,7 @@ class HrPayslip(models.Model):
             ]
             domain_alloc_anc_leaves_1 = [
                 ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
-                ('allocation_month', 'in', [x + 1 for x in range(month)]), ('allocation_year', '=', year),
+                ('allocation_month', 'in', [x + 1 for x in range(month)]), ('allocation_year', '=', date_from.year),
             ]
             alloc_anc_leaves = sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves).mapped('number_of_days_temp')) + sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves_1).mapped('number_of_days_temp'))
         else:
