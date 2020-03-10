@@ -748,7 +748,7 @@ class HrPayslip(models.Model):
         if year == date_from.year:
             domain_alloc_anc_leaves = [
                 ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
-                ('allocation_month', 'in', [x + 1 for x in range(12)]), ('allocation_year', 'in', [x for x in range(date_begin_x.year, date_from.year)])
+                ('allocation_month', 'in', [x + 1 for x in range(12)]), ('allocation_year', 'in', [y for y in range(date_begin_x.year, date_from.year)])
             ]
             domain_alloc_anc_leaves_1 = [
                 ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
