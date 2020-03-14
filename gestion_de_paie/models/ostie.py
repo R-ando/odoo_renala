@@ -3,8 +3,6 @@
 import datetime
 
 from odoo import fields, models, api
-from odoo.exceptions import ValidationError
-from odoo.http import request
 
 # TODO make related field and compute field instead
 # TODO rename model
@@ -35,13 +33,14 @@ class ostie(models.Model):
     hs = fields.Float(string='Heures supp', compute="_compute_hs")
     retenus = fields.Float(string='Retenues', compute="_compute_retenus")
     irsa = fields.Float(string="IRSA", compute="_compute_irsa")
-    employee_id = fields.Many2one(comodel_name='hr.employee', related="payslip_id.employee_id")
+    employee_id = fields.Many2one(comodel_name='hr.employee', related="payslip_id.employee_id", store=True)
     num_cnaps_emp = fields.Char(string=u'N° CNaPS', related='employee_id.num_cnaps_emp', size=64)
     af = fields.Float(string="Allocation F.", compute="_compute_allocation")
     charge_pat = fields.Float(string="Charge employeur", compute="_compute_pat")
     brut_plafon = fields.Float(string=u"Brut plafonné", related="employee_id.company_id.plafond_cnaps")
     nbr_charge = fields.Integer(string=u"Nbre de charge", related="employee_id.nombre_enfant_cnaps")
-    period = fields.Char(string=u"Période", compute="_get_month", size=15, store=True)
+    period = fields.Char(string=u"Période", compute="_get_month", size=15)
+    period_s = fields.Char(string=u"Période", compute="_get_num_month", size=15, store=True)
 
     @api.multi
     def generate_report(self):
@@ -72,6 +71,12 @@ class ostie(models.Model):
     def _get_month(self):
         for ostie in self:
             ostie.period = datetime.datetime.strptime(ostie.date_from, "%Y-%m-%d").strftime("%B").upper() if ostie.date_from else False
+
+    @api.multi
+    @api.depends('date_from')
+    def _get_num_month(self):
+        for ostie in self:
+            ostie.period_s = datetime.datetime.strptime(ostie.date_from, "%Y-%m-%d").strftime("%m %B").upper() if ostie.date_from else False
 
     @api.multi
     def _compute_basic(self):

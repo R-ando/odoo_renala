@@ -742,10 +742,10 @@ class HrPayslip(models.Model):
 
         # TODO : alloc leave can be optimize, use SQL
         # TODO : take to account day and month in 3 years algo
-        if current.year >= 3:
+        if current.years > 3:
             # TODO take account month too
-            gaps = current.year - date_from.year
-            date_begin_x = contract_date_start + relativedelta(year=gaps)
+            gaps = current.years - 3
+            date_begin_x = contract_date_start + relativedelta(years=gaps)
         if year == date_from.year:
             domain_alloc_anc_leaves = [
                 ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),

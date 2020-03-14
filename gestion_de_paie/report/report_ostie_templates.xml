@@ -74,58 +74,58 @@
                                     <span t-field="docs.num_cin"/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.basic"/>
+                                    <span t-field="docs.basic" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.prm"/>
+                                    <span t-field="docs.prm" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.hs"/>
+                                    <span t-field="docs.hs" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.retenus"/>
+                                    <span t-field="docs.retenus" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.brut"/>
+                                    <span t-field="docs.brut" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.brut_plafon"/>
+                                    <span t-field="docs.brut_plafon" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.omsi"/>
+                                    <span t-field="docs.omsi" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.omsiemp"/>
+                                    <span t-field="docs.omsiemp" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.totalomsi"/>
+                                    <span t-field="docs.totalomsi" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
                                     <span t-field="docs.num_cnaps_emp"/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.af"/>
+                                    <span t-field="docs.af" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.nbr_charge"/>
+                                    <span t-field="docs.nbr_charge" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.cnaps"/>
+                                    <span t-field="docs.cnaps" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.cnapsemp"/>
+                                    <span t-field="docs.cnapsemp" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.total_cnaps"/>
+                                    <span t-field="docs.total_cnaps" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.irsa"/>
+                                    <span t-field="docs.irsa" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.net"/>
+                                    <span t-field="docs.net" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
-                                    <span t-field="docs.charge_pat"/>
+                                    <span t-field="docs.charge_pat" t-options='{"widget": "float", "precision": 0}'/>
                                 </td>
                                 <td>
                                     <span t-field="docs.period"/>

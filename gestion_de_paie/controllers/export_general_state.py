@@ -4,19 +4,18 @@
 
 
 import io
+import logging
+
 import xlsxwriter
-from ast import literal_eval
-from datetime import datetime
 
 from odoo import http
 from odoo.http import content_disposition, request
-
-import logging
 
 logger = logging.getLogger(__name__)
 
 
 class ExportGeneralState(http.Controller):
+    # copy pasta ana boris
     """Function to export New Product Excel """
 
     @http.route('/web/binary/general_state', type='http', auth="public")
@@ -31,7 +30,7 @@ class ExportGeneralState(http.Controller):
 
         # Create a workbook and add a worksheet.
         workbook = xlsxwriter.Workbook(output)
-        worksheet = workbook.add_worksheet("New Product")
+        worksheet = workbook.add_worksheet("E.G")
 
         # Add a format for cells.
         titre_format = workbook.add_format({'align': "center", "font_color": "black", "border": 1})
@@ -63,11 +62,18 @@ class ExportGeneralState(http.Controller):
         worksheet.write(row, 20, u"CHARGE Employeur", titre_format)
         worksheet.write(row, 21, u"Période", titre_format)
 
+        # set column width
+        worksheet.set_column('B:B', 20)
+        worksheet.set_column('D:D', 10)
+        worksheet.set_column('H:H', 10)
+        worksheet.set_column('M:M', 15)
+        worksheet.set_column('T:T', 15)
+
         row += 1
 
         logger.debug("Ostie: {}".format(ostie))
 
-        for o in ostie:
+        for o in ostie.sorted(lambda x: x.employee_id.num_emp):
             worksheet.write(row, 0, o.employee_id.num_emp, border_format)
             worksheet.write(row, 1, o.employee_id.name, border_format)
             worksheet.write(row, 2, o.num_cin, border_format)
@@ -93,10 +99,11 @@ class ExportGeneralState(http.Controller):
             worksheet.write(row, 21, o.period, border_format)
             row += 1
 
+        # TODO set total
+
         workbook.close()
 
         output.seek(0)
         xlsheader = [('Content-Type', 'application/octet-stream'),
                      ('Content-Disposition', content_disposition(filename))]
         return request.make_response(output, xlsheader)
-
