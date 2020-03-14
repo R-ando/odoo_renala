@@ -639,8 +639,8 @@ class HrPayslip(models.Model):
             payslip.average_gross_notice = payslip.get_average_gross_notice_funct()
             payslip.preavis = payslip.get_preavis()
             # TODO make ORM friendly not those two instruction
-            ostie_id = payslip.env['ostie'].create({'payslip_id': payslip.id})
-            payslip.ostie_id = ostie_id.id
+            # ostie_id = payslip.env['ostie'].create({'payslip_id': payslip.id})
+            # payslip.ostie_id = ostie_id.id
         # return True
 
     @api.multi
@@ -715,7 +715,6 @@ class HrPayslip(models.Model):
     # new method for computing leaves
     # date and datetime format have string representation in Odoo Object. This is not the case in Odoo upper version
     def _get_leaves(self):
-        # import that is used only iny this
         domain_taken_leaves = [
             ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
             ('type', '=', 'remove'), ('date_from', '>=', self.date_from),
@@ -735,6 +734,8 @@ class HrPayslip(models.Model):
         # new implementation, 3 years cumul leaves
         contract_date_start = fields.Date.from_string(self.contract_id.date_start)
         date_from = fields.Date.from_string(self.date_from)
+        date_to = fields.Date.from_string(self.date_to)
+
         current = relativedelta(date_from, contract_date_start)
         date_begin_x = contract_date_start
 
@@ -758,7 +759,7 @@ class HrPayslip(models.Model):
         else:
             domain_alloc_anc_leaves = [
                 ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'), ('type', '=', 'add'),
-                ('allocation_month', 'in', [x + 1 for x in range(12)]), ('allocation_year', 'in', [x for x in range(date_begin_x.year, date_from.year)])
+                ('allocation_month', 'in', [x + 1 for x in range(12)]), ('allocation_year', 'in', [y for y in range(date_begin_x.year, date_from.year)])
             ]
             alloc_anc_leaves = sum(self.env['hr.holidays'].search(domain_alloc_anc_leaves).mapped('number_of_days_temp'))
 
@@ -766,6 +767,12 @@ class HrPayslip(models.Model):
             ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
             ('type', '=', 'remove'), ('date_from', '>=', date_begin_x.strftime("%Y-%m-%d")),
             ('date_to', '<=', self.date_to)
+        ]
+
+        domain_taken_entre_mois_1 = [
+            ('employee_id', '=', self.employee_id.id), ('state', '=', 'validate'),
+            ('type', '=', 'remove'), ('date_from', '>=', self.date_from),
+            ('date_from', '<=', self.date_to)
         ]
 
         domain_taken_anc_leaves = [
@@ -778,6 +785,9 @@ class HrPayslip(models.Model):
         pris = self.env['hr.holidays'].search(domain_taken_leaves)
         taken_entre_mois = list(set(taken_entre_mois).difference(taken_anc_leaves))
         taken_entre_mois = list(set(taken_entre_mois).difference(pris))
+        taken_entre_mois_1 = self.env['hr.holidays'].search(domain_taken_entre_mois_1)
+        taken_entre_mois_1 = list(set(taken_entre_mois_1).difference(pris))
+        taken_entre_mois_1 = list(set(taken_entre_mois_1).difference(taken_entre_mois))
 
         # calculate taken entre mois
         # this doesn't take account sunday and saturday
@@ -793,14 +803,23 @@ class HrPayslip(models.Model):
                 if temp_date_begin.strftime("%w") == '0' or temp_date_begin.strftime("%w") == '1':
                     continue
                 taken_anc_month += 1
-            while temp_date_ending > date_from:
+            while temp_date_ending >= date_from:
                 temp_date_ending = temp_date_ending - timedelta(days=1)
                 if temp_date_ending.strftime("%w") == '0' or temp_date_ending.strftime("%w") == '1':
                     continue
                 taken_current_month += 1
 
+        taken_current_month_1 = 0
+        for t in taken_entre_mois_1:
+            temp_date_begin = fields.Date.from_string(t.date_from)
+            while temp_date_begin <= date_to:
+                temp_date_begin = temp_date_begin + timedelta(days=1)
+                if temp_date_begin.strftime("%w") == '0' or temp_date_begin.strftime("%w") == '1':
+                    continue
+                taken_current_month_1 += 1
+
         acquis = sum(self.env['hr.holidays'].search(domain_alloc_leaves).mapped('number_of_days_temp'))
-        sum_pris = sum(pris.mapped('number_of_days_temp')) + taken_current_month
+        sum_pris = sum(pris.mapped('number_of_days_temp')) + taken_current_month + taken_current_month_1
         anc = alloc_anc_leaves - sum(taken_anc_leaves.mapped('number_of_days_temp')) - taken_anc_month
         solde = acquis - sum_pris + anc
 
@@ -813,3 +832,10 @@ class HrPayslip(models.Model):
         }
 
         return leaves
+
+    @api.multi
+    def action_payslip_done(self):
+        ret = super(HrPayslip, self).action_payslip_done()
+        ostie_id = self.env['ostie'].create({'payslip_id': self.id})
+        self.ostie_id = ostie_id.id
+        return ret
