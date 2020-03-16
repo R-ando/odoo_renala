@@ -74,9 +74,9 @@ class ExportGeneralState(http.Controller):
         logger.debug("Ostie: {}".format(ostie))
 
         for o in ostie.sorted(lambda x: x.employee_id.num_emp):
-            worksheet.write(row, 0, o.employee_id.num_emp, border_format)
+            worksheet.write(row, 0, o.employee_id.num_emp if o.employee_id.num_emp else '', border_format)
             worksheet.write(row, 1, o.employee_id.name, border_format)
-            worksheet.write(row, 2, o.num_cin, border_format)
+            worksheet.write(row, 2, o.num_cin if o.num_cin else '', border_format)
             worksheet.write(row, 3, o.basic, border_format)
             worksheet.write(row, 4, o.prm, border_format)
             worksheet.write(row, 5, o.hs, border_format)
@@ -86,7 +86,7 @@ class ExportGeneralState(http.Controller):
             worksheet.write(row, 9, o.omsi, border_format)
             worksheet.write(row, 10, o.omsiemp, border_format)
             worksheet.write(row, 11, o.totalomsi, border_format)
-            worksheet.write(row, 12, o.num_cnaps_emp, border_format)
+            worksheet.write(row, 12, o.num_cnaps_emp if o.num_cnaps_emp else '', border_format)
             worksheet.write(row, 13, o.af, border_format)
             worksheet.write(row, 14, o.nbr_charge, border_format)
             worksheet.write(row, 15, o.cnaps, border_format)
