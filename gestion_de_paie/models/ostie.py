@@ -12,8 +12,8 @@ class ostie(models.Model):
     _description = u"Etat général"
 
     payslip_id = fields.Many2one('hr.payslip', string=u'Employé')
-    num_emp = fields.Char('Matricule', size=128)
-    num_cin = fields.Char('CIN', size=128)
+    num_emp = fields.Char('Matricule', size=128, related="payslip_id.employee_id.num_emp", store=True)
+    num_cin = fields.Char('CIN', size=128, related="payslip_id.employee_id.num_cin")
     name_related = fields.Char('Nom', size=128, related="payslip_id.employee_id.name")
     basic = fields.Float('Salaire de base', compute="_compute_basic")
     omsi = fields.Float('OSTIE Travailleur', compute="_compute_omsi")
