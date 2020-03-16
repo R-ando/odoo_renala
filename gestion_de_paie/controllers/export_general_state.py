@@ -36,7 +36,7 @@ class ExportGeneralState(http.Controller):
         titre_format = workbook.add_format({'align': "center", "font_color": "black", "border": 1})
         money_format = workbook.add_format({'num_format': '# ### ##0 [$MGA]'})
         date_format = workbook.add_format({'num_format': 'dd/mm/yyyy'})
-        border_format = workbook.add_format({'border': 1})
+        border_format = workbook.add_format({'border': 1, 'num_format': '# ### ##0'})
 
         row = 0
         worksheet.write(row, 0, u"Matricule", titre_format)
