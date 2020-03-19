@@ -2,6 +2,7 @@
 # TODO need badly an optimisation
 
 from odoo import fields, models, api
+from datetime import datetime, date
 
 DICT_MONTH = {'01': 'Janvier', '02': u'Février', '03': 'Mars',
               '04': 'Avril', '05': 'Mai', '06': 'Juin',
@@ -159,7 +160,7 @@ class CnapsReport(models.TransientModel):
         listIdpayslip = self.env["hr.payslip"].search(
             [("date_from", "like", period + "%"), ("state", "=", "done")]).mapped('id')
         return sum(self.env['hr.payslip.line'].search(
-            [("slip_id", "in", listIdpayslip), ("code", "=", code), ("state", "=", "done")]).mapped(
+            [("slip_id", "in", listIdpayslip), ("code", "=", code)]).mapped(
             'amount'))
 
     def cnaps_month(self, period):
@@ -214,17 +215,29 @@ class CnapsReport(models.TransientModel):
         if payslip_id:
             return  payslip_id.line_ids.filtered(lambda x:x.code == code).amount
 
+    def _get_quantity_by_code(self, id, date_from, code):
+        payslip_id = self.env['hr.payslip'].search([('employee_id', '=', id), ('date_from', '=', '%s-%s' % (date_from, '01'))], limit=1)
+        if payslip_id:
+            print ("\n===payslip_id.line_ids = %s===\n" % payslip_id.line_ids.filtered(lambda x:x.code == code).quantity)
+            return  payslip_id.line_ids.filtered(lambda x:x.code == code).quantity
+
     def employee_paysslip_list(self, period, period_n, id):
         # use related field
         emp = self.env["hr.employee"].browse(id)
         contract = self.env["hr.contract"].search([("employee_id", "=", id)])
         job = contract.mapped("job_id")
+        embauche = contract.mapped('date_start')[0]
+        debauche = contract.mapped('date_end')[0]
+        if debauche and fields.Date.from_string(debauche) < date.today():
+            debauche = datetime.strftime(fields.Date.from_string(debauche), '%d-%m-%Y')
+        else:
+            debauche = ''
         return {
             'period': period[period_n].replace("-", "") or u'',
             'name': emp.name_related.upper() or u'',
             'first_name': emp.first_name or u'',
-            'embauche': contract.mapped('date_start')[0] or u'',
-            'debauche': contract.mapped('date_end')[0] or u'',
+            'embauche': datetime.strftime(fields.Date.from_string(embauche), '%d-%m-%Y'),
+            'debauche': debauche or u'',
             'salary': self.sal(self.getsalry_net(period[period_n], id)) or u'',
             'job': job.name or u'',
             'num_cnaps': emp.num_cnaps_emp or u'',
@@ -232,7 +245,9 @@ class CnapsReport(models.TransientModel):
             'num_cin': emp.num_cin or u'',
             'cnaps_emp': self._get_amount_by_code(id, period[period_n], 'CNAPS_EMP'),
             'cnaps_pat': self._get_amount_by_code(id, period[period_n], 'CNAPS_PAT'),
+            'cnaps_fmfp': self._get_amount_by_code(id, period[period_n], 'FMFP_PAT'),
             'gross': self._get_amount_by_code(id, period[period_n], 'GROSS'),
+            'tps_presence' : self._get_quantity_by_code(id, period[period_n], 'BASIC'),
         }
 
     def sal(self, salr):
@@ -298,7 +313,11 @@ class CnapsReport(models.TransientModel):
             'tel': self.str2(partner.company_id.phone),
             'email': self.str2(partner.company_id.email),
             'employer_rate': self.str2(self.plafond()['emp']) + '%',
-            'worker_rate': self.str2(self.plafond()['patr']) + '%'
+            'worker_rate': self.str2(self.plafond()['patr']) + '%',
+            'nif': self.str2(partner.company_id.nif),
+            'num_cnaps': self.str2(partner.company_id.num_cnaps_patr),
+            'cotisation_cnaps_patr': self.str2(partner.company_id.cotisation_cnaps_patr),
+            'cotisation_cnaps_emp': self.str2(partner.company_id.cotisation_cnaps_emp),
         }
 
     def str2(self, val):
