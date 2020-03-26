@@ -131,11 +131,13 @@ class ExportReportIrsaController(http.Controller):
         enfant = payslip.employee_id.children * payslip.company_id.abat_irsa
         leaves = payslip._get_leaves()['solde']
         impnet = irsa - enfant
+        basic2_qt = payslip.line_ids.filtered(lambda x: x.code == 'BASIC').quantity
         # force to zero if minus
         impnet = impnet if impnet >= 0 else 0
 
         # TODO use method write_formula
         # compute sum
+        total['basic2_qt'] += basic2_qt
         total['basic2'] += basic2
         total['prm'] += prm
         total['hs'] += hs
@@ -156,7 +158,7 @@ class ExportReportIrsaController(http.Controller):
                                payslip.employee_id.job_id.name if payslip.employee_id.job_id.name else '',
                                payslip.employee_id.address_home_id.street if payslip.employee_id.address_home_id.street else ''), border_black)
         worksheet.write(row, col + 2, '%s' % (payslip.employee_id.num_cnaps_emp if payslip.employee_id.num_cnaps_emp else ''), border_black)
-        worksheet.write_number(row, col + 3, payslip.line_ids.filtered(lambda x: x.code == 'BASIC').quantity, border_black)
+        worksheet.write_number(row, col + 3, basic2_qt, border_black)
         worksheet.write_number(row, col + 4, basic2, border_black)
         worksheet.write_number(row, col + 5, prm, border_black)
         worksheet.write_number(row, col + 6, hs, border_black)
@@ -203,7 +205,7 @@ class ExportReportIrsaController(http.Controller):
         worksheet.write(row + 1, col - 4, "", border_black)
         worksheet.write(row + 1, col - 3, "", border_black)
         worksheet.write(row + 1, col - 2, "", border_black)
-        worksheet.write(row + 1, col - 1, "", border_black)
+        worksheet.write_number(row + 1, col - 1, total['basic2_qt'], border_black)
         worksheet.write_number(row + 1, col, total['basic2'], border_black)
         worksheet.write_number(row + 1, col + 1, total['prm'], border_black)
         worksheet.write_number(row + 1, col + 2, total['hs'], border_black)
@@ -231,6 +233,7 @@ class ExportReportIrsaController(http.Controller):
             'conge': 0, 'preavis': 0, 'basic2': 0,
             'cnaps_emp': 0, 'ostie_emp': 0, 'net': 0,
             'mimpo': 0, 'enfant': 0, 'irsa': 0, 'impnet': 0,
+            'basic2_qt': 0,
         }
         self.setColumnWidth(worksheet)
         self.head(workbook, worksheet, year, month, company_id)
