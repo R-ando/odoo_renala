@@ -218,7 +218,6 @@ class CnapsReport(models.TransientModel):
     def _get_quantity_by_code(self, id, date_from, code):
         payslip_id = self.env['hr.payslip'].search([('employee_id', '=', id), ('date_from', '=', '%s-%s' % (date_from, '01'))], limit=1)
         if payslip_id:
-            print ("\n===payslip_id.line_ids = %s===\n" % payslip_id.line_ids.filtered(lambda x:x.code == code).quantity)
             return  payslip_id.line_ids.filtered(lambda x:x.code == code).quantity
 
     def employee_paysslip_list(self, period, period_n, id):
@@ -232,6 +231,16 @@ class CnapsReport(models.TransientModel):
             debauche = datetime.strftime(fields.Date.from_string(debauche), '%d-%m-%Y')
         else:
             debauche = ''
+
+        # Avantages = PRM + HS1 + HS2 + HMNUIT + HMDIM + HMJF + IRP + ITRT
+        avantage = self._get_amount_by_code(id, period[period_n], 'PRM') + \
+            self._get_amount_by_code(id, period[period_n], 'HS1') + \
+            self._get_amount_by_code(id, period[period_n], 'HS2') + \
+            self._get_amount_by_code(id, period[period_n], 'HMNUIT') + \
+            self._get_amount_by_code(id, period[period_n], 'HMDIM') + \
+            self._get_amount_by_code(id, period[period_n], 'HMJF') + \
+            self._get_amount_by_code(id, period[period_n], 'IRP') + \
+            self._get_amount_by_code(id, period[period_n], 'ITRT')
         return {
             'period': period[period_n].replace("-", "") or u'',
             'name': emp.name_related.upper() or u'',
@@ -248,6 +257,7 @@ class CnapsReport(models.TransientModel):
             'cnaps_fmfp': self._get_amount_by_code(id, period[period_n], 'FMFP_PAT'),
             'gross': self._get_amount_by_code(id, period[period_n], 'GROSS'),
             'tps_presence' : self._get_quantity_by_code(id, period[period_n], 'BASIC'),
+            'avantage': avantage,
         }
 
     def sal(self, salr):

@@ -260,7 +260,7 @@ class ExportReportCnapsController(http.Controller):
         # ref employeur
         self.empty_col(worksheet_mth, 2, 4, cl, align_center)
         # avantage
-        self.empty_col(worksheet_mth, 2, 8, cl, align_center)
+        self.cnaps_cell(worksheet_mth, 2, 8, month, 'avantage', rigth)
         self.empty_col(worksheet_mth, 2, 14, cl, align_center)
         # total
         if cl == 0:
