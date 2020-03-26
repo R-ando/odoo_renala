@@ -150,6 +150,7 @@ class ExportReportIrsaController(http.Controller):
         total['enfant'] += enfant
         total['impnet'] += impnet
 
+        worksheet.write(row, 0, '%s' % payslip.employee_id.num_emp)
         worksheet.merge_range(row, col, row, col + 1, '%s, %s, %s' %
                               (payslip.employee_id.name,
                                payslip.employee_id.job_id.name if payslip.employee_id.job_id.name else '',
@@ -193,7 +194,7 @@ class ExportReportIrsaController(http.Controller):
         worksheet.merge_range('Q16:Q17', u'Déduction enfant', border_black)
         worksheet.merge_range('R16:R17', u'Impôts nets', border_black)
 
-        for row, payslip in enumerate(payslips):
+        for row, payslip in enumerate(payslips.sorted(lambda x: x.employee_id.num_emp)):
             self.writePayslip(workbook, worksheet, row + 17, 1, payslip, total)
 
         # define row col
