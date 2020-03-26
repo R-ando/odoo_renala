@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # by Rado - Ingenosya
-#TODO: change this as object oriented we don't need to pass variable in every function
+# TODO: change this as object oriented we don't need to pass variable in every methods
 
 import datetime
 import io
@@ -222,9 +222,9 @@ class ExportReportIrsaController(http.Controller):
 
         # head
         total_net_period = total['net'] - total['impnet']
-        worksheet.write_number('D8', total_net_cumul + total['net'], workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
+        worksheet.write_number('D8', total_net_cumul, workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
         worksheet.write_number('D11', total_net_period, workbook.add_format({'right': 1, "bg_color": "red"}))
-        worksheet.write_number('D13', total_net_cumul + total_net_period + total['net'], workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
+        worksheet.write_number('D13', total_net_cumul + total_net_period, workbook.add_format({'top': 1, 'right': 1, "bg_color": "red"}))
 
     # main function
     def fulfill(self, workbook, worksheet, payslips, year, month, total_net_cumul, company_id=None):
@@ -251,8 +251,11 @@ class ExportReportIrsaController(http.Controller):
         payslips = request.env['hr.payslip'].search([('date_from', 'like', "%s-%s%s" % (year, month, '%')), ('state', '=', 'done')])
         company_id = payslips[:1].company_id
         # take payslip from the begining of the year
-        old_payslips = request.env['hr.payslip'].search([('date_from', '>=', "%s-%s-%s" % (year, '01', '01')), ('date_from', '<', "%s-%s-%s" % (year, month, 01))])
-        total_net_cumul = sum(old_payslips.mapped('line_ids').filtered(lambda x: x.code == 'NET').mapped('total')) if old_payslips else 0
+        old_payslips = request.env['hr.payslip'].search([('date_from', '>=', "%s-%s-%s" % (year, '01', '01')), ('date_from', '<', "%s-%s-%s" % (year, month, 01)), ('state', '=', 'done')])
+        total_net_cumul = sum([
+            payslip.mapped('line_ids').filtered(lambda x: x.code == 'NET').total\
+            - payslip.line_ids.filtered(lambda x: x.code == 'IRSA').total\
+            + payslip.employee_id.children * payslip.company_id.abat_irsa for payslip in old_payslips])
 
         self.fulfill(workbook, worksheet, payslips, year, month, total_net_cumul, company_id)
 
